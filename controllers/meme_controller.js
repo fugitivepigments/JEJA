@@ -5,11 +5,13 @@ var router = express.Router();
 // Require all models
 var db = require("../models");
 
-// Redirect users to the /index route.
-router.get("/", function(req, res) {
-	res.redirect("/index");
-});
+// GET Routes
+// ====================================================================
 
+// Display the Index page
+router.get("/", function(req, res) {
+
+<<<<<<< HEAD
 // Get/Read/display a list of all memes
 router.get("/index", function(req, res) {
 
@@ -120,6 +122,52 @@ router.put("/api/:customerId/eat/:memeId", function(req, res) {
 		// Error while updating the meme's devoured status
 		res.status(500).send("Error while updating the meme's devoured status").end();
 	});
+=======
+});
+
+// POST Routes
+// ====================================================================
+
+// A User adds a new Meme
+router.post("/api/:userID/new-meme", function(req, res) {
+
+});
+
+// Add a new User
+router.post("/api/new-user", function(req, res) {
+
+});
+
+// Add a new User
+router.post("/api/:userID/new-portfolio", function(req, res) {
+
+});
+
+// PUT Routes
+// ====================================================================
+
+// A user updates a Meme
+router.put("/api/:userID/update-meme/:memeID", function(req, res) {
+
+});
+
+// A user updates a Meme
+router.put("/api/:userID/update-portfolio/:portfolioID", function(req, res) {
+
+});
+
+// DELETE Routes
+// ====================================================================
+
+// A user updates a meme
+router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
+
+});
+
+// A user updates a meme
+router.delete("/api/:userID/delete-portfolio/:portfolioID", function(req, res) {
+
+>>>>>>> master
 });
 
 module.exports = router;
