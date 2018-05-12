@@ -1,8 +1,16 @@
 module.exports = function(sequelize, Sequelize){
 	const Meme = sequelize.define('Meme', {
+		// TODO: update controllers to use meme_text instead of meme_name
 		meme_name: {
 			type: Sequelize.STRING,
-			allowNull: false
+			defaultValue: "Untitled"
+		},
+		meme_text: {
+			type: Sequelize.STRING,
+			allowNull: false,
+			validate: {
+				len: [1]
+			}
 		},
 		og_img: {
 			type: Sequelize.STRING,
