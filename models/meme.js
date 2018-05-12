@@ -4,10 +4,16 @@ module.exports = function(sequelize, Sequelize){
 			type: Sequelize.STRING,
 			allowNull: false
 		},
-		devoured: {
-			type: Sequelize.BOOLEAN,
-			allowNull: false,
-			defaultValue: false
+		og_img: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		new_img: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		tags: {
+			type: Sequelize.STRING
 		}
 	});
 

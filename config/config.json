@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "",
-    "database": "my_art_caps  ",
+    "database": "my_art_caps",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
