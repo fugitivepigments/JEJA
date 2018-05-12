@@ -23,6 +23,12 @@ module.exports = function(sequelize, Sequelize){
 				allowNull: true
 			}
 		});
+
+		Meme.belongsTo(models.Portfolio, {
+			foreignKey: {
+				allowNull: true
+			}
+		});
 	};
 
 	return Meme;
