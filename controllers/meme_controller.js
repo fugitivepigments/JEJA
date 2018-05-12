@@ -34,6 +34,7 @@ router.get("/", function(req, res) {
 	});
 });
 
+// Displays the Meme Editor page
 router.get("/meme-editor/:memeID", function(req, res) {
 	db.Meme.findById(req.params.memeID).then((results) => {
 		console.log(results);
