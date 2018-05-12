@@ -10,30 +10,30 @@ router.get("/", function(req, res) {
 	res.redirect("/index");
 });
 
-// Get/Read/display a list of all burgers
+// Get/Read/display a list of all memes
 router.get("/index", function(req, res) {
 
-	// Retrieve list of burgers with associated customers and display in ascending order
-	db.Burger.findAll({include: [ db.Customer ], order: [['burger_name', 'ASC']]}).then((burger_data) => {
-		
-		// Retrieve list of customers with associated list of devoured burgers
-		db.Customer.findAll({include: [ db.Burger ], order: [['customer_name', 'ASC']]}).then((customer_data) => {
+	// Retrieve list of memes with associated customers and display in ascending order
+	db.Meme.findAll({include: [ db.Customer ], order: [['meme_name', 'ASC']]}).then((meme_data) => {
 
-			// Create a list of devoured burgers
-			var devouredBurgers = burger_data.filter(burger => {
-				return burger.devoured;
+		// Retrieve list of customers with associated list of devoured memes
+		db.Customer.findAll({include: [ db.Meme ], order: [['customer_name', 'ASC']]}).then((customer_data) => {
+
+			// Create a list of devoured memes
+			var devouredMemes = meme_data.filter(meme => {
+				return meme.devoured;
 			});
 
-			// Create a list of burgers that can be devoured
-			var availBurgers = burger_data.filter(burger => {
-				return !burger.devoured;
+			// Create a list of memes that can be devoured
+			var availMemes = meme_data.filter(meme => {
+				return !meme.devoured;
 			});
 
 			// Update the View with the retrieved data
 			res.render("index", {
-				burgers: {
-					devouredBurgers: devouredBurgers,
-					availBurgers: availBurgers
+				memes: {
+					devouredMemes: devouredMemes,
+					availMemes: availMemes
 				},
 				customers: customer_data
 			});
@@ -44,24 +44,24 @@ router.get("/index", function(req, res) {
 		});
 
 	}).catch((err) => {
-		res.status(500).send('Error while pulling a list of burgers').json({
+		res.status(500).send('Error while pulling a list of memes').json({
 			error: err.message
 		});
 	});
 });
 
-// Post/Create/Add a new burger
-router.post("/api/new-burger", function(req, res) {
-	var burger = req.body;
-	db.Burger.create(burger).then(() => {
-		console.log('Successfully added burger: ' + req.body.burger_name);
+// Post/Create/Add a new meme
+router.post("/api/new-meme", function(req, res) {
+	var meme = req.body;
+	db.Meme.create(meme).then(() => {
+		console.log('Successfully added meme: ' + req.body.meme_name);
 		res.redirect(200, "/index");
 	}).catch((err) => {
-		res.status(500).send('Error while adding a burger').end();
-	});	
+		res.status(500).send('Error while adding a meme').end();
+	});
 });
 
-// Post/Create/Add a new burger
+// Post/Create/Add a new meme
 router.post("/api/new-customer", function(req, res) {
 	var customer = req.body;
 	db.Customer.create(customer).then(() => {
@@ -72,23 +72,23 @@ router.post("/api/new-customer", function(req, res) {
 	});
 });
 
-// A customer eats a burger
-router.put("/api/:customerId/eat/:burgerId", function(req, res) {
+// A customer eats a meme
+router.put("/api/:customerId/eat/:memeId", function(req, res) {
 
-	// Set the burger's devoured status to true
-	db.Burger.update({
+	// Set the meme's devoured status to true
+	db.Meme.update({
 		devoured: true,
 		CustomerId: req.params.customerId
 	}, {
 		where: {
-			id: req.params.burgerId
+			id: req.params.memeId
 		}
 	}).then(() => {
-		console.log('Successfully devoured burger:' + req.params.burgerId);
+		console.log('Successfully devoured meme:' + req.params.memeId);
 		res.redirect(200, "/index");
 	}).catch((err) => {
-		// Error while updating the burger's devoured status
-		res.status(500).send("Error while updating the burger's devoured status").end();
+		// Error while updating the meme's devoured status
+		res.status(500).send("Error while updating the meme's devoured status").end();
 	});
 });
 
