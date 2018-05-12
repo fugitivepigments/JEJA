@@ -34,6 +34,15 @@ router.get("/", function(req, res) {
 	});
 });
 
+router.get("/meme-editor/:memeID", function(req, res) {
+	db.Meme.findById(req.params.memeID).then((results) => {
+		console.log(results);
+		res.render("editor", {artworks: art});
+	}).catch((err) => {
+		res.status(500).end();
+	});
+});
+
 // POST Routes
 // ====================================================================
 
