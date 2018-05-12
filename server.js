@@ -30,7 +30,6 @@ app.use(routes);
 // Require all models
 const db = require("./models");
 
-
 // Sync all models
 db.sequelize.sync().then(function(){
 	app.listen(PORT, function() {
