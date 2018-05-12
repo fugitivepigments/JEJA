@@ -1,0 +1,30 @@
+{
+  "name": "jeja",
+  "version": "1.0.0",
+  "description": "Art Meme Generator",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fugitivepigments/JEJA.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fugitivepigments/JEJA/issues"
+  },
+  "homepage": "https://github.com/fugitivepigments/JEJA#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "jquery-meme-generator": "^1.0.4",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.7",
+    "sequelize-cli": "^4.0.0",
+    "tape": "^4.9.0"
+  }
+}
