@@ -21,8 +21,8 @@ app.set("view engine", "handlebars");
 var PORT = process.env.PORT || 8080;
 
 // Route Controller
-// var routes = require("./controllers/burgers_controller");
-// app.use(routes);
+var routes = require("./controllers/meme_controller");
+app.use(routes);
 
 // Require all models
 const db = require("./models");
