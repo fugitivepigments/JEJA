@@ -23,6 +23,10 @@ module.exports = function(sequelize, Sequelize){
 		User.hasMany(models.Meme, {
 			onDelete: "cascade"
 		});
+
+		User.hasMany(models.Portfolio, {
+			onDelete: "cascade"
+		});
 	};
 
 	return User;
