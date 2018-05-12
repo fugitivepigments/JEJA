@@ -1,0 +1,31 @@
+<div class="jumbotron">
+        <br />
+        <br />
+        <br />
+        <h2 class="text-center">Placeholder for future GIF</h2>
+        <br />
+        <br />
+        <br />
+    </div>
+    <div id="sign-up" class="jumbotron bg-dark">
+        <div class="row">
+            <div class="col text-center">
+                <button class="btn-primary btn-lg sign-up-button" type="submit">
+                    Sign Up!
+                </button>
+                <!-- Sign up form will be inserted here dynamically -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+		<!-- Content will be inserted here -->
+        <div class="row mb-5 d-flex justify-content-center artwork">
+        {{#each art}}
+            <div class="col-3 card mx-4" style="width: 18rem;">
+                <img src="{{img_url}}" alt="{{title}}">
+            </div>
+        {{/each}}
+            
+        </div>
+    </div>
+    <script src=""></script>

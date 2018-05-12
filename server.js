@@ -5,7 +5,6 @@ var exphbs = require("express-handlebars");
 
 // Require database keys
 require("dotenv").config();
-const keys = require("./keys.js");
 
 // Start Express app
 var app = express();
