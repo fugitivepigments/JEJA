@@ -3,6 +3,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 
+// Read and set environment variables
+require("dotenv").config();
+
 // Start Express app
 var app = express();
 
@@ -26,6 +29,7 @@ app.use(routes);
 
 // Require all models
 const db = require("./models");
+
 
 // Sync all models
 db.sequelize.sync().then(function(){
