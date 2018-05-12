@@ -10,6 +10,12 @@ module.exports = function(sequelize, Sequelize){
 		Portfolio.hasMany(models.Meme, {
 			onDelete: "cascade"
 		});
+
+		Portfolio.belongsTo(models.User, {
+			foreignKey: {
+				allowNull: true
+			}
+		});
 	};
 
 	return Portfolio;

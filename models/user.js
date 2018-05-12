@@ -6,7 +6,7 @@ module.exports = function(sequelize, Sequelize){
 		},
 		user_email: {
 			type: Sequelize.STRING,
-			allowNull: false
+			allowNull: false,
 			validate: {
 				isEmail: true
 			}
