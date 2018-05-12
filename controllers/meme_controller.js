@@ -5,91 +5,56 @@ var router = express.Router();
 // Require all models
 var db = require("../models");
 
-// Redirect users to the /index route.
+// GET Routes
+// ====================================================================
+
+// Display the Index page
 router.get("/", function(req, res) {
-	res.redirect("/index");
+
 });
 
-// Get/Read/display a list of all burgers
-router.get("/index", function(req, res) {
+// POST Routes
+// ====================================================================
 
-	// Retrieve list of burgers with associated customers and display in ascending order
-	db.Burger.findAll({include: [ db.Customer ], order: [['meme_name', 'ASC']]}).then((meme_data) => {
-		
-		// Retrieve list of customers with associated list of devoured burgers
-		db.Customer.findAll({include: [ db.Burger ], order: [['user_name', 'ASC']]}).then((user_data) => {
+// A User adds a new Meme
+router.post("/api/:userID/new-meme", function(req, res) {
 
-			// Create a list of devoured burgers
-			var devouredBurgers = meme_data.filter(burger => {
-				return burger.devoured;
-			});
-
-			// Create a list of burgers that can be devoured
-			var availBurgers = meme_data.filter(burger => {
-				return !burger.devoured;
-			});
-
-			// Update the View with the retrieved data
-			res.render("index", {
-				burgers: {
-					devouredBurgers: devouredBurgers,
-					availBurgers: availBurgers
-				},
-				customers: user_data
-			});
-		}).catch((err) => {
-			res.status(500).send('Error while pulling a list of customers').json({
-				error: err.message
-			});
-		});
-
-	}).catch((err) => {
-		res.status(500).send('Error while pulling a list of burgers').json({
-			error: err.message
-		});
-	});
 });
 
-// Post/Create/Add a new burger
-router.post("/api/new-meme", function(req, res) {
-	var burger = req.body;
-	db.Burger.create(burger).then(() => {
-		console.log('Successfully added burger: ' + req.body.meme_name);
-		res.redirect(200, "/index");
-	}).catch((err) => {
-		res.status(500).send('Error while adding a burger').end();
-	});	
-});
-
-// Post/Create/Add a new burger
+// Add a new User
 router.post("/api/new-user", function(req, res) {
-	var customer = req.body;
-	db.Customer.create(customer).then(() => {
-		console.log('Successfully added customer: ' + req.body.user_name);
-		res.redirect(200, "/index");
-	}).catch((err) => {
-		res.status(500).send('Error while adding a customer').end();
-	});
+
 });
 
-// A customer eats a burger
-router.put("/api/:customerId/eat/:burgerId", function(req, res) {
+// Add a new User
+router.post("/api/:userID/new-portfolio", function(req, res) {
 
-	// Set the burger's devoured status to true
-	db.Burger.update({
-		devoured: true,
-		CustomerId: req.params.customerId
-	}, {
-		where: {
-			id: req.params.burgerId
-		}
-	}).then(() => {
-		console.log('Successfully devoured burger:' + req.params.burgerId);
-		res.redirect(200, "/index");
-	}).catch((err) => {
-		// Error while updating the burger's devoured status
-		res.status(500).send("Error while updating the burger's devoured status").end();
-	});
+});
+
+// PUT Routes
+// ====================================================================
+
+// A user updates a Meme
+router.put("/api/:userID/update-meme/:memeID", function(req, res) {
+
+});
+
+// A user updates a Meme
+router.put("/api/:userID/update-portfolio/:portfolioID", function(req, res) {
+
+});
+
+// DELETE Routes
+// ====================================================================
+
+// A user updates a meme
+router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
+
+});
+
+// A user updates a meme
+router.delete("/api/:userID/delete-portfolio/:portfolioID", function(req, res) {
+
 });
 
 module.exports = router;
