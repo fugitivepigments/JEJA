@@ -14,18 +14,18 @@ router.get("/", function(req, res) {
 router.get("/index", function(req, res) {
 
 	// Retrieve list of burgers with associated customers and display in ascending order
-	db.Burger.findAll({include: [ db.Customer ], order: [['burger_name', 'ASC']]}).then((burger_data) => {
+	db.Burger.findAll({include: [ db.Customer ], order: [['meme_name', 'ASC']]}).then((meme_data) => {
 		
 		// Retrieve list of customers with associated list of devoured burgers
-		db.Customer.findAll({include: [ db.Burger ], order: [['customer_name', 'ASC']]}).then((customer_data) => {
+		db.Customer.findAll({include: [ db.Burger ], order: [['user_name', 'ASC']]}).then((user_data) => {
 
 			// Create a list of devoured burgers
-			var devouredBurgers = burger_data.filter(burger => {
+			var devouredBurgers = meme_data.filter(burger => {
 				return burger.devoured;
 			});
 
 			// Create a list of burgers that can be devoured
-			var availBurgers = burger_data.filter(burger => {
+			var availBurgers = meme_data.filter(burger => {
 				return !burger.devoured;
 			});
 
@@ -35,7 +35,7 @@ router.get("/index", function(req, res) {
 					devouredBurgers: devouredBurgers,
 					availBurgers: availBurgers
 				},
-				customers: customer_data
+				customers: user_data
 			});
 		}).catch((err) => {
 			res.status(500).send('Error while pulling a list of customers').json({
@@ -51,10 +51,10 @@ router.get("/index", function(req, res) {
 });
 
 // Post/Create/Add a new burger
-router.post("/api/new-burger", function(req, res) {
+router.post("/api/new-meme", function(req, res) {
 	var burger = req.body;
 	db.Burger.create(burger).then(() => {
-		console.log('Successfully added burger: ' + req.body.burger_name);
+		console.log('Successfully added burger: ' + req.body.meme_name);
 		res.redirect(200, "/index");
 	}).catch((err) => {
 		res.status(500).send('Error while adding a burger').end();
@@ -62,10 +62,10 @@ router.post("/api/new-burger", function(req, res) {
 });
 
 // Post/Create/Add a new burger
-router.post("/api/new-customer", function(req, res) {
+router.post("/api/new-user", function(req, res) {
 	var customer = req.body;
 	db.Customer.create(customer).then(() => {
-		console.log('Successfully added customer: ' + req.body.customer_name);
+		console.log('Successfully added customer: ' + req.body.user_name);
 		res.redirect(200, "/index");
 	}).catch((err) => {
 		res.status(500).send('Error while adding a customer').end();
