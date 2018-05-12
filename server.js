@@ -3,8 +3,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 
-// Read and set environment variables
+// Require database keys
 require("dotenv").config();
+const keys = require("./keys.js");
 
 // Start Express app
 var app = express();
