@@ -23,9 +23,11 @@ app.set("view engine", "handlebars");
 // Setup Port
 var PORT = process.env.PORT || 8080;
 
-// Route Controller
-var routes = require("./controllers/meme_controller");
-app.use(routes);
+// Route Controllers
+var meme_routes = require("./controllers/meme_controller");
+var user_routes = require("./controllers/user_controller");
+var portfolio_routes = require("./controllers/portfolio_controller");
+app.use(meme_routes, user_routes, portfolio_routes);
 
 // Require all models
 const db = require("./models");

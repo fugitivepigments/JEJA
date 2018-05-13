@@ -37,6 +37,7 @@ router.get("/", function(req, res) {
 // Displays the Meme Editor page
 router.get("/meme-editor/:memeID", function(req, res) {
 	db.Meme.findById(req.params.memeID).then((results) => {
+		// TODO: Need to update 
 		console.log(results);
 		res.render("editor", {artworks: art});
 	}).catch((err) => {
@@ -85,35 +86,6 @@ router.post("/api/:userID/:portfolioID/new-meme", function(req, res) {
 });
 
 
-// Add a new User
-router.post("/api/new-user", function(req, res) {
-	var user = req.body;
-	db.User.create({
-		name: user.name,
-		email: user.email,
-		password: user.password
-	}).then(() => {
-		console.log('Successfully added user: ' + req.body.name);
-		res.redirect(200, "/");
-	}).catch((err) => {
-		res.status(500).send('Error while adding user: '+ req.body.name).end();
-	});	
-});
-
-// Add a new portfolio
-router.post("/api/:userID/new-portfolio", function(req, res) {
-	var portfolio = req.body;
-	db.Portfolio.create({
-		portfolio_name: portfolio.portfolio_name,
-		UserId: req.params.userID
-	}).then(() => {
-		console.log('Successfully added portfolio: ' + req.body.portfolio_name);
-		res.redirect(200, "/");
-	}).catch((err) => {
-		res.status(500).send('Error while adding portfolio: ' + req.body.portfolio_name).end();
-	});	
-});
-
 // PUT Routes
 // ====================================================================
 
@@ -141,23 +113,6 @@ router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 	});
 });
 
-// A user updates a portfolio
-router.put("/api/:userID/update-portfolio/:portfolioID", function(req, res) {
-	var portfolio = req.body;
-	db.Portfolio.update({
-		portfolio_name: portfolio.portfolio_name
-	}, {
-		where: {
-			UserId: req.params.userID,
-			id: req.params.portfolioID
-		}
-	}).then(() => {
-		console.log('Successfully updated portfolio: ' + req.body.portfolio_name);
-		res.redirect(200, "/");
-	}).catch((err) => {
-		res.status(500).send('Error while updating portfolio: ' + req.body.portfolio_name).end();
-	});
-});
 
 // DELETE Routes
 // ====================================================================
@@ -168,20 +123,6 @@ router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
 		where: {
 			userId: req.params.userID,
 			id: req.params.memeID
-		}
-	}).then((result) => {
-		res.json(result);
-	}).catch((err) => {
-		res.status(500).send(err.message);
-	});
-});
-
-// A user deletes a portfolio
-router.delete("/api/:userID/delete-portfolio/:portfolioID", function(req, res) {
-	db.Portfolio.destroy({
-		where: {
-			userId: req.params.userID,
-			id: req.params.portfolioID
 		}
 	}).then((result) => {
 		res.json(result);
