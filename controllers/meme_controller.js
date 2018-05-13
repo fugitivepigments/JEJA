@@ -59,19 +59,31 @@ router.get("/meme-editor/:artworkID", function(req, res) {
 // A user adds a new meme (without a Portfolio)
 router.post("/api/:userID/new-meme", function(req, res) {
 	var meme = req.body;
-	db.Meme.create({
-		meme_name: meme.meme_name,
-		meme_text: meme.meme_text,
-		og_img: meme.og_img,
-		new_img: meme.new_img,
-		tags: meme.tags,
-		UserId: req.params.userID
-	}).then(() => {
-		console.log('Successfully added meme: ' + req.body.meme_name);
-		res.redirect(200, "/");
-	}).catch((err) => {
-		res.status(500).send('Error while adding meme: ' + req.body.meme_name).end();
-	});	
+
+	db.User.findOne({
+		where: {
+			id: req.params.userID
+		}
+	}).then(user => {
+
+		// After the user's record has been found, associate the meme to the user
+		db.Meme.create({
+			meme_name: meme.meme_name,
+			meme_text: meme.meme_text,
+			og_img: meme.og_img,
+			new_img: meme.new_img,
+			tags: meme.tags,
+			UserId: parseInt(req.params.userID)
+		}).then(() => {
+			console.log('Successfully added meme: ' + req.body.meme_name);
+			res.redirect(200, "/");
+		}).catch((err) => {
+			res.status(500).json(err.message).end();
+		});	
+	}).catch(err => {
+		res.status(500).json(err.message).end();
+	});
+	
 });
 
 // A user adds a new meme (with a Portfolio)
