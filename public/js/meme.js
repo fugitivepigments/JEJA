@@ -9,7 +9,7 @@ $("#save").click(function(e){
     
     var imageDataUrl = $("#meme").memeGenerator("save");
 
-    console.log(imageDataUrl);
+    // console.log(imageDataUrl);
 
     localStorage.setItem("savedMeme",imageDataUrl);
     var memeText = "";
@@ -20,6 +20,7 @@ $("#save").click(function(e){
 
     // Get the user's ID from LocalStorage
     var user = 1;
+    localStorage.setItem("loggedInUser",user);
 
     var meme = {
     	meme_name: "Untitled",

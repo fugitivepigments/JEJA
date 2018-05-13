@@ -43,7 +43,7 @@ router.get("/meme-editor", function(req, res) {
 router.get("/meme-editor/:artworkID", function(req, res) {
 	db.Artwork.findOne({
 		where: {
-			id: req.params.artworkID
+			id: parseInt(req.params.artworkID)
 		}
 	}).then((results) => {
 		// console.log(results.dataValues);
@@ -62,7 +62,7 @@ router.post("/api/:userID/new-meme", function(req, res) {
 
 	db.User.findOne({
 		where: {
-			id: req.params.userID
+			id: parseInt(req.params.userID)
 		}
 	}).then(user => {
 
@@ -95,8 +95,8 @@ router.post("/api/:userID/:portfolioID/new-meme", function(req, res) {
 		og_img: meme.og_img,
 		new_img: meme.new_img,
 		tags: meme.tags,
-		UserId: req.params.userID,
-		PortfolioId: req.params.portfolioID
+		UserId: parseInt(req.params.userID),
+		PortfolioId: parseInt(req.params.portfolioID)
 	}).then(() => {
 		console.log('Successfully added meme: ' + req.body.meme_name);
 		res.redirect(200, "/");
@@ -118,12 +118,12 @@ router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 		og_img: meme.og_img,
 		new_img: meme.new_img,
 		tags: meme.tags,
-		PortfolioId: meme.portfolioID,
-		UserId: req.params.userID
+		PortfolioId: parseInt(meme.portfolioID),
+		UserId: parseInt(req.params.userID)
 	}, {
 		where: {
-			UserId: req.params.userID,
-			id: req.params.memeID
+			UserId: parseInt(req.params.userID),
+			id: parseInt(req.params.memeID)
 		}
 	}).then(() => {
 		console.log('Successfully updated meme: ' + req.body.meme_name);
@@ -141,8 +141,8 @@ router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
 	db.Meme.destroy({
 		where: {
-			userId: req.params.userID,
-			id: req.params.memeID
+			userId: parseInt(req.params.userID),
+			id: parseInt(req.params.memeID)
 		}
 	}).then((result) => {
 		res.json(result);
