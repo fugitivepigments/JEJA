@@ -1,0 +1,126 @@
+{{#section 'head'}}
+    <title>ArtMeme - Editor</title>
+
+    <!-- jQuery 1.11.3 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+     
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+     
+    <!-- Spectrum plugin (optional) -->
+    <script src="/js/spectrum.js"></script>
+     
+    <!-- Meme Generator plugin -->
+    <script type="text/javascript" src="/js/jquery.memegenerator.min.js"></script>
+     
+    <!-- jQuery UI CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+     
+    <!-- Spectrum CSS file (optional) -->
+    <link rel="stylesheet" type="text/css" href="/css/spectrum.css">
+     
+    <!-- Meme Generator CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/jquery.memegenerator.min.css">
+
+    <link rel="stylesheet" href="/css/style2.css">
+
+{{/section}}
+
+<div class="my-4">
+    {{!-- <img id="meme" src="{{img_url}}" alt="{{title}}">  --}}
+    <img id="meme" src="{{img_url}}" alt="{{title}}" crossOrigin="anonymous"> 
+</div>
+
+<div class="row d-flex justify-content-center">
+    <button class="btn btn-success" id="save">Save</button>
+    <div class="mx-2"></div>
+    <button class="btn btn-danger" id="download">Download</button>
+</div>
+
+{{#section 'scripts'}}
+<script src="/js/meme.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#meme").memeGenerator({
+        useBootstrap: true
+    });
+});
+
+$("#save").click(function(e){
+    e.preventDefault();
+    
+    var imageDataUrl = $("#meme").memeGenerator("save");
+
+    console.log(imageDataUrl);
+
+    localStorage.setItem("savedMeme",imageDataUrl);
+    
+    // $.ajax({
+    //     url: "/save-img",
+    //     type: "POST",
+    //     data: {image: imageDataUrl},
+    //     dataType: "json",
+    //     success: function(response){
+    //         console.log('Success response: ',response);
+    //         $("#preview").html(
+    //             $("<img>").attr("src", response.filename)
+    //         );
+    //     },
+    //     error: function(err){
+    //         console.log('Error: ', err);
+    //     }
+    // });
+});
+</script>
+
+<script type="text/javascript">
+
+
+    // $(".example.default img").memeGenerator({});
+    
+    // $(".example.bootstrap img").memeGenerator({
+    //     useBootstrap: true,
+    // });
+    
+    // $(".example.horizontal img").memeGenerator({
+    //     useBootstrap: true,
+    //     layout: "horizontal",
+    //     previewMode: "css",
+    //     defaultTextStyle: {
+    //         font: "'Comic Sans', Arial",
+    //     },
+    //     captions: [
+    //         "PREDEFINED text on top"
+    //     ]
+    // });
+    
+    
+    // Example with saving
+    // $("#example-save").memeGenerator({
+    //     useBootstrap: true,
+        
+    // });
+    
+    // $("#save").click(function(e){
+    //     e.preventDefault();
+        
+    //     var imageDataUrl = $("#example-save").memeGenerator("save");
+        
+    //     $("#preview").html(
+    //         $("<img>").attr("src", imageDataUrl)
+    //     );
+    // });
+    
+    $("#download").click(function(e){
+        e.preventDefault();
+        
+        $("#meme").memeGenerator("download");
+    });
+    
+    //
+    
+</script>
+
+{{/section}}    
+ 

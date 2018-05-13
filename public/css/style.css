@@ -5,9 +5,10 @@ input.search-input {
 button.sign-up-button {
 }
 
-div.jumbotron {
+.demo {
 	border-radius: 0px;
 	margin-bottom: 0px;
+	min-height: 318px;
 }
 
 div#sign-up {

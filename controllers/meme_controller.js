@@ -35,11 +35,19 @@ router.get("/", function(req, res) {
 });
 
 // Displays the Meme Editor page
-router.get("/meme-editor/:memeID", function(req, res) {
-	db.Meme.findById(req.params.memeID).then((results) => {
-		// TODO: Need to update 
-		console.log(results);
-		res.render("editor", {artworks: art});
+router.get("/meme-editor", function(req, res) {
+	res.render("editor");
+});
+
+// Displays the Meme Editor page
+router.get("/meme-editor/:artworkID", function(req, res) {
+	db.Artwork.findOne({
+		where: {
+			id: req.params.artworkID
+		}
+	}).then((results) => {
+		// console.log(results.dataValues);
+		res.render("editor", results.dataValues);
 	}).catch((err) => {
 		res.status(500).end();
 	});
