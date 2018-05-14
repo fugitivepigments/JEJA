@@ -10,9 +10,10 @@ require("dotenv").config();
 var app = express();
 
 // Setup Body-Parser Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-// Increase the max request body size from 100KB to 50MB
-app.use(bodyParser.json({limit: '50mb'})); 
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json({limit: '50mb'}));
+// // Increase the max request body size from 100KB to 50MB
+// app.use(bodyParser.json({limit: '50mb'})); 
 
 // Use Static Public
 app.use(express.static('public'));

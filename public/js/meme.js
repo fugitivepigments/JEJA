@@ -28,12 +28,10 @@ $("#save").click(function(e){
     	meme_name: "Untitled",
 		meme_text: memeText.trim(),
 		og_img: $("#meme").data('og-img'),
-		new_img: imageDataUrl,  //imageDataUrl -- requires Sequelize.TEXT
+		new_img: imageDataUrl,
 		tags: "",
 		UserId: user
     }
-
-    // TODO: use Node fs writeFile to save image on server under images dir
 
     $.post('/api/'+ user +'/new-meme', meme , function(data, textStatus, xhr) {
     	console.log('data: ',data);

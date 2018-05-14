@@ -1,6 +1,7 @@
 // Dependencies
 var express = require("express");
 var router = express.Router();
+var fs = require("fs");
 
 // Require all models
 var db = require("../models");
@@ -92,30 +93,54 @@ router.get("/collection", function(req, res) {
 router.post("/api/:userID/new-meme", function(req, res) {
 	var meme = req.body;
 
-	// Make sure the user exists
-	db.User.findOne({
-		where: {
-			id: parseInt(req.params.userID)
-		}
-	}).then(user => {
+	var img = req.body.new_img;
+	var data = img.replace(/^data:image\/\w+;base64,/, "");
+	var buf = new Buffer(data, 'base64');
+	var filename = req.body.meme_name + '.png';
 
-		// After the user's record has been found, associate the meme to the user
-		db.Meme.create({
-			meme_name: meme.meme_name,
-			meme_text: meme.meme_text,
-			og_img: meme.og_img,
-			new_img: meme.new_img,
-			tags: meme.tags,
-			UserId: parseInt(req.params.userID)
-		}).then(() => {
-			console.log('Successfully added meme: ' + req.body.meme_name);
-			res.redirect(200, "/");
-		}).catch((err) => {
+	// createImage(filename, buf);
+
+	// function createImage(filename, buf){
+		
+	// }
+
+	// use Node fs writeFile to save image on server under images dir
+	fs.writeFile(__dirname + '/../public/images/' + filename ,buf, {flag: 'wx'}, err => {
+	    if(err){
+	    	console.log('Filename exists...creating new filename');
+	    	filename
+	        return console.error(err);
+	    }
+
+		// Make sure the user exists
+		db.User.findOne({
+			where: {
+				id: parseInt(req.params.userID)
+			}
+		}).then(user => {
+
+			// After the user's record has been found, associate the meme to the user
+			db.Meme.create({
+				meme_name: meme.meme_name,
+				meme_text: meme.meme_text,
+				og_img: meme.og_img,
+				new_img: '/public/images/' + filename,
+				tags: meme.tags,
+				UserId: parseInt(req.params.userID)
+			}).then((success) => {
+				console.log('Successfully added meme: ' + req.body.meme_name);
+				res.json(success);
+				// res.redirect(200, "/");
+			}).catch((err) => {
+				res.status(500).json(err.message).end();
+			});	
+		}).catch(err => {
 			res.status(500).json(err.message).end();
-		});	
-	}).catch(err => {
-		res.status(500).json(err.message).end();
+		});
+
+	    console.log('image has been created');
 	});
+
 	
 });
 
