@@ -119,7 +119,7 @@ router.post("/api/:userID/new-meme", function(req, res) {
 	
 });
 
-// A user adds a new meme (with a Portfolio)
+// TODO: A user adds a new meme (with a Portfolio)
 router.post("/api/:userID/:portfolioID/new-meme", function(req, res) {
 	var meme = req.body;
 	db.Meme.create({
@@ -142,7 +142,7 @@ router.post("/api/:userID/:portfolioID/new-meme", function(req, res) {
 // PUT Routes
 // ====================================================================
 
-// A user updates a Meme
+// TODO: A user updates a Meme
 router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 	var meme = req.body;
 	db.Meme.update({
@@ -170,7 +170,7 @@ router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 // DELETE Routes
 // ====================================================================
 
-// A user deletes a meme
+// TODO: A user deletes a meme
 router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
 	db.Meme.destroy({
 		where: {

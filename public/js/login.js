@@ -1,6 +1,14 @@
+var userData;
+
 // Check to see if the user is already logged in
-if(localStorage.getItem('userData')){
-	console.log('User is current logged in');
+if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+
+	// Attempt to pull userData from localStorage first
+	// If no userData in localStorage, check sessionStorage
+	userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+	userData = JSON.parse(userData);
+
+	console.log(userData.username + ' is currently logged in');
 	toggleLoginLogOut();
 	$("#signup").toggle();
 }
@@ -28,6 +36,7 @@ $("#login-form").on('submit', function(event) {
 		console.log('Remember me: ' + $("#login-persist").is(":checked"));
 
 		// if Remember me is checked, use localStorage, otherwise use sessionStorage
+		// Store user's name & ID
 		if($("#login-persist").is(":checked")){
 			localStorage.setItem('userData',JSON.stringify(user));
 		}

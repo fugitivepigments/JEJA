@@ -8,7 +8,7 @@ var db = require("../models");
 // GET Routes
 // ====================================================================
 
-// Displays a users details
+// TODO: Displays a users details
 router.get("/user/:userID", function(req, res) {
 	db.Meme.findById(req.params.userID).then((results) => {
 		// TODO: Need to update 
@@ -32,7 +32,6 @@ router.post("/api/new-user", function(req, res) {
 	}).then((result) => {
 		console.log('Successfully added user: ' + req.body.name);
 		res.json(result);
-		// res.redirect("/");
 	}).catch((err) => {
 		res.status(500).send('Error while adding user: '+ req.body.name).end();
 	});	
@@ -56,7 +55,7 @@ router.post("/login", function(req, res) {
 // PUT Routes
 // ====================================================================
 
-// Update a user
+// TODO: Update a user
 router.put("/api/update-user/:userID", function(req, res) {
 	var user = req.body;
 	db.User.update({
@@ -78,7 +77,7 @@ router.put("/api/update-user/:userID", function(req, res) {
 // DELETE Routes
 // ====================================================================
 
-// Delete a user
+// TODO: Delete a user
 router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
 	db.User.destroy({
 		where: {

@@ -6,21 +6,23 @@ $(document).ready(function(){
 
 $("#save").click(function(e){
     e.preventDefault();
+    // Get the user's ID from LocalStorage
+    var user;
+    if(userData){
+    	user = userData.userId;
+    } else {
+    	console.log('Please login');
+    	return;
+    }
     
     var imageDataUrl = $("#meme").memeGenerator("save");
-
-    // console.log(imageDataUrl);
-
     localStorage.setItem("savedMeme",imageDataUrl);
+
     var memeText = "";
     var textboxes = $("input[type=text].mg-textbox-text");
     for (var i = 0; i < textboxes.length; i++) {
     	memeText += textboxes[i].value + " ";
     }
-
-    // Get the user's ID from LocalStorage
-    var user = 1;
-    localStorage.setItem("loggedInUser",user);
 
     var meme = {
     	meme_name: "Untitled",
@@ -31,27 +33,14 @@ $("#save").click(function(e){
 		UserId: user
     }
 
+    // TODO: use Node fs writeFile to save image on server under images dir
+
     $.post('/api/'+ user +'/new-meme', meme , function(data, textStatus, xhr) {
     	console.log('data: ',data);
     	console.log('textStatus: ',textStatus);
     	console.log('xhr: ',xhr);
     });
-    
-    // $.ajax({
-    //     url: "/save-img",
-    //     type: "POST",
-    //     data: {image: imageDataUrl},
-    //     dataType: "json",
-    //     success: function(response){
-    //         console.log('Success response: ',response);
-    //         $("#preview").html(
-    //             $("<img>").attr("src", response.filename)
-    //         );
-    //     },
-    //     error: function(err){
-    //         console.log('Error: ', err);
-    //     }
-    // });
+   
 });
 
 $("#download").click(function(e){

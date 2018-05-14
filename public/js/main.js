@@ -24,7 +24,6 @@ $("#signup-form").on('submit', function(event) {
 	clearform();
 
 	$.post('/api/new-user', newUser, function(data, textStatus, xhr) {
-		/*optional stuff to do after success */
 
 		// package user's name & ID
 		var user = {
@@ -32,10 +31,16 @@ $("#signup-form").on('submit', function(event) {
 			username: data.name
 		}
 
-		localStorage.setItem("userData",JSON.stringify(user));
-		console.log('data: ', data);
-		// console.log('textStatus: ', textStatus);
-		// console.log('xhr: ', xhr);
+		// Store user's name & ID
+		if($("#signin-persist").is(":checked")){
+			localStorage.setItem('userData',JSON.stringify(user));
+		}
+		sessionStorage.setItem("userData",JSON.stringify(user));
+
+		// Toggle the login/logout buttons
+		$("#btn-login").toggle();
+		$("#btn-logout").toggle();
+
 		console.log('We have a new user! Welcome ' + data.name);
 	});
 });
