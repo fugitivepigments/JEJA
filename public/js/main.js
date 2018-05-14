@@ -7,13 +7,13 @@ $(".meme").on('click', function(event) {
 
 $("#signup").on('click', function(event) {
 	event.preventDefault();
-	$("#login-form").slideToggle();
+	$("#signup-form").slideToggle();
 });
 
-$("#login-form").on('submit', function(event) {
+$("#signup-form").on('submit', function(event) {
 	event.preventDefault();
 
-	$("#login-form").slideUp();
+	$("#signup-form").slideUp();
 
 	var newUser = {
 		name: $("#name").val().trim(),
@@ -25,10 +25,17 @@ $("#login-form").on('submit', function(event) {
 
 	$.post('/api/new-user', newUser, function(data, textStatus, xhr) {
 		/*optional stuff to do after success */
+
+		var user = {
+			userId: 10,
+			username: data.name
+		}
+
+		localStorage.setItem("userData",JSON.stringify(user));
 		console.log('data: ', data);
-		console.log('textStatus: ', textStatus);
-		console.log('xhr: ', xhr);
-		console.log('We have a new user!');
+		// console.log('textStatus: ', textStatus);
+		// console.log('xhr: ', xhr);
+		console.log('We have a new user! Welcome ' + data.name);
 	});
 });
 

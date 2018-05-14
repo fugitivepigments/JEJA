@@ -19,11 +19,6 @@ router.get("/user/:userID", function(req, res) {
 	});
 });
 
-// Redirect user to the home page after signing up
-// router.get("/api/new-user", function(req, res){
-// 	res.redirect("/");
-// });
-
 // POST Routes
 // ====================================================================
 
@@ -43,6 +38,20 @@ router.post("/api/new-user", function(req, res) {
 	});	
 });
 
+// Displays a users details
+router.post("/login", function(req, res) {
+	db.User.findOne({
+		where: {
+			email: req.body.email,
+			password: req.body.password
+		}
+	}).then((user) => {
+		console.log('Successful login: ' + user.email)
+		res.json(user);
+	}).catch((err) => {
+		res.status(500).end();
+	});
+});
 
 // PUT Routes
 // ====================================================================
