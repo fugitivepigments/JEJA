@@ -19,6 +19,11 @@ router.get("/user/:userID", function(req, res) {
 	});
 });
 
+// Redirect user to the home page after signing up
+// router.get("/api/new-user", function(req, res){
+// 	res.redirect("/");
+// });
+
 // POST Routes
 // ====================================================================
 
@@ -29,9 +34,10 @@ router.post("/api/new-user", function(req, res) {
 		name: user.name,
 		email: user.email,
 		password: user.password
-	}).then(() => {
+	}).then((result) => {
 		console.log('Successfully added user: ' + req.body.name);
-		res.redirect(200, "/");
+		res.json(result);
+		// res.redirect("/");
 	}).catch((err) => {
 		res.status(500).send('Error while adding user: '+ req.body.name).end();
 	});	

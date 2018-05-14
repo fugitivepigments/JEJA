@@ -25,8 +25,8 @@ $("#save").click(function(e){
     var meme = {
     	meme_name: "Untitled",
 		meme_text: memeText.trim(),
-		og_img: "",
-		new_img: "",  //imageDataUrl -- requires Sequelize.TEXT (65353)
+		og_img: $("#meme").data('og-img'),
+		new_img: imageDataUrl,  //imageDataUrl -- requires Sequelize.TEXT
 		tags: "",
 		UserId: user
     }

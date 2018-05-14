@@ -13,11 +13,11 @@ module.exports = function(sequelize, Sequelize){
 			}
 		},
 		og_img: {
-			type: Sequelize.STRING,
+			type: Sequelize.STRING, //Change to Sequelize.TEXT
 			allowNull: false
 		},
 		new_img: {
-			type: Sequelize.STRING,
+			type: Sequelize.TEXT, //Change to Sequelize.TEXT
 			allowNull: false
 		},
 		tags: {

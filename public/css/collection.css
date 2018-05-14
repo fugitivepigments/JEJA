@@ -1,0 +1,12 @@
+.meme {
+	display: flex;
+	flex-flow: row wrap;
+	width: 200px;
+	height: 280px;
+	box-shadow: 0 0 10px rgba(0,0,0,.3);
+	border-bottom: 4px solid rgba(51, 51, 204, 1);
+}
+
+.meme:hover {
+	transform: scale(1.1);
+}

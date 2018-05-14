@@ -1,0 +1,17 @@
+{{#section 'head'}}
+    <title>ArtMeme</title>
+    <link rel="stylesheet" href="/css/collection.css">
+{{/section}}
+
+<h1>Collection Temp</h1>
+
+<div class="container">
+	<div class="row d-flex flex-row">
+	{{#each memes}}
+		<div class="meme m-2">
+			<h3>{{meme_name}}</h3>
+			<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
+		</div>
+	{{/each}}
+	</div>
+</div>

@@ -15,20 +15,35 @@ router.get("/", function(req, res) {
 
 	// find and return 3 random works of art
 	db.Artwork.findAndCountAll({
-		limit: 3,
+		limit: 1,
 		offset: offset
-	}).then((results) => {
+	}).then((results1) => {
+		offset = Math.floor(Math.random() * 44800);
+		db.Artwork.findAndCountAll({
+			limit: 1,
+			offset: offset
+		}).then((results2) => {
+			offset = Math.floor(Math.random() * 44800);
+			db.Artwork.findAndCountAll({
+				limit: 1,
+				offset: offset
+			}).then((results3) => {
+				// Reformat results to make it easier to display data in views
+				var art = [];
+				art.push(results1.rows[0].dataValues);
+				art.push(results2.rows[0].dataValues);
+				art.push(results3.rows[0].dataValues);
 
-		// Reformat results to make it easier to display data in views
-		var art = [];
-		for (var i = 0; i < results.rows.length; i++) {
-			art.push(results.rows[i].dataValues);
-		}
+				// console.log(art);
 
-		console.log(art);
-
-		// Send results to index.handlebars
-		res.render("index", {artworks: art});
+				// Send results to index.handlebars
+				res.render("index", {artworks: art});
+			}).catch((err) => {
+				res.status(500).end();
+			});
+		}).catch((err) => {
+			res.status(500).end();
+		});
 	}).catch((err) => {
 		res.status(500).end();
 	});
@@ -53,6 +68,23 @@ router.get("/meme-editor/:artworkID", function(req, res) {
 	});
 });
 
+// Displays the collection of all memes
+router.get("/collection", function(req, res) {
+	// res.render("collection");
+
+	db.Meme.findAll().then(results => {
+
+		// Retrieve meme data from results
+		var memes = [];
+		for (var i = 0; i < results.length; i++) {
+			memes.push(results[i].dataValues);
+		}
+		res.render("collection", {memes: memes});
+	}).catch(err => {
+		res.status(500).end();
+	});
+});
+
 // POST Routes
 // ====================================================================
 
@@ -60,6 +92,7 @@ router.get("/meme-editor/:artworkID", function(req, res) {
 router.post("/api/:userID/new-meme", function(req, res) {
 	var meme = req.body;
 
+	// Make sure the user exists
 	db.User.findOne({
 		where: {
 			id: parseInt(req.params.userID)
