@@ -26,8 +26,9 @@ $("#signup-form").on('submit', function(event) {
 	$.post('/api/new-user', newUser, function(data, textStatus, xhr) {
 		/*optional stuff to do after success */
 
+		// package user's name & ID
 		var user = {
-			userId: 10,
+			userId: data.id,
 			username: data.name
 		}
 
