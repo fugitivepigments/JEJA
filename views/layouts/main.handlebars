@@ -27,7 +27,7 @@
             <ul class="navbar-nav justify-content-end d-flex flex-fill">
                 <li class="nav-item">
                     <a id="btn-login" class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                    <a id="btn-signout" class="nav-link" href="#" style="display: none;">Sign Out</a>
+                    <a id="btn-logout" class="nav-link" href="#" style="display: none;">Logout</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/collection">Collection</a>
@@ -49,6 +49,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Welcome</h5>
+            <small id="invalidCreds" class="form-text text-danger" style="display: none;">Your username or password doesn't match what we have on file. Try signing in again, or sign up.</small>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -67,7 +68,7 @@
                 <input type="checkbox" class="form-check-input" id="login-persist">
                 <label class="form-check-label" for="login-persist">Remember me</label>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Sign in</button>
+              <button id="signin" type="submit" class="btn btn-primary w-100">Sign in</button>
             </form>
           </div>
         </div>

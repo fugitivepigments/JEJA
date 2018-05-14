@@ -1,17 +1,11 @@
 $("#login-form").on('submit', function(event) {
 	event.preventDefault();
 
-	// Hide the login modal
-	$(this).closest('.modal').modal('hide');
-
 	// package the user's credientials
 	var userCreds = {
 		email: $("#login-email").val().trim(),
 		password: $("#login-password").val().trim()
 	}
-
-	// Clear login form
-	$("#login-email, #login-password").val('');
 
 	// Login the user
 	$.post('/login', userCreds, function(data, textStatus, xhr) {
@@ -24,19 +18,34 @@ $("#login-form").on('submit', function(event) {
 		}
 
 		localStorage.setItem('userData',JSON.stringify(user));
+
+		// Hide the login modal
+		$("#login-form").closest('.modal').modal('hide');
+
+		// Clear login form
+		$("#login-email, #login-password").val('');
+
+		// Toggle the log in/out buttons
 		$("#btn-login").toggle();
-		$("#btn-signout").toggle();
+		$("#btn-logout").toggle();
 	})
-	.fail(err => {
-		console.log('Invalid Login: ',err);
+	.fail((ErrXhr, ErrType, StatusText) => {
+		// Display red error text under username and password
+		$("#invalidCreds").show();
+		$(".modal-title").hide();
 	});
 });
 
-$("#btn-signout").on('click', function(event) {
+$("#btn-login").on('click', function(event) {
+	$("#invalidCreds").hide();
+	$(".modal-title").show();
+});
+
+$("#btn-logout").on('click', function(event) {
 	event.preventDefault();
 	
 	// clear session data
 	localStorage.removeItem('userData');
 	$("#btn-login").toggle();
-	$("#btn-signout").toggle();
+	$("#btn-logout").toggle();
 });
