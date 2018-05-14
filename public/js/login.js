@@ -1,3 +1,10 @@
+// Check to see if the user is already logged in
+if(localStorage.getItem('userData')){
+	console.log('User is current logged in');
+	toggleLoginLogOut();
+	$("#signup").toggle();
+}
+
 $("#login-form").on('submit', function(event) {
 	event.preventDefault();
 
@@ -11,13 +18,20 @@ $("#login-form").on('submit', function(event) {
 	$.post('/login', userCreds, function(data, textStatus, xhr) {
 		console.log('Welcome ' + data.name);
 
+		$("#signup").toggle();
+
 		// package user's name & ID
 		var user = {
 			userId: data.id,
 			username: data.name
 		}
+		console.log('Remember me: ' + $("#login-persist").is(":checked"));
 
-		localStorage.setItem('userData',JSON.stringify(user));
+		// if Remember me is checked, use localStorage, otherwise use sessionStorage
+		if($("#login-persist").is(":checked")){
+			localStorage.setItem('userData',JSON.stringify(user));
+		}
+		sessionStorage.setItem('userData',JSON.stringify(user));
 
 		// Hide the login modal
 		$("#login-form").closest('.modal').modal('hide');
@@ -26,8 +40,7 @@ $("#login-form").on('submit', function(event) {
 		$("#login-email, #login-password").val('');
 
 		// Toggle the log in/out buttons
-		$("#btn-login").toggle();
-		$("#btn-logout").toggle();
+		toggleLoginLogOut();
 	})
 	.fail((ErrXhr, ErrType, StatusText) => {
 		// Display red error text under username and password
@@ -39,6 +52,7 @@ $("#login-form").on('submit', function(event) {
 $("#btn-login").on('click', function(event) {
 	$("#invalidCreds").hide();
 	$(".modal-title").show();
+	$("#login-email, #login-password").val('');
 });
 
 $("#btn-logout").on('click', function(event) {
@@ -46,6 +60,15 @@ $("#btn-logout").on('click', function(event) {
 	
 	// clear session data
 	localStorage.removeItem('userData');
+	sessionStorage.removeItem('userData');
+
+	toggleLoginLogOut();
+
+	$("#signup").toggle();
+});
+
+function toggleLoginLogOut(){
+	// Toggle the log in/out buttons
 	$("#btn-login").toggle();
 	$("#btn-logout").toggle();
-});
+}
