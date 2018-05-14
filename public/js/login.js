@@ -26,7 +26,11 @@ $("#login-form").on('submit', function(event) {
 	$.post('/login', userCreds, function(data, textStatus, xhr) {
 		console.log('Welcome ' + data.name);
 
+		// Hide the Home page's Sign Up button
 		$("#signup").toggle();
+
+		// Show the Meme Editor Save button
+		$("#save").toggle();
 
 		// package user's name & ID
 		var user = {
@@ -62,6 +66,7 @@ $("#btn-login").on('click', function(event) {
 	$("#invalidCreds").hide();
 	$("#loginModalLabel").show();
 	$("#login-email, #login-password").val('');
+
 });
 
 $("#btn-logout").on('click', function(event) {
@@ -73,7 +78,11 @@ $("#btn-logout").on('click', function(event) {
 
 	toggleLoginLogOut();
 
+	// Show the Home page's Sign Up button
 	$("#signup").toggle();
+
+	// Hide the Meme Editor Save button
+	$("#save").toggle();
 });
 
 function toggleLoginLogOut(){
