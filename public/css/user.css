@@ -1,0 +1,13 @@
+.edit {
+	font-size: 1rem;
+	border: 0;
+	background: none;
+	color: var(--blue);
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.edit-on {
+	display: flex;
+	flex-flow: row;
+}

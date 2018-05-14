@@ -8,12 +8,22 @@ var db = require("../models");
 // GET Routes
 // ====================================================================
 
-// TODO: Displays a users details
+// Displays a single user's details
 router.get("/user/:userID", function(req, res) {
-	db.Meme.findById(req.params.userID).then((results) => {
-		// TODO: Need to update 
-		console.log(results);
-		res.render("user", {user: results.dataValues});
+	db.User.findOne({
+		where: {
+			id: parseInt(req.params.userID)
+		},
+		include: [
+			{model: db.Meme}, 
+			{model: db.Portfolio}
+		],
+		order: [
+			[db.Meme, 'createdAt', 'DESC'],
+			[db.Portfolio, 'createdAt', 'DESC']
+		]
+	}).then((user) => {
+		res.render("user", user.dataValues);
 	}).catch((err) => {
 		res.status(500).end();
 	});
@@ -37,7 +47,7 @@ router.post("/api/new-user", function(req, res) {
 	});	
 });
 
-// Displays a users details
+// Log a user in
 router.post("/login", function(req, res) {
 	db.User.findOne({
 		where: {
@@ -55,19 +65,20 @@ router.post("/login", function(req, res) {
 // PUT Routes
 // ====================================================================
 
-// TODO: Update a user
+// Update a user
 router.put("/api/update-user/:userID", function(req, res) {
 	var user = req.body;
+	console.log('Inside user update');
 	db.User.update({
 		name: user.name,
 		email: user.email
 	}, {
 		where: {
-			UserId: req.params.userID
+			id: parseInt(req.params.userID)
 		}
-	}).then(() => {
+	}).then((user) => {
 		console.log('Successfully updated user: ' + req.body.name);
-		res.redirect(200, "/");
+		res.json(user);
 	}).catch((err) => {
 		res.status(500).send('Error while updating meme: ' + req.body.name).end();
 	});

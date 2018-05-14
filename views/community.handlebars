@@ -1,0 +1,20 @@
+{{#section 'head'}}
+    <title>ArtMeme - Collection</title>
+    <link rel="stylesheet" href="/css/collection.css">
+{{/section}}
+
+<h1>Meme Collection</h1>
+
+<div class="container">
+	<div class="row d-flex flex-row">
+	{{#each users}}
+		<div class="meme m-2">
+			<h3>{{name}}</h3>
+		</div>
+	{{/each}}
+	</div>
+</div>
+
+{{#section 'scripts'}}
+<script src="/js/collection.js" type="text/javascript"></script>
+{{/section}}    

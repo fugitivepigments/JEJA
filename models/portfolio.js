@@ -10,9 +10,7 @@ module.exports = function(sequelize, Sequelize){
 	});
 
 	Portfolio.associate = function(models){
-		Portfolio.hasMany(models.Meme, {
-			onDelete: "cascade"
-		});
+		Portfolio.hasMany(models.Meme);
 
 		Portfolio.belongsTo(models.User, {
 			foreignKey: {
