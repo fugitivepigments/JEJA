@@ -73,7 +73,7 @@ router.get("/meme-editor/:artworkID", function(req, res) {
 router.get("/collection", function(req, res) {
 	// res.render("collection");
 
-	db.Meme.findAll().then(results => {
+	db.Meme.findAll({order: [['createdAt', 'DESC']]}).then(results => {
 
 		// Retrieve meme data from results
 		var memes = [];
@@ -99,17 +99,19 @@ router.post("/api/:userID/new-meme", function(req, res) {
 	var filename = req.body.meme_name + '.png';
 	var num = 0;
 
-	createImage(filename, buf);
+	createMemeImage(filename);
 
-	function createImage(filename, buf){
-		// use Node fs writeFile to save image on server under images dir
+	function createMemeImage(filename){
+		// use fs.writeFile to save image on server under images dir
 		fs.writeFile(__dirname + '/../public/images/' + filename ,buf, {flag: 'wx'}, err => {
 		    if(err){
+				// If the filename already exists, increment a counter until an 
+				// available filename is found
 		    	if(err.code === "EEXIST") {
 		    		num++;
 		    		console.log('Filename exists...creating new filename');
 		    		filename = req.body.meme_name + " ("+ num +").png";
-		    		createImage(filename, buf);
+		    		createMemeImage(filename);
 		    		return; 
 		    	} else {
 		    		console.log('Error', err.code);
@@ -129,13 +131,12 @@ router.post("/api/:userID/new-meme", function(req, res) {
 					meme_name: meme.meme_name,
 					meme_text: meme.meme_text,
 					og_img: meme.og_img,
-					new_img: '/public/images/' + filename,
+					new_img: '/images/' + filename,
 					tags: meme.tags,
 					UserId: parseInt(req.params.userID)
 				}).then((success) => {
 					console.log('Successfully added meme: ' + req.body.meme_name);
 					res.json(success);
-					// res.redirect(200, "/");
 				}).catch((err) => {
 					res.status(500).json(err.message).end();
 				});	

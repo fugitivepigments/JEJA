@@ -54,13 +54,13 @@ $("#login-form").on('submit', function(event) {
 	.fail((ErrXhr, ErrType, StatusText) => {
 		// Display red error text under username and password
 		$("#invalidCreds").show();
-		$(".modal-title").hide();
+		$("#loginModalLabel").hide();
 	});
 });
 
 $("#btn-login").on('click', function(event) {
 	$("#invalidCreds").hide();
-	$(".modal-title").show();
+	$("#loginModalLabel").show();
 	$("#login-email, #login-password").val('');
 });
 

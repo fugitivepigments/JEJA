@@ -15,8 +15,9 @@ $("#save").click(function(e){
     	return;
     }
     
+    // Retrieve and store the image data
     var imageDataUrl = $("#meme").memeGenerator("save");
-    localStorage.setItem("savedMeme",imageDataUrl);
+    localStorage.setItem("lastSavedMeme",imageDataUrl);
 
     var memeText = "";
     var textboxes = $("input[type=text].mg-textbox-text");
