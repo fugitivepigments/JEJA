@@ -3,6 +3,9 @@ module.exports = function(sequelize, Sequelize){
 		portfolio_name: {
 			type: Sequelize.STRING,
 			allowNull: false
+		},
+		cover_img: {
+			type: Sequelize.STRING
 		}
 	});
 

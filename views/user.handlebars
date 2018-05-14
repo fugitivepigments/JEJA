@@ -1,0 +1,23 @@
+{{#section 'head'}}
+    <title>ArtMeme - {{name}} Details</title>
+    <link rel="stylesheet" href="/css/collection.css">
+{{/section}}
+
+<h1>{{name}}'s Details</h1>
+
+<p>Name: {{name}} <a href="#">change</a></p>
+<p>email: {{email}} <a href="#">change</a></p>
+
+<h1>{{name}}'s Portfolios</h1>
+
+<div class="container">
+	<div class="row d-flex flex-row">
+	{{#each portfolio}}
+		<div class="portfolio m-2">
+			<h3>{{portfolio_name}}</h3>
+			<img src="{{cover_img}}" alt="{{portfolio_name}}">
+		</div>
+	{{/each}}
+	</div>
+</div>
+  

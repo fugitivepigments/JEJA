@@ -3,7 +3,8 @@ $(document).ready(function(){
         useBootstrap: true
     });
 
-    // TODO: check for userData after the page has loaded
+    // If the user is logged in, show the save button, 
+    // otherwise hide the save button
     if(userData){
         $("#save").show();
     } else {
