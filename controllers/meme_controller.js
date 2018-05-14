@@ -50,9 +50,10 @@ router.get("/", function(req, res) {
 	});
 });
 
-// Displays the Meme Editor page
+// Displays the Meme Editor page with a random img
 router.get("/meme-editor", function(req, res) {
-	res.render("editor");
+	var randomID = Math.floor(Math.random() * 44800); 
+	res.redirect("/meme-editor/" + randomID);
 });
 
 // Displays the Meme Editor page
@@ -62,7 +63,6 @@ router.get("/meme-editor/:artworkID", function(req, res) {
 			id: parseInt(req.params.artworkID)
 		}
 	}).then((results) => {
-		// console.log(results.dataValues);
 		res.render("editor", results.dataValues);
 	}).catch((err) => {
 		res.status(500).end();

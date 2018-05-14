@@ -37,6 +37,9 @@ $("#signup-form").on('submit', function(event) {
 		}
 		sessionStorage.setItem("userData",JSON.stringify(user));
 
+		// Hide the Home page's Sign Up button
+		$("#signup").toggle();
+
 		// Toggle the login/logout buttons
 		$("#btn-login").toggle();
 		$("#btn-logout").toggle();

@@ -27,6 +27,7 @@ To make famous works of art even better through user input
 * https://www.npmjs.com/package/jquery-meme-generator
 * https://www.npmjs.com/package/spectrum-colorpicker
 * https://www.npmjs.com/package/jsonwebtoken
+* https://www.npmjs.com/package/dragula
 
 ## Breakdown of Duties:
 * Jon - Backend, UserDB/UserAuth

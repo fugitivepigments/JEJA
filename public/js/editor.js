@@ -6,9 +6,9 @@ $(document).ready(function(){
     // If the user is logged in, show the save button, 
     // otherwise hide the save button
     if(userData){
-        $("#save").show();
+        $("#save-form").show();
     } else {
-        $("#save").hide();
+        $("#save-form").hide();
     }
 
     $("#save").click(function(e){
@@ -34,7 +34,7 @@ $(document).ready(function(){
 
         // Package the meme data
         var meme = {
-            meme_name: "Untitled",
+            meme_name: $("#meme-name").val().trim() || "Untitled",
             meme_text: memeText.trim(),
             og_img: $("#meme").data('og-img'),
             new_img: imageDataUrl,

@@ -30,14 +30,13 @@ $("#login-form").on('submit', function(event) {
 		$("#signup").toggle();
 
 		// Show the Meme Editor Save button
-		$("#save").toggle();
+		$("#save-form").toggle();
 
 		// package user's name & ID
 		var user = {
 			userId: data.id,
 			username: data.name
 		}
-		console.log('Remember me: ' + $("#login-persist").is(":checked"));
 
 		// if Remember me is checked, use localStorage, otherwise use sessionStorage
 		// Store user's name & ID
@@ -81,8 +80,8 @@ $("#btn-logout").on('click', function(event) {
 	// Show the Home page's Sign Up button
 	$("#signup").toggle();
 
-	// Hide the Meme Editor Save button
-	$("#save").toggle();
+	// Hide the Meme Editor save-form
+	$("#save-form").toggle();
 });
 
 function toggleLoginLogOut(){

@@ -22,7 +22,7 @@
     <!-- Meme Generator CSS file -->
     <link rel="stylesheet" type="text/css" href="/css/jquery.memegenerator.min.css">
 
-    <link rel="stylesheet" href="/css/style2.css">
+    <link rel="stylesheet" href="/css/editor.css">
 
 {{/section}}
 
@@ -40,7 +40,10 @@
 </div>
 
 <div class="row d-flex justify-content-center">
-    <button class="btn btn-success" id="save">Save</button>
+    <form id="save-form" action="" class="d-flex flex-row">
+        <input id="meme-name" class="form-control" type="text" name="meme_name" placeholder="FILENAME">
+        <button class="btn btn-success" id="save">Save</button>
+    </form>
     <div class="mx-2"></div>
     <button class="btn btn-danger" id="download">Download</button>
 </div>

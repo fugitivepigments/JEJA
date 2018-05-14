@@ -1,5 +1,5 @@
 {{#section 'head'}}
-    <title>ArtMeme - {{name}}'s Details</title>
+    <title>ArtMeme - {{name}}'s Memes</title>
     <link rel="stylesheet" href="/css/collection.css">
     <link rel="stylesheet" href="/css/user.css">
 {{/section}}
@@ -41,6 +41,12 @@
 					<img src="{{cover_img}}" alt="{{portfolio_name}}">
 				</div>
 			{{/each}}
+			<div class="row pl-3">
+				<button id="new-portfolio" class="btn btn-primary">
+					<i class="fa fa-plus"></i>
+					Add New
+				</button>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -58,6 +64,14 @@
 					<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
 				</div>
 			{{/each}}
+			</div>
+			<div class="row pl-3">
+				<a href="/meme-editor">
+					<button id="new-meme" class="btn btn-primary">
+						<i class="fa fa-plus"></i>
+						Add New
+					</button>
+				</a>
 			</div>
 		</div>
 	</div>

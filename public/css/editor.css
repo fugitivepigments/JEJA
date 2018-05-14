@@ -3,3 +3,7 @@
 	/*flex-flow: column;*/
 	justify-content: center;
 }
+
+#meme-name {
+	width: 100%;
+}
