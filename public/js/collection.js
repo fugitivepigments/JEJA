@@ -1,4 +1,4 @@
-$(".meme").hover(function() {
+$(".card").hover(function() {
 	// Display the new image on hover
 	var img = $(this).children('img')[0];
 	console.log(img.dataset.newImg);

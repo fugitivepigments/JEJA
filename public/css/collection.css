@@ -1,4 +1,4 @@
-.meme {
+/*.meme {
 	display: flex;
 	flex-flow: column wrap;
 	box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -8,9 +8,44 @@
 .meme img {
 	width: 200px;
 	height: 280px;
+}*/
+
+.card:hover {
+	transform: scale(1.01);
+	box-shadow: 0 0 15px rgba(0,0,0,.7);
 }
 
-.meme:hover {
-	/*transform: scale(1.1);*/
-	box-shadow: 0 0 15px rgba(0,0,0,.7);
+.title, .meme-title {
+	font-family: 'Source Sans Pro', sans-serif;
+	/*margin-left: 15px;*/
+	margin: 0px;
+}
+
+.title { 
+	margin-left: 15px;
+}
+
+.meme-title {
+	background-color: #eeeeee;
+}
+
+img {
+	max-height: 400px;
+}
+
+.card {
+	margin: 0 0 15px 15px;
+	border: 1px solid #343a40;
+	border-radius: 0;
+}
+
+.row {
+	padding: 15px;
+}
+
+.lead {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-left: 15px;
+	font-size: 20px;
+	margin-bottom: 0 !important;
 }
