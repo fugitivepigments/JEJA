@@ -29,6 +29,31 @@ router.get("/user/:userID", function(req, res) {
 	});
 });
 
+// Displays all User 
+router.get("/community", function(req, res) {
+	db.User.findAll({
+		include: [
+			{model: db.Meme}, 
+			{model: db.Portfolio}
+		],
+		order: [
+			[db.Meme, 'createdAt', 'DESC'],
+			[db.Portfolio, 'createdAt', 'DESC']
+		]
+	}).then((results) => {
+		console.log(results[0].dataValues);
+
+		var users = [];
+		for (var i = 0; i < results.length; i++) {
+			users.push(results[i].dataValues);
+		}
+
+		res.render("community", {users: users});
+	}).catch((err) => {
+		res.status(500).end();
+	});
+});
+
 // POST Routes
 // ====================================================================
 

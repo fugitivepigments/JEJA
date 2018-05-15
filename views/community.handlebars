@@ -1,17 +1,22 @@
 {{#section 'head'}}
-    <title>ArtMeme - Community</title>
+    <title>Deface - Community</title>
     <link rel="stylesheet" href="/css/collection.css">
 {{/section}}
 
-<h1>Meme Collection</h1>
+<h1>Deface Users</h1>
 
 <div class="container">
 	<div class="row d-flex flex-row">
-	{{#each users}}
-		<div class="meme m-2">
-			<h3>{{name}}</h3>
+		<div class="col-3">
+		{{#each users}}
+			<div class="card m-2">
+				<div class="card-header">
+					<h3 class="card-title">{{name}}</h3>
+				</div>
+				<div class="card-body"></div>
+			</div>
+		{{/each}}
 		</div>
-	{{/each}}
 	</div>
 </div>
 

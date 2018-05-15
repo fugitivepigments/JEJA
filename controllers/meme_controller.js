@@ -2,6 +2,7 @@
 var express = require("express");
 var router = express.Router();
 var fs = require("fs");
+var Sequelize = require("sequelize");
 
 // Require all models
 var db = require("../models");
@@ -81,6 +82,28 @@ router.get("/collection", function(req, res) {
 			memes.push(results[i].dataValues);
 		}
 		res.render("collection", {memes: memes});
+	}).catch(err => {
+		res.status(500).end();
+	});
+});
+
+// Search
+router.get("/search", function(req, res) {
+	// generate a random offset
+	// artwork.Title, artwork.author , meme.meme_text, meme.meme_name
+	const Op = Sequelize.Op;
+	db.Artwork.findAll({
+		title: {
+			[Op.like]: '%' + req.body.searchInput + '%'
+		}
+	}).then((results) => {
+
+		artworks = [];
+		for (var i = 0; i < results.length; i++) {
+			artworks.push(results[i].dataValues);
+		}
+		console.log(artworks);
+		res.render("searchResults", {results: artworks});
 	}).catch(err => {
 		res.status(500).end();
 	});
