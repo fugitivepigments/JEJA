@@ -43,6 +43,9 @@ module.exports = function(sequelize, Sequelize){
 		timeframe: {
 			type: Sequelize.STRING,
 			allowNull: false
+		},
+		hitCount: {
+			type: Sequelize.INTEGER
 		}
 	}, {
 		timestamps: false
