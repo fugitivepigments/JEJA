@@ -11,15 +11,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css" crossorigin="anonymous">
     {{{_sections.head}}}
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav id="nav-main" class="navbar navbar-expand-sm navbar-dark bg-dark">
         <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a href="/"><span class="navbar-brand d-flex flex-fill">ArtMeme</span></a>
+        <a href="/"><span class="navbar-brand d-flex flex-fill">Deface</span></a>
         <div class="d-flex flex-fill">
             <!--spacer-->
         </div>
@@ -32,10 +33,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/collection">Collection</a>
                 </li>
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0" id="search-form">
                     <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" style="display:none">
                     <!-- Search bar hidden and will be displayed onClick -->
-                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" id="search-button" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
