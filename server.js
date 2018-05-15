@@ -18,7 +18,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(express.static('public'));
 
 // Setup Handlebars
-app.engine("handlebars", exphbs({ 
+app.engine("handlebars", exphbs({
 	defaultLayout: "main",
 	helpers: {
 	    section: function(name, options){
