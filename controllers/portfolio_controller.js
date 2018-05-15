@@ -8,7 +8,7 @@ var db = require("../models");
 // GET Routes
 // ====================================================================
 
-// Displays a users details
+// TODO: Displays a portfolio
 router.get("/portfolio/:portfolioID", function(req, res) {
 	db.Meme.findById(req.params.portfolioID).then((results) => {
 		// TODO: Need to update 

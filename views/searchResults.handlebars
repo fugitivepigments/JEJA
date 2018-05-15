@@ -1,0 +1,17 @@
+{{#section 'head'}}
+    <title>Deface - Search Results {{portfolio_name}}</title>
+    <link rel="stylesheet" href="/css/collection.css">
+{{/section}}
+
+<h1>Search Results</h1>
+
+<div class="container">
+	<div class="row d-flex flex-row">
+	{{#each results}}
+		<div class="meme m-2">
+			<h3>{{author}} - {{title}}</h3>
+			<img src="{{img_url}}" alt="{{title}}">
+		</div>
+	{{/each}}
+	</div>
+</div>
