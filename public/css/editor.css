@@ -7,3 +7,39 @@
 #meme-name {
 	width: 100%;
 }
+
+.my-4 {
+	margin-left: 15px;
+}
+
+.mg-add-textbox, .mg-advanced-settings-toggle, .mg-toolbox-toggle{
+	display: none;
+}
+
+input.mg-textbox-text.form-control,
+input.mg-textbox-size.form-control,
+.sp-replacer,
+input.mg-textbox-border-width.form-control,
+#meme-name {
+	border: 1px solid #343a40;
+}
+
+#meme-name {
+	margin-right: 17.5px;
+}
+
+#save, #download {
+	background-color: #f0b155;
+	color: white;
+	border: none;
+}
+
+.sp-replacer {
+	height: 100%;
+	padding: 8px;
+}
+
+.footer {
+	margin-bottom: 30px;
+}
+

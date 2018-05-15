@@ -1,6 +1,14 @@
 $(document).ready(function(){
     $("#meme").memeGenerator({
-        useBootstrap: true
+        useBootstrap: true,
+            previewMode: "css",
+            defaultTextStyle: {
+                font: "'Comic Sans', Arial",
+            },
+            // captions: [
+            //     "type top",
+            //     "type bottom"
+            // ]
     });
 
     // If the user is logged in, show the save button, 
