@@ -1,0 +1,65 @@
+img {
+	max-height: 250px;
+	margin: auto;
+}
+
+.row {
+	padding: 15px;
+}
+
+div .col {
+	padding: 0;
+}
+
+/*h5*/ .info {
+	margin: 15px;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1, .lead {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-left: 15px;
+}
+
+.lead {
+	font-size: 15px;
+}
+
+.card-div .card {
+	height: 100%;
+	border: 1px solid #343a40;
+	border-radius: 0;
+	background-color: #eeeeee;
+}
+
+.card-div .card:hover {
+	transform: scale(1.01);
+	box-shadow: 0 0 15px rgba(0,0,0,.7);
+}
+
+/*div*/ .card-body {
+	font-size: 20px;
+}
+
+p.info {
+	margin: 0;
+	line-height: 1;
+}
+
+.card-div /*wrapper columns*/ {
+	margin-bottom: 15px;
+}
+
+img {
+	background-position: center;
+	margin: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+/*div*/ .image-wrapper {
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	margin-top: 5px;
+}
