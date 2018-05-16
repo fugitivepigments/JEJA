@@ -5,6 +5,7 @@ $(".meme").on('click', function(event) {
 	window.location.href = "/meme-editor/" + artworkId;
 });
 
+
 $("#signup").on('click', function(event) {
 	event.preventDefault();
 	$("#signup-form").slideToggle();
@@ -53,3 +54,9 @@ function clearform(){
 	$("#email").val('');
 	$("#password").val('');
 }
+
+$(".search-btn").on('click', function(event) {
+	event.preventDefault();
+	console.log('Clicked the search icon');
+    $(".search-toggle").toggle();
+});

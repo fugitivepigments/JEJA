@@ -2,7 +2,7 @@
 Group Project
 
 ## App Name: 
-Deface
+Dry Memes
 
 ## Purpose:
 To make famous works of art even better through user input
@@ -27,6 +27,7 @@ To make famous works of art even better through user input
 * https://www.npmjs.com/package/spectrum-colorpicker
 * https://www.npmjs.com/package/jsonwebtoken
 * https://www.npmjs.com/package/dragula
+* https://www.npmjs.com/package/bcrypt-nodejs
 
 ## Breakdown of Duties:
 * Jon - Backend, UserDB/UserAuth
