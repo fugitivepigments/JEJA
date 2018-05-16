@@ -13,6 +13,13 @@
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<<<<<<< HEAD
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Lato:900|Bad+Script" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css" crossorigin="anonymous"> {{{_sections.head}}}
+=======
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -20,10 +27,11 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/css/style.css" crossorigin="anonymous">
     {{{_sections.head}}}
+>>>>>>> refs/remotes/origin/master
 </head>
 
 <body>
-    <nav id="nav-main" class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav id="nav-main" class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
         <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,11 +49,11 @@
                     <a class="nav-link" href="/collection">Collection</a>
                 </li>
                 <form class="form-inline my-2 my-lg-0" id="search-form" method="GET" action="/search">
-                    <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" style="display:none" name="searchInput">
+                    <div class="search-toggle" style="display: none">
+                        <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" name="searchInput">
+                    </div>
                     <!-- Search bar hidden and will be displayed onClick -->
-                    <button class="btn btn-outline-secondary my-2 my-sm-0" id="search-button" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
+                    <i id="searchShow" class="fa fa-search"></i>
                 </form>
             </ul>
         </div>
@@ -53,39 +61,68 @@
     {{{ body }}}
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Welcome</h5>
-            <small id="invalidCreds" class="form-text text-danger" style="display: none;">Your username or password doesn't match what we have on file. Try signing in again, or sign up.</small>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="login-form" action="/login" method="POST">
-              <div class="form-group">
-                <label for="login-email">Email address</label>
-                <input name="email" type="email" class="form-control" id="login-email" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="login-password">Password</label>
-                <input name="password" type="password" class="form-control" id="login-password" placeholder="Password">
-              </div>
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="login-persist">
-                <label class="form-check-label" for="login-persist">Remember me</label>
-              </div>
-              <button id="signin" type="submit" class="btn btn-primary w-100">Sign in</button>
-            </form>
-          </div>
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Welcome</h5>
+                    <small id="invalidCreds" class="form-text text-danger" style="display: none;">Your username or password doesn't match what we have on file. Try signing in again, or sign up.</small>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form" action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="login-email">Email address</label>
+                            <input name="email" type="email" class="form-control" id="login-email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input name="password" type="password" class="form-control" id="login-password" placeholder="Password">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="login-persist">
+                            <label class="form-check-label" for="login-persist">Remember me</label>
+                        </div>
+                        <button id="signin" type="submit" class="btn btn-primary w-100">Sign in</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>   
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3 class="footer-headings"><i class="fas fa-angle-right"></i>  About Us</h3>
+                    <p>This is a test</p>
+                </div>
+                <div class="col">
+                    <h3 class="footer-headings"><i class="fas fa-angle-right"></i>  Credits</h3>
+                    <p>This is a test</p>
+                </div>
+                <div class="col">
+                    <h3 class="footer-headings"><i class="fas fa-angle-right"></i>  Links</h3>
+                    <p>This is a test</p>
+                </div>
+            </div>
+            <p class="footer-text">&copy; Copyright 2018 JEJA Productions</p>
+        </div>
+    </footer>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script src="/js/login.js"></script>
+    <script type="text/javascript">
+    // Search Bar Animation
+    // Toggles Search Bar on click
+    $(".fa-search").on('click', function(event) {
+        // $(".search-toggle").animate({
+        //     width: 'toggle'
+        // });
+        console.log("Test");
+    });
+    </script>
     {{{_sections.scripts}}}
 </body>
 

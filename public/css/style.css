@@ -1,22 +1,215 @@
-input.search-input {
-	display: none;
+html {
+	overflow-x: hidden;
 }
 
-button.sign-up-button {
+h1,
+h2 {
+    font-family: "Lato", "Helvetica", "Arial", Sans-serif;
 }
+
+h2.sidebar-title {
+    font-weight: bold;
+    display: block;
+    border-bottom: 5px solid #000;
+}
+
+h3.script {
+	font-family: "Bad Script", "Helvetica", "Arial", Sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	color: #fff;
+	display: block;
+	text-align: center;
+	margin-bottom: 20px;
+	margin-top: 25px;
+}
+
+h3.footer-headings {
+	color: #353a3f;
+	opacity: .8;
+	font-size: 25px;
+	font-family: "Lato", "Helvetica", "Arial", Sans-serif;
+}
+
+p.footer-text {
+	font-size: 10px;
+	text-align: center;
+	display: block;
+	color: #fff;
+	border-top: 1px solid #353a3f;
+	padding-top: 20px;
+	opacity: .8;
+}
+
+form.sign-up-form {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input.search-input {
+    display: none;
+}
+
+label.sign-up-label {
+	float: left;
+	width: 25%;
+	background-color: #c7544f;
+	border-radius: 10px 0px 0px 10px;
+	border: 1px solid #c7544f;
+	border-right: 2px;
+	padding: 6px 5px 6px 8px;
+	text-align: left;
+}
+
+input.sign-input {
+	color: #353a3f;
+	float: right;
+	max-width: 75%;
+	background-color: #e5e5e5;
+	border-radius: 0px 10px 10px 0px;
+	border: 1px solid #999;
+	border-left: 0px;
+}
+
+input.sign-input:focus {
+	background-color: #fff;
+	border: 1px solid #c7544f;
+	border-left: 0px;
+	color: #353a3f;
+}
+
+/* Class for when a section of the form is completed */
+label.sign-up-label-complete {
+	background-color: #c7544f;
+}
+
+input.sign-input-complete {
+	background-color: #eee;
+	border: 1px solid #c7544f;
+	border-left: 0px;
+	color: #353a3f;
+}
+
+button.submit-sign-up {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80px;
+	display: block;
+	clear: left;
+}
+
+
+div.form-group {
+	margin-top: 30px;
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	overflow: auto;
+}
+
+button.sign-up-button {}
 
 .demo {
-	border-radius: 0px;
-	margin-bottom: 0px;
-	min-height: 318px;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    min-height: 318px;
 }
 
-div#sign-up {
+.meme {
+	max-width: 100%;
+    max-height: 380px;
+    display: block;
+    margin: 0px auto;
+    opacity: .9;
+}
+
+.meme:hover {
+	opacity: 1.0;
+}
+
+a.nav-link {
+    padding: 10px 8px 10px 8px;
+    display: block;
+}
+
+a.nav-link:hover {
+    background-color: #e8807d;
+    border-radius: 5px;
+}
+
+span.navbar-brand {
+    font-family: "Lato", "Helvetica", "Arial", Sans-serif;
+    font-size: 35px;
+}
+
+svg.fa-search {
+    cursor: pointer;
+    position: relative;
+    color: #fff;
+    opacity: 0.8;
+    padding-left: 10px;
+    font-size: 25px;
+}
+
+svg.fa-search:hover {
+	opacity: .5;
+}
+
+div.search-toggle {
+    width: 300px;
+}
+
+div.jumbotron {
+	border-radius: 0px;
+	margin-bottom: 0px;
+}
+
+div.disp-bg {
+	background-color: #353a3f;
+	width: 100%;
+	margin-top: -35px;
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
 
-.meme {
-	width: 300px;
-	height: 380px;
+div.artwork {
+	background-color: #fff;
+	padding: 20px 20px 20px 20px;
+	box-shadow: 0px 0px 10px #000;
 }
+
+div.content-contain {
+	max-width: 100%;
+	overflow-x: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+div.top-picks {
+	margin: 0px auto;
+}
+
+div.recent-picks {
+	margin: 0px auto;
+}
+
+footer.footer {
+	width: 100%;
+	background-color: #c7544f!important;
+	color: #fff;
+	margin-top: 20px;
+	/* Blame Safari for the negative bottom margin */
+	margin-bottom: -1px; 
+	padding: 20px 0px 20px 0px;
+}
+
+nav#nav-main {
+    background-color: #c7544f!important;
+}
+
+div#sign-up {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
