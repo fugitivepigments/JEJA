@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/fugitivepigments/JEJA#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "dragula": "^3.7.2",
