@@ -58,5 +58,5 @@ function clearform(){
 $(".search-btn").on('click', function(event) {
 	event.preventDefault();
 	console.log('Clicked the search icon');
-    $(".search-toggle").toggle();
+    $(".search-toggle").animate({width: 'toggle'});
 });
