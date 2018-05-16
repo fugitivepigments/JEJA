@@ -8,6 +8,8 @@ if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 	userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
 	userData = JSON.parse(userData);
 
+	$("#curr-user").text('Welcome, '+userData.username);
+
 	console.log(userData.username + ' is currently logged in');
 	toggleLoginLogOut();
 	$("#signup").toggle();
@@ -24,7 +26,7 @@ $("#login-form").on('submit', function(event) {
 
 	// Login the user
 	$.post('/login', userCreds, function(data, textStatus, xhr) {
-		console.log('Welcome ' + data.name);
+		console.log('Welcome, ' + data.name);
 
 		// Hide the Home page's Sign Up button
 		$("#signup").toggle();
@@ -44,6 +46,8 @@ $("#login-form").on('submit', function(event) {
 			localStorage.setItem('userData',JSON.stringify(user));
 		}
 		sessionStorage.setItem('userData',JSON.stringify(user));
+
+		$("#curr-user").text('Welcome, '+userData.username);
 
 		// Hide the login modal
 		$("#login-form").closest('.modal').modal('hide');
@@ -74,6 +78,8 @@ $("#btn-logout").on('click', function(event) {
 	// clear session data
 	localStorage.removeItem('userData');
 	sessionStorage.removeItem('userData');
+
+	$("#curr-user").text('');
 
 	toggleLoginLogOut();
 

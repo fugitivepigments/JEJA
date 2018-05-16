@@ -136,6 +136,14 @@ a.nav-link:hover {
     border-radius: 5px;
 }
 
+
+#curr-user {
+	color: rgba(255,255,255,.5);
+	padding: 10px 8px 10px 8px;
+	padding-right: .5rem;
+	padding-left: .5rem;
+}
+
 span.navbar-brand {
     font-family: "Lato", "Helvetica", "Arial", Sans-serif;
     font-size: 35px;
