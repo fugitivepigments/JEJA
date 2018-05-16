@@ -141,6 +141,12 @@ span.navbar-brand {
     font-size: 35px;
 }
 
+button.search-btn {
+	border: none;
+	background: none;
+	outline: none;
+}
+
 svg.fa-search {
     cursor: pointer;
     position: relative;
@@ -152,10 +158,6 @@ svg.fa-search {
 
 svg.fa-search:hover {
 	opacity: .5;
-}
-
-div.search-toggle {
-    width: 300px;
 }
 
 div.jumbotron {
