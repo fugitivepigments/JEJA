@@ -1,13 +1,87 @@
-.edit {
-	font-size: 1rem;
-	border: 0;
-	background: none;
-	color: var(--blue);
-	font-weight: 500;
-	cursor: pointer;
+h1 {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-left: 15px;
+}
+
+/*p*/.lead {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-left: 15px;
+	font-size: 20px;
+	margin-bottom: 0 !important;
 }
 
 .edit-on {
 	display: flex;
 	flex-flow: row;
+}
+
+/*main cards*/.card.m-4 {
+	border: 1px solid #343a40;
+	border-radius: 0 !important;
+	margin: 15px !important;
+}
+
+/*h5*/.card-title {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.card-header {
+	border-bottom: 1px solid #343a40;
+}
+
+/*meme cards*/ div .card {
+	border: 1px solid #343a40;
+	border-radius: 0 !important;
+	margin: 0 15px 15px 0;
+}
+
+button, #new-portfolio, #new-meme {
+	background-color: #f0b155;
+	color: white;
+	border: none;
+	border-radius: .25rem;
+}
+
+/*div*/.edit-on input {
+	padding: 0 3px;
+}
+
+/*div*/.edit-on {
+	height: 24px;
+}
+
+img {
+	max-height: 300px;
+}
+
+/*inside saved memes*/ .row {
+	padding: 15px;
+}
+
+/*for each main card*/ .col-12 {
+	padding: 0;
+}
+
+/*meme-cards edit and delete buttons*/ .card-link {
+	background-color: #f0b155;
+	color: white !important;
+	border: none;
+	border-radius: .25rem;
+	padding: 1px 6px;
+	margin: 3px;
+	height: 24px;
+}
+
+.card-link:hover {
+	background-color: #f0b155;
+	color: white !important;
+}
+
+/*h3*/ .meme-title {
+	background-color: #eeeeee;
+	margin-bottom: 0;
+}
+
+/*meme button background*/ .card-block {
+	background-color: #eeeeee;
 }
