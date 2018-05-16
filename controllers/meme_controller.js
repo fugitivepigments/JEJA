@@ -99,7 +99,7 @@ router.get("/collection", function(req, res) {
 // Search
 router.get("/search", function(req, res) {
   // generate a random offset
-  // artwork.Title, artwork.author , meme.meme_text, meme.meme_name
+  // artwork.title, artwork.author , meme.meme_text, meme.meme_name
   db.Artwork.findAll({
     where: {
 				title: req.body.searchInput
