@@ -1,6 +1,17 @@
+h1 {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-left: 15px;
+}
+
+/*p*/.lead {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-left: 15px;
+	font-size: 20px;
+	margin-bottom: 0 !important;
+}
+
 .mg-advanced-settings {
 	display: flex;
-	/*flex-flow: column;*/
 	justify-content: center;
 }
 
@@ -34,6 +45,10 @@ input.mg-textbox-border-width.form-control,
 	border: none;
 }
 
+#save:focus , #download:focus {
+	box-shadow: none;
+}
+
 .sp-replacer {
 	height: 100%;
 	padding: 8px;
@@ -43,10 +58,4 @@ input.mg-textbox-border-width.form-control,
 	margin-bottom: 30px;
 }
 
-/*#meme {
-	max-height: 600px;
-}
-
-.mg-wrapper .mg-image>img {
-	width: auto;
-}*/
+.

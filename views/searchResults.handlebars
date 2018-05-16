@@ -1,17 +1,24 @@
 {{#section 'head'}}
     <title>Deface - Search Results {{portfolio_name}}</title>
-    <link rel="stylesheet" href="/css/collection.css">
+    <link rel="stylesheet" href="/css/searchresults.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400" rel="stylesheet">
 {{/section}}
 
 <h1>Search Results</h1>
+<p class="lead"><i>Click on an artwork to use it to make a meme</i></p>
 
-<div class="container">
-	<div class="row d-flex flex-row">
-	{{#each results}}
-		<div class="meme m-2">
-			<h3>{{author}} - {{title}}</h3>
-			<img src="{{img_url}}" alt="{{title}}">
-		</div>
-	{{/each}}
+<div class="row">
+		{{#each results}}
+	<div class="col-lg-4 col-md-6 col-sm-6 card-div">
+		<div class="card">
+	    	<div class="image-wrapper">
+	    	<img  src="{{img_url}}" alt="{{title}}">
+	    	</div>
+	        <div class="card-body">
+				<p class="info"><i>Artist: </i>{{author}}</p>
+				<p class="info"><i>Title: </i>{{title}}</p>
+			</div>
+	 	</div>
 	</div>
+	{{/each}}
 </div>

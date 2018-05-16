@@ -1,9 +1,15 @@
 $(document).ready(function(){
+    // var textSizeSelector = $(".mg-textbox-size")
+    // var textSizeCap = $("div");
+    // textSizeCap.attr("class", "lead");
+    // textSizeCap.text("Edit text at the top of the meme here:");
+    // textSizeSelector.prependChild(textSizeCap);
+
     $("#meme").memeGenerator({
         useBootstrap: true,
             previewMode: "css",
             defaultTextStyle: {
-                font: "'Comic Sans', Arial",
+                font: "'Comic Sans', Helvetica",
             },
             // captions: [
             //     "type top",
@@ -29,7 +35,7 @@ $(document).ready(function(){
             console.log('Please login');
             return;
         }
-        
+
         // Retrieve and store the image data
         var imageDataUrl = $("#meme").memeGenerator("save");
         localStorage.setItem("lastSavedMeme",imageDataUrl);

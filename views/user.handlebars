@@ -1,12 +1,15 @@
 {{#section 'head'}}
     <title>ArtMeme - {{name}}'s Memes</title>
-    <link rel="stylesheet" href="/css/collection.css">
     <link rel="stylesheet" href="/css/user.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400" rel="stylesheet">
 {{/section}}
 
-<div class="container">
+	<h1>Account Details</h1>
+	<p class="lead"><i>Review and edit your account details here, create new portfolios, and view your saved memes here</i></p>
+	<div class="my-4">
+
 	<div class="row">
-		<div class="col-6">
+		<div class="col-12">
 			<div class="card m-4">
 				<div class="card-header d-flex flex-row justify-content-between">
 					<h5 class="card-title">{{name}}'s Details</h5>
@@ -66,12 +69,23 @@
 					<button class="edit edit-memes">Edit</button>
 				</div>
 				<div class="card-body">
-					<div class="d-flex flex-row">
+					<div class="row">
 					{{#each Memes}}
-						<div class="meme m-2">
+						<!-- <div class="card meme col-lg-4 col-md-6 col-sm-6">
 							<h3>{{meme_name}}</h3>
 							<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
-						</div>
+						</div> -->
+						<div class="card">
+								<h3 class="meme-title text-center">{{meme_name}}</h3>
+								<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
+						        <form method="POST" class="delete-meme">
+						            <input type="hidden" name="_method" value="DELETE">
+						            <div class="card-block text-right">
+						            	<button type="" class="card-link btn-link text-danger">Edit</button>
+						                <button type="" class="card-link btn-link text-danger">Delete</button>
+						            </div>
+						        </form>
+							</div>
 					{{/each}}
 					</div>
 					<div class="pl-3">
@@ -82,13 +96,10 @@
 							</button>
 						</a>
 					</div>
-				</div>
+				</div>	
 			</div>		
 		</div>
-		
 	</div>
-	
-</div>
 
 {{#section 'scripts'}}
 <script src="/js/collection.js" type="text/javascript"></script>
