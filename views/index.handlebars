@@ -1,53 +1,65 @@
 {{#section 'head'}}
-    <title>ArtMeme</title>
-    <link rel="stylesheet" href="/css/style.css">
-{{/section}}
-
+<title>ArtMeme</title>
+<link rel="stylesheet" href="/css/style.css"> {{/section}}
 <div class="demo jumbotron d-flex justify-content-center align-items-center">
     <h2 class="text-center">Placeholder for future GIF</h2>
 </div>
-<div id="sign-up" class="jumbotron bg-dark">
-    <div class="row">
-        <div class="col text-center">
-            <button id="signup" class="btn-primary btn-lg sign-up-button" type="submit">
-                Sign Up!
-            </button>
-            <!-- Sign up form will be inserted here dynamically -->
-
-            <form id="signup-form" action="#" method="POST" class="w-25" style="display: none;">
-                <div class="form-group">
-                    <label for="name" class="text-white text-left">Name</label>
-                    <input name="name" type="text" class="form-control" id="name" placeholder="Enter your name">
+<div class="disp-bg">
+    <h3 class="script">Here's some art to get you started . . .</h3>
+    <div class="container">
+        <div class="row">
+            {{#each artworks}}
+            <div class="col-md-4">
+                <div class="artwork justify-content-center">
+                    <a href="/meme-editor">
+                        <img src="{{img_url}}" alt="{{title}}" data-artworkid="{{id}}" class="meme">
+                    </a>
                 </div>
-                <div class="form-group">
-                    <label for="email" class="text-white">Email address</label>
-                    <input name="email" type="email" class="form-control" id="email" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                    <label for="password" class="text-white">Password</label>
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="signin-persist">
-                    <label class="form-check-label text-white" for="signin-persist">Remember me</label>
-                </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
+            </div>
+            {{/each}}
         </div>
     </div>
 </div>
-<div class="container">
-    <!-- Content will be inserted here -->
-    <div class="row my-5 d-flex justify-content-center artwork">
-    {{#each artworks}}
-        <a href="/meme-editor">
-            <img src="{{img_url}}" alt="{{title}}" data-artworkid="{{id}}" class="meme m-4">
-        </a>
-    {{/each}}
-
+<div id="sign-up" class="jumbotron bg-dark">
+    <div class="row">
+        <div class="col text-center justify-content-center">
+            <button id="signup" class="btn-primary btn-lg" type="submit">
+                Sign Up
+            </button>
+            <!-- Sign up form will be inserted here dynamically -->
+            <form id="signup-form" action="#" method="POST" class="w-50 sign-up-form text-center" style="display: none;">
+                <div class="form-group">
+                    <label for="name" class="text-white text-left sign-up-label">Name</label>
+                    <input name="name" type="text" class="form-control sign-input" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="text-white sign-up-label">Email</label>
+                    <input name="email" type="email" class="form-control sign-input" id="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="text-white sign-up-label">Password</label>
+                    <input name="password" type="password" class="form-control sign-input" id="password" placeholder="Password">
+                </div>
+                <div class="form-check" style="float: left">
+                    <input type="checkbox" class="form-check-input" id="signin-persist">
+                    <label class="form-check-label text-white" for="signin-persist">Remember me</label>
+                </div>
+                <button class="btn btn-primary submit-sign-up" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <h3 class="script">. . . or you can check out what others have created &#8628;</h3>
+</div>
+<div class="row content-contain">
+    <div class="col top-picks">
+        <h2 class="sidebar-title">TOP PICKS</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie tortor ut odio accumsan porttitor. Donec faucibus libero sit amet bibendum varius. Aliquam interdum sem lectus, vitae vehicula arcu tempor ut. Vestibulum lobortis commodo iaculis. Etiam sagittis ipsum sit amet eros aliquet dictum vel vel eros. Sed risus est, mollis vitae fringilla a, bibendum et massa. Nulla luctus sem sapien, a aliquet dolor congue vitae. Donec pretium sapien nec mauris condimentum, non lacinia dui lobortis. Donec finibus, libero id laoreet malesuada, odio mi scelerisque enim, vitae pharetra augue erat nec lectus. Aenean cursus elit nibh, vitae placerat massa placerat non. Duis ut venenatis est, nec viverra ex. Maecenas pretium vehicula lectus, sed elementum lacus auctor non.</p>
+    </div>
+    <div class="col recent-picks">
+        <h2 class="sidebar-title">RANDOM</h2>
+        <p>Nulla facilisi. Maecenas blandit porttitor diam, eget maximus sem. Curabitur mattis vitae tellus ut feugiat. Praesent eu lectus commodo, blandit tortor eget, vehicula dolor. Aenean porttitor pellentesque augue, ac ornare quam elementum in. Proin lacinia leo vel est mattis, eu porttitor turpis viverra. Aliquam at tortor suscipit, dignissim urna et, tristique leo. Ut ultrices imperdiet arcu sit amet egestas. Vestibulum efficitur lectus eget erat sodales, eu tincidunt lorem volutpat. Quisque sodales suscipit mattis. Vivamus tempor interdum erat, ultricies sagittis dui lobortis ac. Nunc sodales, metus rhoncus facilisis accumsan, massa sapien faucibus ligula, vel ultricies metus est sit amet magna.</p>
     </div>
 </div>
-
 {{#section 'scripts'}}
 <script src="/js/main.js" type="text/javascript"></script>
 {{/section}}
