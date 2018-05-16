@@ -49,3 +49,22 @@ img {
 	font-size: 20px;
 	margin-bottom: 0 !important;
 }
+
+/*meme-cards edit and delete buttons*/ .card-link {
+	background-color: #f0b155;
+	color: white !important;
+	border: none;
+	border-radius: .25rem;
+	padding: 1px 6px;
+	margin: 3px;
+	height: 24px;
+}
+
+/*meme button background*/ .card-block {
+	background-color: #eeeeee;
+}
+
+.card-link:hover {
+	background-color: #f0b155;
+	color: white !important;
+}
