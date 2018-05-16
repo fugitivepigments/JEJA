@@ -1,9 +1,8 @@
 # JEJA
 Group Project
 
-## App Name:
-DEFACER?
-BETTER METTER/BETTER MET?
+## App Name: 
+Deface
 
 ## Purpose:
 To make famous works of art even better through user input

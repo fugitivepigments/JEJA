@@ -1,6 +1,7 @@
 // Dependencies
 var express = require("express");
 var router = express.Router();
+var bcrypt = require("bcrypt-nodejs");
 
 // Require all models
 var db = require("../models");
@@ -60,28 +61,39 @@ router.get("/community", function(req, res) {
 // Add a new User
 router.post("/api/new-user", function(req, res) {
 	var user = req.body;
-	db.User.create({
-		name: user.name,
-		email: user.email,
-		password: user.password
-	}).then((result) => {
-		console.log('Successfully added user: ' + req.body.name);
-		res.json(result);
-	}).catch((err) => {
-		res.status(500).send('Error while adding user: '+ req.body.name).end();
-	});	
+	bcrypt.hash(req.body.password, null, null, function(err, hash){
+		db.User.create({
+			name: user.name,
+			email: user.email,
+			password: hash
+		}).then((result) => {
+			console.log('Successfully added user: ' + req.body.name);
+			res.json(result);
+		}).catch((err) => {
+			res.status(500).send('Error while adding user: '+ req.body.name).end();
+		});	
+	});
+
 });
 
 // Log a user in
 router.post("/login", function(req, res) {
+
 	db.User.findOne({
 		where: {
-			email: req.body.email,
-			password: req.body.password
+			email: req.body.email
 		}
 	}).then((user) => {
-		console.log('Successful login: ' + user.email)
-		res.json(user);
+		console.log('[Successfully pulled the user from the db]');
+		bcrypt.compare(req.body.password, user.password, function(err, response){
+			console.log('err: ', err);
+			console.log('res: ', response);
+			if (response){
+				// password matches
+				console.log('Successful login: ' + user.email)
+				res.json(user);
+			}
+		});
 	}).catch((err) => {
 		res.status(500).end();
 	});
