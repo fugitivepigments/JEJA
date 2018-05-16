@@ -52,6 +52,11 @@ input.search-input {
     border: 0px;
 }
 
+input.search-input:placeholder {
+    color: #fff;
+    opacity: .9;
+}
+
 label.sign-up-label {
 	float: left;
 	width: 25%;
