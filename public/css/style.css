@@ -48,6 +48,8 @@ form.sign-up-form {
 
 input.search-input {
     display: none;
+    background-color: #c66a67;
+    border: 0px;
 }
 
 label.sign-up-label {
