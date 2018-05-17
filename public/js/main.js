@@ -57,6 +57,30 @@ function clearform(){
 
 $(".search-btn").on('click', function(event) {
 	event.preventDefault();
-	console.log('Clicked the search icon');
-    $(".search-toggle").toggle();
+    $(".search-toggle").animate({width: 'toggle'});
+
+    $('.search-input').toggleClass('shown');
+
+    if($(".search-input").hasClass('shown')){
+    	startSearch();
+    }
 });
+
+
+$("#search-form").on('submit', function(event) {
+	event.preventDefault();
+	/* Act on the event */
+	startSearch();
+	// console.log("search-form submitted");
+});
+
+function startSearch(){
+	console.log('Search executed');
+
+	var query = $(".search-input").val().trim();
+
+	$.get('/search', function(data) {
+		/*optional stuff to do after success */
+		console.log(data);
+	});
+}

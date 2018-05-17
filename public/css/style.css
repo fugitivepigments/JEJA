@@ -48,6 +48,39 @@ form.sign-up-form {
 
 input.search-input {
     display: none;
+    background-color: #c66a67;
+    border: 0px;
+    opacity: .9;
+}
+
+/* Search bar placeholder text color for all browsers*/
+
+.search-input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #fff;
+}
+.search-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #fff;
+   opacity:  .9;
+}
+.search-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #fff;
+   opacity:  .9;
+}
+.search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #fff;
+}
+.search-input::-ms-input-placeholder { /* Microsoft Edge */
+   color: #fff;
+}
+
+.search-input::placeholder { /* Most modern browsers support this now. */
+   color: #fff;
+}
+
+/* end placeholder color css*/
+
+input.search-input:focus {
+    border: 0px;
 }
 
 label.sign-up-label {
@@ -134,6 +167,14 @@ a.nav-link {
 a.nav-link:hover {
     background-color: #e8807d;
     border-radius: 5px;
+}
+
+
+#curr-user {
+	color: rgba(255,255,255,.5);
+	padding: 10px 8px 10px 8px;
+	padding-right: .5rem;
+	padding-left: .5rem;
 }
 
 span.navbar-brand {
