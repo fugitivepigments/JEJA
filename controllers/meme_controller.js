@@ -21,7 +21,7 @@ function displayThreeRandom(displayPage, model, res){
       ]
     }
   }).then((artResults) => {
-    console.log(artResults);
+    // console.log(artResults);
     // generate a random offset
     var art = [];
     for (var i = 0; i < artResults.length; i++) {
@@ -91,7 +91,7 @@ router.get("/", function(req, res) {
 
     db.Meme.findAll({order: [['createdAt', 'DESC']]})
       .then((recentMemes) => {
-      console.log('Recent Memes',recentMemes);
+      // console.log('Recent Memes',recentMemes);
         var memes = [];
         for (var i = 0; i < recentMemes.length; i++) {
           memes.push(recentMemes[i].dataValues);

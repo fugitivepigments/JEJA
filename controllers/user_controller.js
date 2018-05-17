@@ -42,7 +42,7 @@ router.get("/community", function(req, res) {
 			[db.Portfolio, 'createdAt', 'DESC']
 		]
 	}).then((results) => {
-		console.log(results[0].dataValues);
+		// console.log(results[0].dataValues);
 
 		var users = [];
 		for (var i = 0; i < results.length; i++) {
