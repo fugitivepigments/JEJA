@@ -1,6 +1,7 @@
 h1 {
 	font-family: 'Source Sans Pro', sans-serif;
 	margin-left: 15px;
+	margin-top: 80px;
 }
 
 /*p*/.lead {
@@ -33,6 +34,7 @@ h1 {
 	border: 1px solid #343a40;
 	border-radius: 0 !important;
 	margin: 0 15px 15px 0;
+	height: 100%;
 }
 
 button, #new-portfolio, #new-meme {
@@ -40,6 +42,10 @@ button, #new-portfolio, #new-meme {
 	color: white;
 	border: none;
 	border-radius: .25rem;
+}
+
+button:hover, #new-portfolio:hover, #new-meme:hover {
+	background-color: #eb9514;
 }
 
 /*div*/.edit-on input {
@@ -51,7 +57,7 @@ button, #new-portfolio, #new-meme {
 }
 
 img {
-	max-height: 300px;
+	max-height: 400px;
 }
 
 /*inside saved memes*/ .row {
@@ -67,19 +73,20 @@ img {
 	color: white !important;
 	border: none;
 	border-radius: .25rem;
-	padding: 1px 6px;
-	margin: 3px;
+	margin: 5px;
 	height: 24px;
 }
 
 .card-link:hover {
-	background-color: #f0b155;
+	background-color: #eb9514;
 	color: white !important;
 }
 
 /*h3*/ .meme-title {
 	background-color: #eeeeee;
 	margin-bottom: 0;
+	font-family: 'Open Sans Condensed', sans-serif;
+	padding: 10px;
 }
 
 /*meme button background*/ .card-block {

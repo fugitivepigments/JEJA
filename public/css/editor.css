@@ -1,6 +1,7 @@
 h1 {
 	font-family: 'Source Sans Pro', sans-serif;
 	margin-left: 15px;
+	margin-top: 80px;
 }
 
 /*p*/.lead {
@@ -20,7 +21,8 @@ h1 {
 }
 
 .my-4 {
-	margin-left: 15px;
+	
+	margin-bottom: 0;
 }
 
 .mg-add-textbox, .mg-advanced-settings-toggle, .mg-toolbox-toggle{
@@ -45,8 +47,9 @@ input.mg-textbox-border-width.form-control,
 	border: none;
 }
 
-#save:focus , #download:focus {
-	box-shadow: none;
+#save:hover , #download:hover {
+	/*box-shadow: none;*/
+	background-color: #eb9514
 }
 
 .sp-replacer {
