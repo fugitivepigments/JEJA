@@ -47,16 +47,17 @@ $("#login-form").on('submit', function(event) {
 		}
 		sessionStorage.setItem('userData',JSON.stringify(user));
 
-		$("#curr-user").text('Welcome, '+userData.username);
-
-		// Hide the login modal
-		$("#login-form").closest('.modal').modal('hide');
+		$("#curr-user").text('Welcome, '+data.name);
 
 		// Clear login form
 		$("#login-email, #login-password").val('');
 
 		// Toggle the log in/out buttons
 		toggleLoginLogOut();
+		
+		// Hide the login modal
+		$("#loginModal").modal("hide");
+		
 	})
 	.fail((ErrXhr, ErrType, StatusText) => {
 		// Display red error text under username and password
@@ -74,7 +75,17 @@ $("#btn-login").on('click', function(event) {
 
 $("#btn-logout").on('click', function(event) {
 	event.preventDefault();
-	
+
+	var user;
+	try {
+		var userData = JSON.parse(sessionStorage.userData);
+		user = userData.username;
+	} catch (err) {
+		// console.log(err);
+		var userData = JSON.parse(localStorage.userData);
+		user = userData.username;
+	}
+	console.log(user);
 	// clear session data
 	localStorage.removeItem('userData');
 	sessionStorage.removeItem('userData');
@@ -88,6 +99,13 @@ $("#btn-logout").on('click', function(event) {
 
 	// Hide the Meme Editor save-form
 	$("#save-form").toggle();
+
+	//Set user's name to logout modal
+	$("#logout-user").text(user);
+
+	//Logout modal appears
+	$("#logoutModal").modal();
+	console.log(user + " has been logged out");
 });
 
 function toggleLoginLogOut(){

@@ -285,15 +285,15 @@ div#sign-up {
 	font-weight: bold;
 }
 
-label, #signin {
+label, #signin, .modal-close /*logout*/ {
 	font-family: "Source Sans Pro";
 }
 
-#signin {
+#signin, .modal-close /*logout*/ {
 	background-color: #f0b155;
 	border: none;
 }
 
-#signin:hover {
+#signin:hover, .modal-close:hover /*logout*/ {
 	background-color: #eb9514;
 }
