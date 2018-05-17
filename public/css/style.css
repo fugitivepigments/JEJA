@@ -50,11 +50,37 @@ input.search-input {
     display: none;
     background-color: #c66a67;
     border: 0px;
+    opacity: .9;
 }
 
-input.search-input:placeholder {
+/* Search bar placeholder text color for all browsers*/
+
+.search-input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color: #fff;
-    opacity: .9;
+}
+.search-input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #fff;
+   opacity:  .9;
+}
+.search-input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #fff;
+   opacity:  .9;
+}
+.search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #fff;
+}
+.search-input::-ms-input-placeholder { /* Microsoft Edge */
+   color: #fff;
+}
+
+.search-input::placeholder { /* Most modern browsers support this now. */
+   color: #fff;
+}
+
+/* end placeholder color css*/
+
+input.search-input:focus {
+    border: 0px;
 }
 
 label.sign-up-label {
