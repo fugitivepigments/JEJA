@@ -10,7 +10,7 @@ $(".card").hover(function() {
 
 $(".btn-edit").on('click', function(event) {
 	event.preventDefault();
-	var memeId = $(this).data('memeid');
+	const memeId = $(this).parent().prev().data('memeid');
 	window.location.href = "/edit-meme/" + memeId;
 });
 

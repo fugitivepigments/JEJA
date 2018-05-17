@@ -10,45 +10,26 @@ var artworkCount;
 // Require all models
 var db = require("../models");
 
-function displayRandomThree(displayPage, model, res){
-  model.findAndCountAll().then((results) => {
-    artworkCount = results.count;
+function displayThreeRandom(displayPage, model, res){
+  artworkCount = 44809;
+  model.findAll({
+    where: {
+      [Op.or]: [
+        {id: parseInt(Math.floor(Math.random() * artworkCount))},
+        {id: parseInt(Math.floor(Math.random() * artworkCount))},
+        {id: parseInt(Math.floor(Math.random() * artworkCount))}
+      ]
+    }
+  }).then((results) => {
+    console.log(results);
     // generate a random offset
-    var offset = Math.floor(Math.random() * artworkCount);
-    // find and return 3 random items from the selected model
-    model.findAndCountAll({
-      limit: 1,
-      offset: offset
-    }).then((results1) => {
-      offset = Math.floor(Math.random() * artworkCount);
-     model.findAndCountAll({
-        limit: 1,
-        offset: offset
-      }).then((results2) => {
-        offset = Math.floor(Math.random() * artworkCount);
-       model.findAndCountAll({
-          limit: 1,
-          offset: offset
-        }).then((results3) => {
-          // Reformat results to make it easier to display data in views
-          var art = [];
-          art.push(results1.rows[0].dataValues);
-          art.push(results2.rows[0].dataValues);
-          art.push(results3.rows[0].dataValues);
+    var art = [];
+    for (var i = 0; i < results.length; i++) {
+      art.push(results[i].dataValues);
+    }
 
-          // Send results to index.handlebars
-          res.render(displayPage, {
-            artworks: art
-          });
-        }).catch((err) => {
-          res.status(500).end();
-        });
-      }).catch((err) => {
-        res.status(500).end();
-      });
-    }).catch((err) => {
-      res.status(500).end();
-    });
+    // Send results to index.handlebars
+    res.render(displayPage, {artworks: art});
   }).catch((err) => {
       res.status(500).end();
   });
@@ -79,7 +60,7 @@ function displayAll(displayPage, model, res){
 
 // Display the Index page -- GOOD
 router.get("/", function(req, res) {
-  displayRandomThree("index", db.Artwork, res);
+  displayThreeRandom("index", db.Artwork, res);
 });
 
 // Displays the Meme Editor page with a random img --RETIRE
@@ -249,49 +230,140 @@ router.post("/api/:userID/new-meme", function(req, res) {
 // TODO: A user adds a new meme (with a Portfolio)
 router.post("/api/:userID/:portfolioID/new-meme", function(req, res) {
   var meme = req.body;
-  db.Meme.create({
-    meme_name: meme.meme_name,
-    meme_text: meme.meme_text,
-    og_img: meme.og_img,
-    new_img: meme.new_img,
-    tags: meme.tags,
-    UserId: parseInt(req.params.userID),
-    PortfolioId: parseInt(req.params.portfolioID)
-  }).then(() => {
-    console.log('Successfully added meme: ' + req.body.meme_name);
-    res.redirect(200, "/");
-  }).catch((err) => {
-    res.status(500).send('Error while adding meme: ' + req.body.meme_name).end();
-  });
+
+  var img = req.body.new_img;
+  var data = img.replace(/^data:image\/\w+;base64,/, "");
+  var buf = new Buffer(data, 'base64');
+  var filename = req.body.meme_name + '.png';
+  var num = 0;
+
+  createMemeImage(filename);
+
+  function createMemeImage(filename) {
+    // use fs.writeFile to save image on server under images dir
+    // Allow files to be overrided
+    fs.writeFile(__dirname + '/../public/images/' + filename, buf, {
+      flag: 'wx'
+    }, err => {
+      if (err) {
+        // If the filename already exists, increment a counter until an
+        // available filename is found
+        if (err.code === "EEXIST") {
+          num++;
+          console.log('Filename exists...creating new filename');
+          filename = req.body.meme_name + " (" + num + ").png";
+          createMemeImage(filename);
+          return;
+        } else {
+          console.log('Error', err.code);
+          return console.error(err);
+        }
+      }
+
+      // Make sure the user exists
+      db.User.findOne({
+        where: {
+          id: parseInt(req.params.userID)
+        }
+      }).then(user => {
+
+        // After the user's record has been found, associate the meme to the user
+        db.Meme.create({
+          meme_name: meme.meme_name,
+          meme_text: meme.meme_text,
+          og_img: meme.og_img,
+          new_img: '/images/' + filename,
+          tags: meme.tags,
+          UserId: parseInt(req.params.userID),
+          PortfolioId: parseInt(req.params.portfolioID)
+        }).then((success) => {
+          console.log('Successfully added meme: ' + req.body.meme_name);
+          res.json(success);
+        }).catch((err) => {
+          res.status(500).send('Error while adding meme: ' + req.body.meme_name).end();
+        });
+      }).catch(err => {
+        res.status(500).json(err.message).end();
+      });
+
+      console.log('image has been created');
+    });
+  }
+
 });
 
 
 // PUT Routes
 // ====================================================================
 
-// TODO: A user updates a Meme
+// A user updates a Meme
 //take back to editor with same meme_text; delimit text data top/bottom
 router.put("/api/:userID/update-meme/:memeID", function(req, res) {
   var meme = req.body;
-  db.Meme.update({
-    meme_name: meme.meme_name,
-    meme_text: meme.meme_text,
-    og_img: meme.og_img,
-    new_img: meme.new_img,
-    tags: meme.tags,
-    PortfolioId: parseInt(meme.portfolioID),
-    UserId: parseInt(req.params.userID)
-  }, {
-    where: {
-      UserId: parseInt(req.params.userID),
-      id: parseInt(req.params.memeID)
-    }
-  }).then(() => {
-    console.log('Successfully updated meme: ' + req.body.meme_name);
-    res.redirect(200, "/");
-  }).catch((err) => {
-    res.status(500).send('Error while updating meme: ' + req.body.meme_name).end();
-  });
+
+  var img = req.body.new_img;
+  var data = img.replace(/^data:image\/\w+;base64,/, "");
+  var buf = new Buffer(data, 'base64');
+  var filename = req.body.meme_name + '.png';
+  var num = 0;
+
+  updateMemeImage(filename);
+
+  function updateMemeImage(filename) {
+    // use fs.writeFile to save image on server under images dir
+    // Allow files to be overrided
+    fs.writeFile(__dirname + '/../public/images/' + filename, buf, err => {
+      if (err) {
+        // If the filename already exists, increment a counter until an
+        // available filename is found
+        if (err.code === "EEXIST") {
+          num++;
+          console.log('Filename exists...creating new filename');
+          filename = req.body.meme_name + " (" + num + ").png";
+          updateMemeImage(filename);
+          return;
+        } else {
+          console.log('Error', err.code);
+          return console.error(err);
+        }
+      }
+
+      // Make sure the user exists
+      db.User.findOne({
+        where: {
+          id: parseInt(req.params.userID)
+        }
+      }).then(user => {
+        // After the user's record has been found, associate the meme to the user
+        db.Meme.update({
+          meme_name: meme.meme_name,
+          meme_text: meme.meme_text,
+          og_img: meme.og_img,
+          new_img: '/images/' + filename,
+          tags: meme.tags,
+          // PortfolioId: parseInt(meme.portfolioID),
+          UserId: parseInt(req.params.userID)
+        }, {
+          where: {
+            UserId: parseInt(req.params.userID),
+            id: parseInt(req.params.memeID)
+          }
+        }).then((success) => {
+          console.log('Successfully updated meme: ' + req.body.meme_name);
+          res.json(success);
+          // res.redirect(200, "/");
+        }).catch((err) => {
+          console.log('The error occurrs here');
+          res.status(500).json(err.message).end();
+        });
+      }).catch(err => {
+        res.status(500).json(err.message).end();
+      });
+
+      console.log('image has been updated');
+    });
+  }
+
 });
 
 

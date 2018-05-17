@@ -64,7 +64,7 @@ $(".edit").on('click', function(event) {
 
 $(".btn-edit").on('click', function(event) {
 	event.preventDefault();
-	var memeId = $(this).data('memeid');
+	const memeId = $(this).parent().prev().data('memeid');
 	window.location.href = "/edit-meme/" + memeId;
 });
 
@@ -81,6 +81,9 @@ $(".btn-delete").on('click', function(event) {
 			if(response === 1){
 				// console.log("meme #"+ memeId +" deleted successfully.");
 				$(this).closest('.card').remove();
+				// Update meme count
+				
+				// $(".meme-section-title").text("Saved Memes ("+newCount+")");
 			} else {
 				console.log("You cannot delete meme #" + memeId);
 			}
