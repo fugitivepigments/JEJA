@@ -1,9 +1,9 @@
 {{#section 'head'}}
-    <title>ArtMeme - Collection</title>
+    <title>Dry Memes - Collection</title>
     <link rel="stylesheet" href="/css/collection.css">
 {{/section}}
 
-<h1 class="title">My Meme Collection</h1>
+<h1 class="title">Meme Collection</h1>
 <p class="lead"><i>(Hover cursor to see text)</i></p>
 
 <div class="">
@@ -11,14 +11,11 @@
 	{{#each memes}}
 		<div class="card">
 			<h3 class="meme-title text-center">{{meme_name}}</h3>
-			<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
-      <form method="POST" class="delete-meme">
-          <input type="hidden" name="_method" value="DELETE">
-            <div class="card-block text-right">
-                <button href="#" class="card-link text-primary">Edit</button>
-                <button type="" class="card-link btn-link text-danger">Delete</button>
-            </div>
-      </form>
+			<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}" data-memeid="{{id}}">
+      <div class="card-block text-right">
+          <button class="card-link btn-edit text-primary">Edit</button>
+          <button class="card-link btn-delete text-danger">Delete</button>
+      </div>
 		</div>
 	{{/each}}
 	</div>

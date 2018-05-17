@@ -1,7 +1,6 @@
 {{#section 'head'}}
-    <title>ArtMeme - {{name}}'s Memes</title>
+    <title>Dry Memes - {{name}}'s Account</title>
     <link rel="stylesheet" href="/css/user.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400" rel="stylesheet">
 {{/section}}
 
 	<h1>Account Details</h1>
@@ -12,7 +11,7 @@
 		<div class="col-12">
 			<div class="card m-4">
 				<div class="card-header d-flex flex-row justify-content-between">
-					<h5 class="card-title">{{name}}'s Details</h5>
+					<h5 class="card-title user-name">{{name}}'s Details</h5>
 					<button class="edit edit-details">Edit</button>
 				</div>
 				<div class="card-body">
@@ -21,13 +20,13 @@
 		                    <label for="name"><strong>Name:&nbsp;</strong></label>
 		                    <input name="name" type="text" class="form-control" id="name" value="{{name}}">
 		                </div>
-		                <p class="edit-off"><strong>Name:</strong> {{name}}</p>
+		                <p class="edit-off disp-name"><strong>Name:</strong> {{name}}</p>
 
 		                <div class="form-group edit-on" style="display: none;">
 		                    <label for="email"><strong>Email:&nbsp;</strong></label>
 		                    <input name="email" type="text" class="form-control" id="email" value="{{email}}">
 		                </div>
-		                <p class="edit-off"><strong>Email:</strong> {{email}}</p>
+		                <p class="edit-off disp-email"><strong>Email:</strong> {{email}}</p>
 					</form>
 				</div>
 			</div>	
@@ -65,7 +64,7 @@
 		<div class="col-12">
 			<div class="card m-4">
 				<div class="card-header d-flex flex-row justify-content-between">
-					<h5 class="card-title">Saved Memes ({{Memes.length}})</h5>
+					<h5 class="card-title meme-section-title">Saved Memes ({{Memes.length}})</h5>
 					<button class="edit edit-memes">Edit</button>
 				</div>
 				<div class="card-body">
@@ -76,20 +75,17 @@
 							<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
 						</div> -->
 						<div class="card">
-								<h3 class="meme-title text-center">{{meme_name}}</h3>
-								<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
-						        <form method="POST" class="delete-meme">
-						            <input type="hidden" name="_method" value="DELETE">
-						            <div class="card-block text-right">
-						            	<button type="" class="card-link btn-link text-danger">Edit</button>
-						                <button type="" class="card-link btn-link text-danger">Delete</button>
-						            </div>
-						        </form>
-							</div>
+							<h3 class="meme-title text-center">{{meme_name}}</h3>
+							<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}" data-memeid="{{id}}">
+				            <div class="card-block text-right">
+				            	<button type="" class="card-link btn-edit text-danger">Edit</button>
+				                <button type="" class="card-link btn-delete text-danger">Delete</button>
+				            </div>
+						</div>
 					{{/each}}
 					</div>
 					<div class="pl-3">
-						<a href="/meme-editor">
+						<a href="/create-meme">
 							<button id="new-meme" class="btn btn-primary">
 								<i class="fa fa-plus"></i>
 								Add New

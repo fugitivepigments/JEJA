@@ -1,5 +1,5 @@
 {{#section 'head'}}
-<title>ArtMeme</title>
+<title>Dry Memes</title>
 <link rel="stylesheet" href="/css/style.css"> {{/section}}
 <div class="demo jumbotron d-flex justify-content-center align-items-center">
     <h2 class="text-center">Placeholder for future GIF</h2>
@@ -11,7 +11,7 @@
             {{#each artworks}}
             <div class="col-md-4">
                 <div class="artwork justify-content-center">
-                    <a href="/meme-editor">
+                    <a href="/create-meme/{{id}}">
                         <img src="{{img_url}}" alt="{{title}}" data-artworkid="{{id}}" class="meme">
                     </a>
                     <div class="artwork-desc">
@@ -61,6 +61,19 @@
     </div>
     <div class="col recent-picks">
         <h2 class="sidebar-title">RANDOM</h2>
+{{!--         {{#each randomPicks}}
+        <div class="col-md-4">
+            <div class="artwork justify-content-center">
+                <a href="/edit-meme/{{id}}">
+                    <img src="{{new_img}}" alt="{{meme_name}}" data-artworkid="{{id}}" class="meme">
+                </a>
+                <div class="artwork-desc">
+                    <h4 class="desc-title">{{title}}</h4>
+                    <p class="desc-text">by {{author}}</p>
+                </div>
+            </div>
+        </div>
+        {{/each}} --}}
         <p>Nulla facilisi. Maecenas blandit porttitor diam, eget maximus sem. Curabitur mattis vitae tellus ut feugiat. Praesent eu lectus commodo, blandit tortor eget, vehicula dolor. Aenean porttitor pellentesque augue, ac ornare quam elementum in. Proin lacinia leo vel est mattis, eu porttitor turpis viverra. Aliquam at tortor suscipit, dignissim urna et, tristique leo. Ut ultrices imperdiet arcu sit amet egestas. Vestibulum efficitur lectus eget erat sodales, eu tincidunt lorem volutpat. Quisque sodales suscipit mattis. Vivamus tempor interdum erat, ultricies sagittis dui lobortis ac. Nunc sodales, metus rhoncus facilisis accumsan, massa sapien faucibus ligula, vel ultricies metus est sit amet magna.</p>
     </div>
 </div>
@@ -69,7 +82,7 @@
         $(this).children(".artwork-desc").slideDown(400);
     }, function() {
         $(this).children(".artwork-desc").slideUp(400);
-    })
+    });
 </script>
 {{#section 'scripts'}}
 

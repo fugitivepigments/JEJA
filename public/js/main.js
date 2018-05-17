@@ -1,10 +1,5 @@
-$(".meme").on('click', function(event) {
-	event.preventDefault();
-	var artworkId = $(this).data('artworkid');
-
-	window.location.href = "/meme-editor/" + artworkId;
-});
-
+// Signup Form
+// ================================================
 
 $("#signup").on('click', function(event) {
 	event.preventDefault();
@@ -38,6 +33,8 @@ $("#signup-form").on('submit', function(event) {
 		}
 		sessionStorage.setItem("userData",JSON.stringify(user));
 
+		$("#curr-user").text('Welcome, '+userData.username);
+
 		// Hide the Home page's Sign Up button
 		$("#signup").toggle();
 
@@ -55,6 +52,9 @@ function clearform(){
 	$("#password").val('');
 }
 
+// Site Search
+// ================================================
+
 $(".search-btn").on('click', function(event) {
 	event.preventDefault();
     $(".search-toggle").animate({width: 'toggle'});
@@ -67,11 +67,9 @@ $(".search-btn").on('click', function(event) {
 });
 
 
-$(".search-form").on('submit', function(event) {
+$(".search-form, .search-input").on('submit', function(event) {
 	// event.preventDefault();
-	 //Act on the event 
 	startSearch();
-	console.log("search-form submitted");
 });
 
 function startSearch(){
@@ -79,12 +77,17 @@ function startSearch(){
 
 	var query = $(".search-input").val().trim();
 
-	$.ajax({
-		url: '/search?q=' + query,
-		type: 'GET'
-	})
-	.then(function(data) {
+	$.get('/search?q=' + query, function(data) {
 		console.log("successful search");
-		location.href = '/search?q=' + query;
+		window.location.href = '/search?q=' + query;
 	});
 }
+
+
+$("#curr-user").on('click', function(event) {
+	event.preventDefault();
+
+	if(userData){
+		window.location.href = "/user/" + userData.userId;
+	}
+});

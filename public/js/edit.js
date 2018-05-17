@@ -55,17 +55,26 @@ $(document).ready(function(){
         var meme = {
             meme_name: $("#meme-name").val().trim() || "Untitled",
             meme_text: memeText.trim(),
-            og_img: $("#meme").data('og-img'),
+            og_img: $("#meme").attr('src'),
             new_img: imageDataUrl,
             tags: "",
             UserId: user
         }
 
-        // add meme to database
-        $.post('/api/'+ user +'/new-meme', meme , function(data, textStatus, xhr) {
-            
+        var memeId = $("#meme").data("memeid");
+
+        // send update request to database
+        $.ajax({
+            url: '/api/'+ user +'/update-meme/' + memeId,
+            type: 'PUT',
+            data: meme
+        })
+        .done(function(response) {
+            console.log("success");
+        })
+        .fail(function(err) {
+            console.error(err.message);
         });
-       
     });
 
     $("#download").click(function(e){
