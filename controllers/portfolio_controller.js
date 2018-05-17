@@ -69,6 +69,7 @@ router.delete("/api/:userID/delete-portfolio/:portfolioID", function(req, res) {
 			id: req.params.portfolioID
 		}
 	}).then((result) => {
+		// Result with either be 1(successful) or 0(failed)
 		res.json(result);
 	}).catch((err) => {
 		res.status(500).send(err.message);

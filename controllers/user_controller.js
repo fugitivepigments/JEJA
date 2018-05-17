@@ -98,7 +98,7 @@ router.post("/login", function(req, res) {
 // PUT Routes
 // ====================================================================
 
-// Update a user
+// Update a user --GOOD
 router.put("/api/update-user/:userID", function(req, res) {
 	var user = req.body;
 	db.User.update({
@@ -141,14 +141,14 @@ router.put("/api/update-user/:userID", function(req, res) {
 // DELETE Routes
 // ====================================================================
 
-// TODO: Delete a user
-router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
+// Delete a user -- NEED TO USE
+router.delete("/api/delete-user/:userID", function(req, res) {
 	db.User.destroy({
 		where: {
-			userId: req.params.userID,
-			id: req.params.memeID
+			id: req.params.userID
 		}
 	}).then((result) => {
+		// should return either 1 or 0
 		res.json(result);
 	}).catch((err) => {
 		res.status(500).send(err.message);

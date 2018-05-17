@@ -62,4 +62,25 @@ input.mg-textbox-border-width.form-control,
 	margin-bottom: 30px;
 }
 
-.
+.nav-arrows {
+	position: fixed;
+	width: 100%;
+	top: 50%;
+}
+
+.nav-arrows span.left-click {
+	position: absolute;
+	top: 50%;
+	left: 50px;
+	cursor: pointer;
+	z-index: 3;
+	width: 40px;
+}
+
+.nav-arrows span.right-click {
+	position: absolute;
+	top: 50%;
+	right: 50px;
+	cursor: pointer;
+	z-index: 3;
+}

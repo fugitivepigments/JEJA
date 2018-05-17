@@ -20,16 +20,28 @@ function displayThreeRandom(displayPage, model, res){
         {id: parseInt(Math.floor(Math.random() * artworkCount))}
       ]
     }
-  }).then((results) => {
-    console.log(results);
+  }).then((artResults) => {
+    console.log(artResults);
     // generate a random offset
     var art = [];
-    for (var i = 0; i < results.length; i++) {
-      art.push(results[i].dataValues);
+    for (var i = 0; i < artResults.length; i++) {
+      art.push(artResults[i].dataValues);
     }
 
-    // Send results to index.handlebars
-    res.render(displayPage, {artworks: art});
+    db.Memes.findAll({
+      order: [['createdAt', 'DESC']]
+    }).then((recentMemes) => {
+        var memes = [];
+        for (var i = 0; i < recentMemes.length; i++) {
+          memes.push(recentMemes[i].dataValues);
+        }
+
+      // Send results to index.handlebars
+      res.render(displayPage, {artworks: art, memes: memes});
+    }).catch((err) => {
+      res.status(500).end();
+    });
+
   }).catch((err) => {
       res.status(500).end();
   });
@@ -60,15 +72,43 @@ function displayAll(displayPage, model, res){
 
 // Display the Index page -- GOOD
 router.get("/", function(req, res) {
-  displayThreeRandom("index", db.Artwork, res);
-});
+  // displayThreeRandom("index", db.Artwork, res);
+  artworkCount = 44809;
+  db.Artwork.findAll({
+    where: {
+      [Op.or]: [
+        {id: parseInt(Math.floor(Math.random() * artworkCount))},
+        {id: parseInt(Math.floor(Math.random() * artworkCount))},
+        {id: parseInt(Math.floor(Math.random() * artworkCount))}
+      ]
+    }
+  }).then((artResults) => {
+    // console.log(artResults);
+    var art = [];
+    for (var i = 0; i < artResults.length; i++) {
+      art.push(artResults[i].dataValues);
+    }
 
-// Displays the Meme Editor page with a random img --RETIRE
-// router.get("/meme-editor", function(req, res) {
-//   artworkCount = artworkCount || 44809;
-//   var randomID = Math.floor(Math.random() * artworkCount);
-//   res.redirect("/meme-editor/" + randomID);
-// });
+    db.Meme.findAll({order: [['createdAt', 'DESC']]})
+      .then((recentMemes) => {
+      console.log('Recent Memes',recentMemes);
+        var memes = [];
+        for (var i = 0; i < recentMemes.length; i++) {
+          memes.push(recentMemes[i].dataValues);
+        }
+
+        // console.log(memes);
+
+      // Send results to index.handlebars
+      res.render("index", {artworks: art, randomPicks: memes});
+    }).catch((err) => {
+      res.status(500).end();
+    });
+
+  }).catch((err) => {
+      res.status(500).end();
+  });
+});
 
 // Displays the Meme Generator page with a random img --NEED TO USE
 router.get("/create-meme", function(req, res) {
@@ -86,12 +126,6 @@ router.get("/create-meme/:artworkID", function(req, res) {
 router.get("/edit-meme/:memeID", function(req, res) {
   displayOne("edit", db.Meme, req.params.memeID, res);
 });
-
-// Displays the Meme Editor page --- TODO: Retire this route
-// router.get("/meme-editor/:memeID", function(req, res) {
-//   // displayOne(db.Meme, req.params.memeID, res);
-//   displayOne("editor", db.Artwork, req.params.memeID, res);
-// });
 
 // Displays the collection of all memes -- GOOD
 router.get("/collection", function(req, res) {
@@ -164,7 +198,7 @@ router.get("/search", function(req, res) {
 // POST Routes
 // ====================================================================
 
-// User saves a meme (without a Portfolio)
+// User saves a meme (without a Portfolio) --GOOD
 router.post("/api/:userID/new-meme", function(req, res) {
   var meme = req.body;
 
@@ -296,7 +330,7 @@ router.post("/api/:userID/:portfolioID/new-meme", function(req, res) {
 // PUT Routes
 // ====================================================================
 
-// A user updates a Meme
+// A user updates a Meme --GOOD
 //take back to editor with same meme_text; delimit text data top/bottom
 router.put("/api/:userID/update-meme/:memeID", function(req, res) {
   var meme = req.body;
