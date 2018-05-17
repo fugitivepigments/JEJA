@@ -67,7 +67,7 @@ $(".search-btn").on('click', function(event) {
 });
 
 
-$(".search-form").on('submit', function(event) {
+$(".search-form, .search-input").on('submit', function(event) {
 	// event.preventDefault();
 	startSearch();
 });
@@ -82,3 +82,12 @@ function startSearch(){
 		window.location.href = '/search?q=' + query;
 	});
 }
+
+
+$("#curr-user").on('click', function(event) {
+	event.preventDefault();
+
+	if(userData){
+		window.location.href = "/user/" + userData.userId;
+	}
+});

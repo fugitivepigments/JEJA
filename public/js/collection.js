@@ -1,11 +1,11 @@
 $(".card").hover(function() {
 	// Display the new image on hover
-	var img = $(this).children('img')[0];
-	img.src = img.dataset.newImg;
+	var img = $(this).children('img');
+	img.attr('src', img.data('new-img'));
 }, function() {
 	// Display the original image on mouse leave
-	var img = $(this).children('img')[0];
-	img.src = img.dataset.ogImg;
+	var img = $(this).children('img');
+	img.attr('src', img.data('og-img'));
 });
 
 $(".btn-edit").on('click', function(event) {

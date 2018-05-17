@@ -101,7 +101,6 @@ router.post("/login", function(req, res) {
 // Update a user
 router.put("/api/update-user/:userID", function(req, res) {
 	var user = req.body;
-	console.log('Inside user update');
 	db.User.update({
 		name: user.name,
 		email: user.email
@@ -109,9 +108,30 @@ router.put("/api/update-user/:userID", function(req, res) {
 		where: {
 			id: parseInt(req.params.userID)
 		}
-	}).then((user) => {
-		console.log('Successfully updated user: ' + req.body.name);
-		res.json(user);
+	}).then((response) => {
+		// response is an array with either 1(successful) or 0(failed)
+		if(response[0] === 1){
+			db.User.findOne({
+				where: {
+					id: parseInt(req.params.userID)
+				},
+				include: [
+					{model: db.Meme}, 
+					{model: db.Portfolio}
+				],
+				order: [
+					[db.Meme, 'createdAt', 'DESC'],
+					[db.Portfolio, 'createdAt', 'DESC']
+				]
+			}).then((user) => {
+				console.log('Successfully updated user: ' + req.body.name);
+				res.json(user.dataValues);
+			}).catch((err) => {
+				res.status(500).end();
+			});
+		} else {
+			res.json(response[0]);
+		}
 	}).catch((err) => {
 		res.status(500).send('Error while updating meme: ' + req.body.name).end();
 	});

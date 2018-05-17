@@ -16,17 +16,23 @@ $(".edit-details").on('click', function(event) {
 			email: $("#email").val().trim()
 		}
 
-		console.log(user);
-
 		$.ajax({
 			url: '/api/update-user/' + userData.userId,
 			type: 'PUT',
 			data: user,
-		}).then(() => {
-			console.log('Successfully updated user info');
+		}).then((updatedUser) => {
+			// console.log('Successfully updated user info');
+			// Display the updated name
+			$("#name").text(updatedUser.name);
+			$(".disp-name").text("Name: " + updatedUser.name);
+			$(".user-name").text(updatedUser.name + "'s Details")
+			document.title = "Dry Memes - " + updatedUser.name + "'s Account"
+
+			// Display the updated email
+			$("#email").text(updatedUser.email);
+			$(".disp-email").text("Email: " + updatedUser.email);
+
 			prevUserDetails = user;
-			location.reload();
-			// refreshUserInfo();
 		});
 	}
 });
@@ -53,5 +59,33 @@ $(".edit").on('click', function(event) {
 		$(this).text('Save');
 	} else {
 		$(this).text('Edit');
+	}
+});
+
+$(".btn-edit").on('click', function(event) {
+	event.preventDefault();
+	var memeId = $(this).data('memeid');
+	window.location.href = "/edit-meme/" + memeId;
+});
+
+$(".btn-delete").on('click', function(event) {
+	event.preventDefault();
+
+	if(userData){
+		const memeId = $(this).parent().prev().data('memeid');
+		
+		$.ajax({
+			url: '/api/'+ userData.userId +'/delete-meme/' + memeId,
+			type: 'DELETE'
+		}).then(response => {
+			if(response === 1){
+				// console.log("meme #"+ memeId +" deleted successfully.");
+				$(this).closest('.card').remove();
+			} else {
+				console.log("You cannot delete meme #" + memeId);
+			}
+		}).catch(err => {
+			console.log("meme #"+ memeId +" was not deleted", err.message);
+		});
 	}
 });
