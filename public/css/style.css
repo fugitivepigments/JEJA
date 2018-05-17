@@ -31,6 +31,19 @@ h3.footer-headings {
 	font-family: "Lato", "Helvetica", "Arial", Sans-serif;
 }
 
+h4.desc-title {
+	color: #353a3f;
+	font-size: 20px;
+	font-family: "Lato", "Helvetica", "Arial", Sans-serif;
+	padding: 20px 0px 0px 0px;
+}
+
+p.desc-text {
+	color: #353a3f;
+	font-size: 10px;
+	font-family: "Lato", "Helvetica", "Arial", Sans-serif;
+}
+
 p.footer-text {
 	font-size: 10px;
 	text-align: center;
@@ -218,6 +231,11 @@ div.artwork {
 	background-color: #fff;
 	padding: 20px 20px 20px 20px;
 	box-shadow: 0px 0px 10px #000;
+}
+
+div.artwork-desc {
+	max-width: 100%;
+	display: none;
 }
 
 div.content-contain {
