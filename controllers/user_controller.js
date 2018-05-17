@@ -48,7 +48,7 @@ router.get("/community", function(req, res) {
 		for (var i = 0; i < results.length; i++) {
 			users.push(results[i].dataValues);
 		}
-
+		console.log(users[0].memes);
 		res.render("community", {users: users});
 	}).catch((err) => {
 		res.status(500).end();

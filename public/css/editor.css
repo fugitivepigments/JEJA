@@ -42,13 +42,13 @@ input.mg-textbox-border-width.form-control,
 	margin-right: 17.5px;
 }
 
-#save, #download {
+#save, #download, .modal-close {
 	background-color: #f0b155;
 	color: white;
 	border: none;
 }
 
-#save:hover , #download:hover {
+#save:hover, #download:hover, .modal-close:hover {
 	/*box-shadow: none;*/
 	background-color: #eb9514
 }
@@ -83,4 +83,13 @@ input.mg-textbox-border-width.form-control,
 	right: 50px;
 	cursor: pointer;
 	z-index: 3;
+}
+
+#confirmationModalLabel /*save modal title*/ {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: bold;
+}
+
+.modal-body, .modal-close {
+	font-family: 'Source Sans Pro', sans-serif;
 }

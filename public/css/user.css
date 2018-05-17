@@ -1,7 +1,8 @@
 h1 {
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Open Sans Condensed', sans-serif;
 	margin-left: 15px;
 	margin-top: 80px;
+	font-weight: bold;
 }
 
 /*p*/.lead {

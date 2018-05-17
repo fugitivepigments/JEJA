@@ -63,10 +63,10 @@
         </button>
       </div>
       <div class="modal-body">
-        Your meme has been saved. Visit your Stash to view this meme again later.
+        Your meme has been saved. Visit your collection to view this meme again later.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
     $("#save").on('click', function(event) {
         event.preventDefault();
-        $(".modal-body").text('Your meme "'+ $("#meme-name").val().trim() +'" has been saved. Visit your Stash to view this meme again later.');
+        $(".modal-body").text('Your meme "'+ $("#meme-name").val().trim() +'" has been saved. Visit your collection to view this meme again later.');
     });
 });
 </script>
