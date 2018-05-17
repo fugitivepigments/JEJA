@@ -274,3 +274,26 @@ div#sign-up {
     padding-bottom: 30px;
 }
 
+/*modal styling*/
+
+.modal-content {
+	border-radius: 0;
+}
+
+#loginModalLabel {
+	font-family: "Open Sans Condensed";
+	font-weight: bold;
+}
+
+label, #signin {
+	font-family: "Source Sans Pro";
+}
+
+#signin {
+	background-color: #f0b155;
+	border: none;
+}
+
+#signin:hover {
+	background-color: #eb9514;
+}
