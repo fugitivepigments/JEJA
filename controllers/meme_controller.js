@@ -98,24 +98,22 @@ router.get("/collection", function(req, res) {
 
 // Search
 router.get("/search", function(req, res) {
-  console.log('Seach query: '+req.body);
+  console.log('Seach body: ',req.query.q);
   // generate a random offset
   // artwork.title, artwork.author , meme.meme_text, meme.meme_name
   db.Artwork.findAll({
     where: {
-				title: req.body.searchInput
-      // title: {
-      //   [Op.like]: '%' + req.body.searchInput + '%'
-      // },
+      title: {
+        [Op.like]: '%' + req.query.q + '%'
+      }
       // author: {
-      //   [Op.like]: '%' + req.body.searchInput + '%'
+      //   [Op.like]: '%' + req.query.q + '%'
       // }
     }
   }).then((results) => {
 		//looks like something is wrong with the req.body searchInput
 		//returns undefined.
 		//----->TEST
-		console.log(req.body.searchInput);
     artworks = [];
     for (var i = 0; i < results.length; i++) {
       artworks.push(results[i].dataValues);

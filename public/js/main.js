@@ -59,19 +59,19 @@ $(".search-btn").on('click', function(event) {
 	event.preventDefault();
     $(".search-toggle").animate({width: 'toggle'});
 
-    $('.search-input').toggleClass('shown');
-
     if($(".search-input").hasClass('shown')){
     	startSearch();
+    } else {
+    	$('.search-input').addClass('shown');
     }
 });
 
 
-$("#search-form").on('submit', function(event) {
-	event.preventDefault();
-	/* Act on the event */
+$(".search-form").on('submit', function(event) {
+	// event.preventDefault();
+	 //Act on the event 
 	startSearch();
-	// console.log("search-form submitted");
+	console.log("search-form submitted");
 });
 
 function startSearch(){
@@ -79,8 +79,12 @@ function startSearch(){
 
 	var query = $(".search-input").val().trim();
 
-	$.get('/search', function(data) {
-		/*optional stuff to do after success */
-		console.log(data);
+	$.ajax({
+		url: '/search?q=' + query,
+		type: 'GET'
+	})
+	.then(function(data) {
+		console.log("successful search");
+		location.href = '/search?q=' + query;
 	});
 }
