@@ -1,24 +1,46 @@
 {{#section 'head'}}
-    <title>Dry Memes - Search Results {{portfolio_name}}</title>
+    <title>Dry Memes - Search Results</title>
     <link rel="stylesheet" href="/css/searchresults.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400" rel="stylesheet">
 {{/section}}
 
 <h1>Search Results</h1>
-<p class="lead"><i>Click on an artwork to use it to make a meme</i></p>
 
 <div class="row">
-		{{#each results}}
+	<h2>Matching Artwork ({{artworks.results}})</h2>
+	<p class="lead"><i>Click on an artwork to use it to make a meme</i></p>
+	{{#each artworks.data}}
 	<div class="col-lg-4 col-md-6 col-sm-6 card-div">
-		<div class="card">
-	    	<div class="image-wrapper">
-	    	<img  src="{{img_url}}" alt="{{title}}">
-	    	</div>
-	        <div class="card-body">
-				<p class="info"><i>Artist: </i>{{author}}</p>
-				<p class="info"><i>Title: </i>{{title}}</p>
-			</div>
-	 	</div>
+		<a href="/create-meme/{{id}}">
+			<div class="card">
+		    	<div class="image-wrapper">
+		    	<img  src="{{img_url}}" alt="{{title}}">
+		    	</div>
+		        <div class="card-body">
+					<p class="info"><i>Artist: </i>{{author}}</p>
+					<p class="info"><i>Title: </i>{{title}}</p>
+				</div>
+		 	</div>
+		</a>
+	</div>
+	{{/each}}
+</div>
+
+<div class="row">
+	<h2>Matching Memes ({{memes.results}})</h2>
+	<p class="lead"><i>Click on a meme to edit</i></p>
+	{{#each memes.data}}
+	<div class="col-lg-4 col-md-6 col-sm-6 card-div">
+		<a href="/edit-meme/{{id}}">
+			<div class="card">
+		    	<div class="image-wrapper">
+		    	<img  src="{{new_img}}" alt="{{meme_text}}">
+		    	</div>
+		        <div class="card-body">
+					<p class="info"><i>Title: </i>{{meme_name}}</p>
+				</div>
+		 	</div>
+		</a>
 	</div>
 	{{/each}}
 </div>

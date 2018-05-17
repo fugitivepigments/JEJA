@@ -269,6 +269,11 @@ nav#nav-main {
     background-color: #c7544f!important;
 }
 
+/*Adds top margin to the element immediately after the nav-main*/
+nav#nav-main + * {
+	margin-top: 78px;
+}
+
 div#sign-up {
     padding-top: 30px;
     padding-bottom: 30px;

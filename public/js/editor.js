@@ -58,9 +58,7 @@ $(document).ready(function(){
 
         // add meme to database
         $.post('/api/'+ user +'/new-meme', meme , function(data, textStatus, xhr) {
-            console.log('data: ',data);
-            console.log('textStatus: ',textStatus);
-            console.log('xhr: ',xhr);
+            
         });
        
     });

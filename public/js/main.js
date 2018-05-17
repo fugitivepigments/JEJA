@@ -76,12 +76,8 @@ function startSearch(){
 
 	var query = $(".search-input").val().trim();
 
-	$.ajax({
-		url: '/search?q=' + query,
-		type: 'GET'
-	})
-	.then(function(data) {
+	$.get('/search?q=' + query, function(data) {
 		console.log("successful search");
-		location.href = '/search?q=' + query;
+		window.location.href = '/search?q=' + query;
 	});
 }

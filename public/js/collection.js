@@ -12,5 +12,11 @@ $(".card").hover(function() {
 $(".btn-edit").on('click', function(event) {
 	event.preventDefault();
 	var memeId = $(this).data('memeid');
-	window.location.href = "/meme-editor/" + memeId;
+	window.location.href = "/edit-meme/" + memeId;
+});
+
+$(".btn-delete").on('click', function(event) {
+	event.preventDefault();
+	var memeId = $(this).data('memeid');
+	window.location.href = "/delete-meme/" + memeId;
 });
