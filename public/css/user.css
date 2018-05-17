@@ -1,6 +1,7 @@
 h1 {
 	font-family: 'Source Sans Pro', sans-serif;
 	margin-left: 15px;
+	margin-top: 80px;
 }
 
 /*p*/.lead {
@@ -51,7 +52,7 @@ button, #new-portfolio, #new-meme {
 }
 
 img {
-	max-height: 300px;
+	max-height: 400px;
 }
 
 /*inside saved memes*/ .row {
@@ -67,8 +68,7 @@ img {
 	color: white !important;
 	border: none;
 	border-radius: .25rem;
-	padding: 1px 6px;
-	margin: 3px;
+	margin: 5px;
 	height: 24px;
 }
 
@@ -80,6 +80,8 @@ img {
 /*h3*/ .meme-title {
 	background-color: #eeeeee;
 	margin-bottom: 0;
+	font-family: 'Open Sans Condensed', sans-serif;
+	padding: 10px;
 }
 
 /*meme button background*/ .card-block {

@@ -15,10 +15,15 @@
 	box-shadow: 0 0 15px rgba(0,0,0,.7);
 }
 
-.title, .meme-title {
-	font-family: 'Source Sans Pro', sans-serif;
-	/*margin-left: 15px;*/
+.meme-title {
+	font-family: 'Open Sans Condensed', sans-serif;
 	margin: 0px;
+}
+
+/*h1*/.title  {
+	margin-top: 80px;
+	font-family: 'Source Sans Pro', sans-serif;
+	margin-bottom: 0px;
 }
 
 .title { 
@@ -27,6 +32,7 @@
 
 .meme-title {
 	background-color: #eeeeee;
+	padding: 10px;
 }
 
 img {
@@ -37,6 +43,7 @@ img {
 	margin: 0 0 15px 15px;
 	border: 1px solid #343a40;
 	border-radius: 0;
+	height: 100%;
 }
 
 .row {
@@ -55,8 +62,7 @@ img {
 	color: white !important;
 	border: none;
 	border-radius: .25rem;
-	padding: 1px 6px;
-	margin: 3px;
+	margin: 5px;
 	height: 24px;
 }
 
@@ -67,4 +73,14 @@ img {
 .card-link:hover {
 	background-color: #f0b155;
 	color: white !important;
+	text-decoration: none;
+}
+
+.card-link:focus {
+	background-color: #edab49;
+	text-decoration: none;
+}	
+
+/*area at bottom of cards*/ .card-block {
+	height: 100%;
 }
