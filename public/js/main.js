@@ -1,7 +1,6 @@
 $(".meme").on('click', function(event) {
 	event.preventDefault();
 	var artworkId = $(this).data('artworkid');
-
 	window.location.href = "/meme-editor/" + artworkId;
 });
 
@@ -69,9 +68,7 @@ $(".search-btn").on('click', function(event) {
 
 $(".search-form").on('submit', function(event) {
 	// event.preventDefault();
-	 //Act on the event 
 	startSearch();
-	console.log("search-form submitted");
 });
 
 function startSearch(){

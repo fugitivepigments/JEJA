@@ -8,3 +8,9 @@ $(".card").hover(function() {
 	var img = $(this).children('img')[0];
 	img.src = img.dataset.ogImg;
 });
+
+$(".btn-edit").on('click', function(event) {
+	event.preventDefault();
+	var memeId = $(this).data('memeid');
+	window.location.href = "/meme-editor/" + memeId;
+});
