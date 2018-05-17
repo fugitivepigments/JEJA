@@ -1,9 +1,5 @@
-$(".meme").on('click', function(event) {
-	event.preventDefault();
-	var artworkId = $(this).data('artworkid');
-	window.location.href = "/meme-editor/" + artworkId;
-});
-
+// Signup Form
+// ================================================
 
 $("#signup").on('click', function(event) {
 	event.preventDefault();
@@ -37,6 +33,8 @@ $("#signup-form").on('submit', function(event) {
 		}
 		sessionStorage.setItem("userData",JSON.stringify(user));
 
+		$("#curr-user").text('Welcome, '+userData.username);
+
 		// Hide the Home page's Sign Up button
 		$("#signup").toggle();
 
@@ -53,6 +51,9 @@ function clearform(){
 	$("#email").val('');
 	$("#password").val('');
 }
+
+// Site Search
+// ================================================
 
 $(".search-btn").on('click', function(event) {
 	event.preventDefault();

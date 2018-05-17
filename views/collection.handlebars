@@ -11,18 +11,11 @@
 	{{#each memes}}
 		<div class="card">
 			<h3 class="meme-title text-center">{{meme_name}}</h3>
-			<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
-
-      {{!-- We should move the edit/delete buttons to the User's page 
-        I think this form should be removed -- Jon
-        --}}
-      <form method="POST" class="delete-meme">
-          <input type="hidden" name="_method" value="DELETE">
-            <div class="card-block text-right">
-                <button class="card-link btn-edit text-primary" data-memeid="{{id}}">Edit</button>
-                <button type="" class="card-link btn-delete text-danger">Delete</button>
-            </div>
-      </form>
+			<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}" data-memeid="{{id}}">
+      <div class="card-block text-right">
+          <button class="card-link btn-edit text-primary">Edit</button>
+          <button class="card-link btn-delete text-danger">Delete</button>
+      </div>
 		</div>
 	{{/each}}
 	</div>

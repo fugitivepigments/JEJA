@@ -9,7 +9,7 @@ var db = require("../models");
 // GET Routes
 // ====================================================================
 
-// Displays a single user's details
+// Displays a single user's details --GOOD
 router.get("/user/:userID", function(req, res) {
 	db.User.findOne({
 		where: {
@@ -30,7 +30,7 @@ router.get("/user/:userID", function(req, res) {
 	});
 });
 
-// Displays all User 
+// Displays all Users --GOOD
 router.get("/community", function(req, res) {
 	db.User.findAll({
 		include: [
@@ -58,7 +58,7 @@ router.get("/community", function(req, res) {
 // POST Routes
 // ====================================================================
 
-// Add a new User
+// Add a new User (securely) --GOOD
 router.post("/api/new-user", function(req, res) {
 	var user = req.body;
 	// Encrypt password
@@ -77,7 +77,7 @@ router.post("/api/new-user", function(req, res) {
 
 });
 
-// Log a user in
+// Login a user (securely) --GOOD
 router.post("/login", function(req, res) {
 	db.User.findOne({
 		where: {

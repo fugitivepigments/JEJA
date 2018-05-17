@@ -11,7 +11,7 @@
             {{#each artworks}}
             <div class="col-md-4">
                 <div class="artwork justify-content-center">
-                    <a href="/meme-editor">
+                    <a href="/create-meme/{{id}}">
                         <img src="{{img_url}}" alt="{{title}}" data-artworkid="{{id}}" class="meme">
                     </a>
                     <div class="artwork-desc">
@@ -69,7 +69,7 @@
         $(this).children(".artwork-desc").slideDown(400);
     }, function() {
         $(this).children(".artwork-desc").slideUp(400);
-    })
+    });
 </script>
 {{#section 'scripts'}}
 

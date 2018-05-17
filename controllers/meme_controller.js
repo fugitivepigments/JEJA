@@ -66,6 +66,14 @@ function displayOne(displayPage, model, modelId, res){
   });
 }
 
+function displayAll(displayPage, model, res){
+  model.findAll().then((results) => {
+    res.render(displayPage, results.dataValues);
+  }).catch((err) => {
+    res.status(500).end();
+  });
+}
+
 // GET Routes
 // ====================================================================
 
@@ -74,11 +82,18 @@ router.get("/", function(req, res) {
   displayRandomThree("index", db.Artwork, res);
 });
 
-// Displays the Meme Editor page with a random img --NEED TO USE
-router.get("/meme-editor", function(req, res) {
+// Displays the Meme Editor page with a random img --RETIRE
+// router.get("/meme-editor", function(req, res) {
+//   artworkCount = artworkCount || 44809;
+//   var randomID = Math.floor(Math.random() * artworkCount);
+//   res.redirect("/meme-editor/" + randomID);
+// });
+
+// Displays the Meme Generator page with a random img --NEED TO USE
+router.get("/create-meme", function(req, res) {
   artworkCount = artworkCount || 44809;
   var randomID = Math.floor(Math.random() * artworkCount);
-  res.redirect("/meme-editor/" + randomID);
+  res.redirect("/create-meme/" + randomID);
 });
 
 // Displays the Meme Generator page -- GOOD (new)
@@ -92,10 +107,10 @@ router.get("/edit-meme/:memeID", function(req, res) {
 });
 
 // Displays the Meme Editor page --- TODO: Retire this route
-router.get("/meme-editor/:memeID", function(req, res) {
-  // displayOne(db.Meme, req.params.memeID, res);
-  displayOne("editor", db.Artwork, req.params.memeID, res);
-});
+// router.get("/meme-editor/:memeID", function(req, res) {
+//   // displayOne(db.Meme, req.params.memeID, res);
+//   displayOne("editor", db.Artwork, req.params.memeID, res);
+// });
 
 // Displays the collection of all memes -- GOOD
 router.get("/collection", function(req, res) {
@@ -283,7 +298,8 @@ router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 // DELETE Routes
 // ====================================================================
 
-// TODO: A user deletes a meme
+// Deletes a meme. The meme can only be delete if it belongs to 
+// the specified user.
 router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
 
   db.Meme.destroy({
@@ -292,8 +308,10 @@ router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
       id: parseInt(req.params.memeID)
     }
   }).then((result) => {
-    res.redirect(200, "/collection");
+    // Result with either be 1(successful) or 0(failed)
+    res.json(result);
   }).catch((err) => {
+    console.log('You cannot delete this meme');
     res.status(500).send(err.message);
   });
 });
