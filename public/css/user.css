@@ -34,6 +34,7 @@ h1 {
 	border: 1px solid #343a40;
 	border-radius: 0 !important;
 	margin: 0 15px 15px 0;
+	height: 100%;
 }
 
 button, #new-portfolio, #new-meme {
@@ -41,6 +42,10 @@ button, #new-portfolio, #new-meme {
 	color: white;
 	border: none;
 	border-radius: .25rem;
+}
+
+button:hover, #new-portfolio:hover, #new-meme:hover {
+	background-color: #eb9514;
 }
 
 /*div*/.edit-on input {
@@ -73,7 +78,7 @@ img {
 }
 
 .card-link:hover {
-	background-color: #f0b155;
+	background-color: #eb9514;
 	color: white !important;
 }
 
