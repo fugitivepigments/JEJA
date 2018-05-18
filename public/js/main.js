@@ -60,16 +60,20 @@ $(".search-btn").on('click', function(event) {
     $(".search-toggle").animate({width: 'toggle'});
 
     if($(".search-input").hasClass('shown')){
-    	startSearch();
+    	if($(".search-input").val().trim().length > 0){
+    		startSearch();
+    	}
     } else {
     	$('.search-input').addClass('shown');
     }
 });
 
 
-$(".search-form, .search-input").on('submit', function(event) {
+$(".search-input").on('submit', function(event) {
 	// event.preventDefault();
-	startSearch();
+	if($(".search-input").val().trim().length > 0){
+    		startSearch();
+    }
 });
 
 function startSearch(){
@@ -87,7 +91,14 @@ function startSearch(){
 $("#curr-user").on('click', function(event) {
 	event.preventDefault();
 
-	if(userData){
-		window.location.href = "/user/" + userData.userId;
+	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+
+		// Attempt to pull userData from localStorage first
+		// If no userData in localStorage, check sessionStorage
+		userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+		userData = JSON.parse(userData);
+		if(userData){
+			window.location.href = "/user/" + userData.userId;
+		}
 	}
 });

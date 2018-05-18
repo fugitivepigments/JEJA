@@ -93,3 +93,8 @@ input.mg-textbox-border-width.form-control,
 .modal-body, .modal-close {
 	font-family: 'Source Sans Pro', sans-serif;
 }
+
+#save-form {
+	display: flex;
+	flex-flow: row nowrap;
+}

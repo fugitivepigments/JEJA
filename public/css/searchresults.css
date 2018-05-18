@@ -63,3 +63,8 @@ img {
 	text-align: center;
 	margin-top: 5px;
 }
+
+a, a:hover {
+	text-decoration: none;
+	color: #000;
+}
