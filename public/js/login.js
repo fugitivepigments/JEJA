@@ -112,4 +112,5 @@ function toggleLoginLogOut(){
 	// Toggle the log in/out buttons
 	$("#btn-login").toggle();
 	$("#btn-logout").toggle();
+	$("#collection-link").toggle();
 }
