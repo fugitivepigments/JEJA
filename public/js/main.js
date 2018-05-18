@@ -60,16 +60,20 @@ $(".search-btn").on('click', function(event) {
     $(".search-toggle").animate({width: 'toggle'});
 
     if($(".search-input").hasClass('shown')){
-    	startSearch();
+    	if($(".search-input").val().trim().length > 0){
+    		startSearch();
+    	}
     } else {
     	$('.search-input').addClass('shown');
     }
 });
 
 
-$(".search-form, .search-input").on('submit', function(event) {
+$(".search-input").on('submit', function(event) {
 	// event.preventDefault();
-	startSearch();
+	if($(".search-input").val().trim().length > 0){
+    		startSearch();
+    }
 });
 
 function startSearch(){
