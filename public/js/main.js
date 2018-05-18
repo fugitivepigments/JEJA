@@ -87,7 +87,14 @@ function startSearch(){
 $("#curr-user").on('click', function(event) {
 	event.preventDefault();
 
-	if(userData){
-		window.location.href = "/user/" + userData.userId;
+	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+
+		// Attempt to pull userData from localStorage first
+		// If no userData in localStorage, check sessionStorage
+		userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
+		userData = JSON.parse(userData);
+		if(userData){
+			window.location.href = "/user/" + userData.userId;
+		}
 	}
 });
