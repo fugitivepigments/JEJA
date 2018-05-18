@@ -1,24 +1,24 @@
 {{#section 'head'}}
-    <title>Dry Memes - Editor</title>
+    <title>DRY MEMES - Editor</title>
 
     <!-- jQuery 1.11.3 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     
+
     <!-- jQuery UI 1.11.4 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-     
+
     <!-- Spectrum plugin (optional) -->
     <script src="/js/spectrum.js"></script>
-     
+
     <!-- Meme Generator plugin -->
     <script type="text/javascript" src="/js/jquery.memegenerator.min.js"></script>
-     
+
     <!-- jQuery UI CSS file -->
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-     
+
     <!-- Spectrum CSS file (optional) -->
     <link rel="stylesheet" type="text/css" href="/css/spectrum.css">
-     
+
     <!-- Meme Generator CSS file -->
     <link rel="stylesheet" type="text/css" href="/css/jquery.memegenerator.min.css">
 
@@ -34,13 +34,13 @@
     {{!-- <img id="meme" src="{{img_url}}" alt="{{title}}">  --}}
 
     {{!-- You must enable CORS to view the image through localhost
-        Install this Chrome extension to enable CORS automatically: 
+        Install this Chrome extension to enable CORS automatically:
 
         https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi/related?hl=en-US
 
         Once this is deployed to Heroku the image can be viewed without CORS
      --}}
-    <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous"> 
+    <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous">
 </div>
 
 <div class="row d-flex justify-content-center footer">
@@ -54,5 +54,4 @@
 
 {{#section 'scripts'}}
 <script src="/js/editor.js" type="text/javascript"></script>
-{{/section}}    
- 
+{{/section}}
