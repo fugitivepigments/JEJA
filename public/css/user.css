@@ -191,3 +191,9 @@ div.scroll-window div.meme-card img {
 	width: 100%;
 	height: 100%;
 }
+
+.close-popout {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+}

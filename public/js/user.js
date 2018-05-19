@@ -250,3 +250,8 @@ function displayPortfolios(arr){
 }
 
 loadPortfolioCovers();
+
+//close meme popout
+$(".close-popout").on("click", function() {
+	$("#meme-picker").animate({width: 'toggle'});
+})
