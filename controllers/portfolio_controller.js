@@ -78,7 +78,13 @@ router.put("/api/add-meme-to-portfolio", function(req, res) {
 			}
 		}).then(result => {
 			console.log('Successfully added meme to portfolio: ' + req.body.portfolioID);
-			res.json(result);
+			db.Portfolio.findAll().then(portfolioList => {
+				portfolios = [];
+				for (var i = 0; i < portfolioList.length; i++) {
+					portfolios.push(portfolioList[i].dataValues);
+				}
+				res.json(portfolios);
+			});
 		}).catch((err) => {
 			res.status(500).send('Error finding portfolio: ' + req.body.portfolioID).end();
 		});
@@ -117,7 +123,13 @@ router.delete("/api/:userID/delete-portfolio/:portfolioID", function(req, res) {
 		}
 	}).then((result) => {
 		// Result with either be 1(successful) or 0(failed)
-		res.json(result);
+		db.Portfolio.findAll().then(portfolioList => {
+			portfolios = [];
+			for (var i = 0; i < portfolioList.length; i++) {
+				portfolios.push(portfolioList[i].dataValues);
+			}
+			res.json(portfolios);
+		});
 	}).catch((err) => {
 		res.status(500).send(err.message);
 	});

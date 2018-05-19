@@ -110,12 +110,27 @@ div.portfolio {
 	position: relative;
 }
 
+div.portfolio:hover button.add-meme,
+div.portfolio:hover button.remove-portfolio {
+	opacity: 1;
+}
+
 div.portfolio button.add-meme {
 	position: absolute;
 	top: 60%;
 	left: 50%;
 	transform: translate(-50%,-50%);
+	outline: none;
 	cursor: pointer;
+	transition: opacity 1s;
+	opacity: 0;
+}
+
+div.portfolio button.remove-portfolio {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	opacity: 0;
 }
 
 div.portfolio-card:hover,
@@ -123,6 +138,11 @@ div.meme-card:hover {
 	transform: scale(1.01);
 	box-shadow: 0 0 15px rgba(0,0,0,.7);
 	cursor: pointer;
+}
+
+div.portfolio div.img-holder img {
+	width: 100%;
+	height: 100%;
 }
 
 div#meme-picker {
@@ -153,7 +173,7 @@ div.scroll-window div.meme-card {
 	margin: 10px 0;
 }
 
-div.meme-card img {
+div.scroll-window div.meme-card img {
 	width: 100%;
 	height: 100%;
 }

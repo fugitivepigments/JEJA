@@ -46,11 +46,12 @@
 				<div id="portfolio-list" class="row">
 				{{#each Portfolios}}
 					<div class="portfolio">
-						<div class="card portfolio-card m-2" data-portfolio-id="{{id}}">
+						<div class="card portfolio-card m-2" data-portfolio-id="{{id}}" data-cover="{{cover_img}}">
 							<h3 class="meme-title text-center">{{portfolio_name}}</h3>
 							<div class="img-holder"></div>
 						</div>
 						<button class="add-meme"><i class="fa fa-plus fa-5x"></i></button>
+						<button class="btn btn-danger remove-portfolio">x</button>
 					</div>
 				{{/each}}
 				</div>
