@@ -29,6 +29,7 @@ h3.footer-headings {
 	opacity: .8;
 	font-size: 25px;
 	font-family: "Lato", "Helvetica", "Arial", Sans-serif;
+	text-transform: uppercase;
 }
 
 h4.desc-title {
@@ -144,14 +145,14 @@ button.submit-sign-up {
 	clear: left;
 }
 
-
-div.form-group {
+/* We should limit this rule-set to only a specific form */
+/*div.form-group {
 	margin-top: 30px;
 	margin-left: 0 auto;
 	margin-right: 0 auto;
 	overflow: auto;
 }
-
+*/
 button.sign-up-button {}
 
 .demo {
@@ -290,7 +291,7 @@ div#sign-up {
 	font-weight: bold;
 }
 
-label, #signin, .modal-close /*logout*/ {
+label, strong, #signin, .modal-close /*logout*/ {
 	font-family: "Source Sans Pro";
 }
 

@@ -78,14 +78,15 @@ $("#btn-logout").on('click', function(event) {
 
 	var user;
 	try {
-		var userData = JSON.parse(sessionStorage.userData);
+		userData = JSON.parse(localStorage.userData);
 		user = userData.username;
 	} catch (err) {
 		// console.log(err);
-		var userData = JSON.parse(localStorage.userData);
+		userData = JSON.parse(sessionStorage.userData);
 		user = userData.username;
 	}
 	console.log(user);
+
 	// clear session data
 	localStorage.removeItem('userData');
 	sessionStorage.removeItem('userData');
@@ -106,6 +107,10 @@ $("#btn-logout").on('click', function(event) {
 	//Logout modal appears
 	$("#logoutModal").modal();
 	console.log(user + " has been logged out");
+
+	// Route user to the home page
+	window.location.href = "/";
+
 });
 
 function toggleLoginLogOut(){

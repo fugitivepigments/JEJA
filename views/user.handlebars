@@ -3,95 +3,123 @@
     <link rel="stylesheet" href="/css/user.css">
 {{/section}}
 
-	<h1>Account Details</h1>
-	<p class="lead"><i>Review and edit your account details, create new portfolios, and view your saved memes here</i></p>
-	<div class="my-4">
+<h1>Account Details</h1>
+<p class="lead"><i>Review and edit your account details, create new portfolios, and view your saved memes here</i></p>
+<div class="my-4">
 
-	<div class="row">
-		<div class="col-12">
-			<div class="card m-4">
-				<div class="card-header d-flex flex-row justify-content-between">
-					<h5 class="card-title user-name">{{name}}'s Details</h5>
-					<button class="edit edit-details">Edit</button>
+{{!-- User Details Section --}}
+<div class="row">
+	<div class="col-12">
+		<div class="card m-4">
+			<div class="card-header d-flex flex-row justify-content-between">
+				<h5 class="card-title user-name">{{name}}'s Details</h5>
+				<button class="edit edit-details">Edit</button>
+			</div>
+			<div class="card-body">
+				<form action="" method="">
+					<div class="form-group edit-on" style="display: none;">
+	                    <label for="name"><strong>Name:&nbsp;</strong></label>
+	                    <input name="name" type="text" class="form-control" id="name" value="{{name}}">
+	                </div>
+	                <p class="edit-off disp-name"><strong>Name:</strong> {{name}}</p>
+
+	                <div class="form-group edit-on" style="display: none;">
+	                    <label for="email"><strong>Email:&nbsp;</strong></label>
+	                    <input name="email" type="text" class="form-control" id="email" value="{{email}}">
+	                </div>
+	                <p class="edit-off disp-email"><strong>Email:</strong> {{email}}</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{!-- Portfolios Section --}}
+<div class="row">
+	<div class="col-12">
+		<div class="card m-4">
+			<div class="card-header d-flex flex-row justify-content-between">
+				<h5 class="card-title">Portfolios ({{Portfolios.length}})</h5>
+				<button class="edit edit-portfolios">Edit</button>
+			</div>
+			<div class="card-body">
+				<div class="row">
+				{{#each Portfolios}}
+					<div class="card portfolio m-2">
+						<h3 class="meme-title text-center">{{portfolio_name}}</h3>
+						<img src="{{cover_img}}" alt="{{portfolio_name}}">
+					</div>
+				{{/each}}
 				</div>
-				<div class="card-body">
-					<form action="" method="">
-						<div class="form-group edit-on" style="display: none;">
-		                    <label for="name"><strong>Name:&nbsp;</strong></label>
-		                    <input name="name" type="text" class="form-control" id="name" value="{{name}}">
-		                </div>
-		                <p class="edit-off disp-name"><strong>Name:</strong> {{name}}</p>
-
-		                <div class="form-group edit-on" style="display: none;">
-		                    <label for="email"><strong>Email:&nbsp;</strong></label>
-		                    <input name="email" type="text" class="form-control" id="email" value="{{email}}">
-		                </div>
-		                <p class="edit-off disp-email"><strong>Email:</strong> {{email}}</p>
-					</form>
+				<div class="pl-3">
+					<button id="new-portfolio" class="btn btn-primary" data-toggle="modal" data-target="#portfolioModal">
+						<i class="fa fa-plus"></i>
+						Add New
+					</button>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="row">
-		<div class="col-12">
-			<div class="card m-4">
-				<div class="card-header d-flex flex-row justify-content-between">
-					<h5 class="card-title">Portfolios ({{Portfolios.length}})</h5>
-					<button class="edit edit-portfolios">Edit</button>
-				</div>
-				<div class="card-body">
-					<div class="d-flex flex-row">
-					{{#each Portfolios}}
-						<div class="portfolio m-2">
-							<h3>{{portfolio_name}}</h3>
-							<img src="{{cover_img}}" alt="{{portfolio_name}}">
-						</div>
-					{{/each}}
+{{!-- Memes Section --}}
+<div class="row">
+	<div class="col-12">
+		<div class="card m-4">
+			<div class="card-header d-flex flex-row justify-content-between">
+				<h5 class="card-title meme-section-title">Saved Memes ({{Memes.length}})</h5>
+				<button class="edit edit-memes">Edit</button>
+			</div>
+			<div class="card-body">
+				<div class="row">
+				{{#each Memes}}
+					<div class="card">
+						<h3 class="meme-title text-center">{{meme_name}}</h3>
+						<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}" data-memeid="{{id}}">
+			            <div class="card-block text-right">
+			            	<button type="" class="card-link btn-edit text-danger">Edit</button>
+			                <button type="" class="card-link btn-delete text-danger">Delete</button>
+			            </div>
 					</div>
-					<div class="pl-3">
-						<button id="new-portfolio" class="btn btn-primary">
+				{{/each}}
+				</div>
+				<div class="pl-3">
+					<a href="/create-meme">
+						<button id="new-meme" class="btn btn-primary">
 							<i class="fa fa-plus"></i>
 							Add New
 						</button>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="row">
-		<div class="col-12">
-			<div class="card m-4">
-				<div class="card-header d-flex flex-row justify-content-between">
-					<h5 class="card-title meme-section-title">Saved Memes ({{Memes.length}})</h5>
-					<button class="edit edit-memes">Edit</button>
-				</div>
-				<div class="card-body">
-					<div class="row">
-					{{#each Memes}}
-						<div class="card">
-							<h3 class="meme-title text-center">{{meme_name}}</h3>
-							<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}" data-memeid="{{id}}">
-				            <div class="card-block text-right">
-				            	<button type="" class="card-link btn-edit text-danger">Edit</button>
-				                <button type="" class="card-link btn-delete text-danger">Delete</button>
-				            </div>
-						</div>
-					{{/each}}
-					</div>
-					<div class="pl-3">
-						<a href="/create-meme">
-							<button id="new-meme" class="btn btn-primary">
-								<i class="fa fa-plus"></i>
-								Add New
-							</button>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- Start Portfolio Modal -->
+<div class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="portfolioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="portfolioModalLabel">Add a new </h5>
+{{!--                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> --}}
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+	                <label for="portfolio-name">Portfolio Name</label>
+	                <input name="portfolio" type="text" class="form-control" id="portfolio-name" placeholder="New Portfolio">
+	            </div>
+            </div>
+            <div class="modal-footer">
+            	<button id="save-portfolio" type="button" class="card-link">Save</button>
+                <button type="button" class="card-link modal-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End portfolio Modal -->
 
 {{#section 'scripts'}}
 <script src="/js/collection.js" type="text/javascript"></script>

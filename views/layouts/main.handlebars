@@ -10,11 +10,11 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Lato:900|Bad+Script" rel="stylesheet">
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Lato:900|Bad+Script" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css" crossorigin="anonymous"> {{{_sections.head}}}
@@ -32,16 +32,6 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="navbar-nav justify-content-end d-flex flex-fill">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" id="curr-user"></a>
-                </li>
-                <li class="nav-item">
-                    <a id="btn-login" class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                    <a id="btn-logout" class="nav-link" href="#" style="display: none;">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/collection" style="display: none;" id="collection-link">Collection</a>
-                </li>
                 <form class="form-inline my-2 my-lg-0" class="search-form"action="/search" method="GET">
                     <div class="search-toggle" style="display: none">
                         <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search" aria-label="Search" name="q">
@@ -50,6 +40,19 @@
                         <i id="searchShow" class="fa fa-search"></i>
                     </button>
                 </form>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="curr-user"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/community" id="community-link">Community</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/collection" style="display: none;" id="collection-link">Collection</a>
+                </li>
+                <li class="nav-item">
+                    <a id="btn-login" class="nav-link" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                    <a id="btn-logout" class="nav-link" href="#" style="display: none;">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -116,11 +119,15 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h3 class="footer-headings text-center"><i class="fas fa-angle-right"></i>  PROJECT COLLABORATORS <i class="fas fa-angle-left"></i></h3>
+                    <h3 class="footer-headings text-center">
+                        <i class="fas fa-angle-right"></i>
+                        PROJECT COLLABORATORS
+                        <i class="fas fa-angle-left"></i>
+                    </h3>
                     <p class="d-flex justify-content-around">
                       <a href="http://www.andrewrmancuso.com/" target="_blank" style="text-decoration: none; color: #FFF">ANDREW R. MANCUSO</a>
                       <a href="http://www.ethanallen.com/" target="_blank" style="text-decoration: none; color: #FFF">ETHAN LING</a>
-                      <a href="http://www.jonathan.com/" target="_blank" style="text-decoration: none; color: #FFF">JONATHAN WHITE</a>
+                      <a href="https://github.com/jonathan-white" target="_blank" style="text-decoration: none; color: #FFF">JONATHAN WHITE</a>
                       <a href="https://jon-erikchandler.herokuapp.com/" target="_blank" style="text-decoration: none; color: #FFF">JON-ERIK CHANDLER</a>
                     </p>
                 </div>

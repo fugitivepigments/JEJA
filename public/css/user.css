@@ -93,3 +93,12 @@ img {
 /*meme button background*/ .card-block {
 	background-color: #eeeeee;
 }
+
+div.portfolio {
+	width: 200px;
+	height: 200px;
+}
+
+.portfolio img {
+	height: calc(200px - 55px);
+}

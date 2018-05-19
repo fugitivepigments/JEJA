@@ -47,11 +47,11 @@ function infoChanged(){
 	return false;
 }
 
-function refreshUserInfo(){
-	$.get('/user/' + userData.userId, function(data) {
+// function refreshUserInfo(){
+// 	$.get('/user/' + userData.userId, function(data) {
 
-	});
-}
+// 	});
+// }
 
 $(".edit").on('click', function(event) {
 	event.preventDefault();
@@ -91,4 +91,36 @@ $(".btn-delete").on('click', function(event) {
 			console.log("meme #"+ memeId +" was not deleted", err.message);
 		});
 	}
+});
+
+$("#save-portfolio").on('click', function(event) {
+	event.preventDefault();
+
+	// Obtain the provided portfolio name
+	const portfolioName = $("#portfolio-name").val().trim();
+
+	// Validation to check that a portfolio name has been provided
+	if(portfolioName.length > 0){
+		// Validation to check if the user is logged in
+		if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+
+			// package portfolio details
+			const newPortfolio = {
+				portfolio_name: portfolioName || "Untitled",
+				cover_img: "/images/Placeholder.jpg",
+				UserId: userData.userId
+			}
+
+			// Close the portfolio modal
+			$("#portfolioModal").modal();
+
+			// ajax call to create a new port
+			$.post('/api/'+ userData.userId +'/new-portfolio', newPortfolio, function(data, textStatus, xhr) {
+				/*optional stuff to do after success */
+				// Reload/redraw portfolios section
+				
+			});
+		}
+	}
+	
 });

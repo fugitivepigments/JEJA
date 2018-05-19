@@ -10,7 +10,11 @@ var db = require("../models");
 
 // TODO: Displays a portfolio
 router.get("/portfolio/:portfolioID", function(req, res) {
-	db.Meme.findById(req.params.portfolioID).then((results) => {
+	db.Portfolio.findOne({
+		where: {
+			id: req.params.portfolioID
+		}
+	}).then((results) => {
 		// TODO: Need to update 
 		console.log(results);
 		res.render("portfolio", {portfolio: results.dataValues});
