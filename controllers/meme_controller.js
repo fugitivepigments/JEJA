@@ -90,14 +90,7 @@ router.get("/", function(req, res) {
     }
 
     db.Meme.findAll({
-      order: [['createdAt', 'DESC']],
-      where: {
-        [Op.or]: [
-          {id: parseInt(Math.floor(Math.random() * artworkCount))},
-          {id: parseInt(Math.floor(Math.random() * artworkCount))},
-          {id: parseInt(Math.floor(Math.random() * artworkCount))}
-        ]
-      }
+      order: [['createdAt', 'DESC']]
     }).then((recentMemes) => {
       // console.log('Recent Memes',recentMemes);
         var memes = [];
