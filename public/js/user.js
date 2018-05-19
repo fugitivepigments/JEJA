@@ -95,7 +95,9 @@ $("#save-portfolio").on('click', function(event) {
 				// Reload/redraw portfolios section
 				console.log(data);
 
-				displayPortfolios(data);
+				window.location.href = "/user/" + userData.userId
+
+				// displayPortfolios(data);
 
 				// $("#portfolio-list").empty();
 				// data.forEach((element, index) => {
@@ -187,7 +189,9 @@ $(".add-meme").on('click', function(event) {
 			$(".scroll-window .meme-card").animate({opacity: 1}, 2300);
 		});
 	}
-});
+});	
+
+
 
 $(".remove-portfolio").on('click', function(event) {
 	event.preventDefault();
@@ -212,7 +216,8 @@ $(".remove-portfolio").on('click', function(event) {
 		});
 	}
 	
-});
+});	
+
 
 function loadPortfolioCovers(){
 	var portfolios = $(".portfolio-card");
@@ -226,28 +231,27 @@ function loadPortfolioCovers(){
 	});
 }
 
-function displayPortfolios(arr){
-	$("#portfolio-list").empty();
-	arr.forEach((element, index) => {
-		const header = $("<h3 class='meme-title text-center'>").text(element.portfolio_name);
-		const cover = $("<div class='img-holder'>");
-		const add_button = $("<button class='add-meme'>")
-			.append($("<i class='fa fa-plus fa-5x'>"));
-		const close_button = $("<button class='btn btn-danger remove-portfolio'>")
-			.text("X");
+// function displayPortfolios(arr){
+// 	$("#portfolio-list").empty();
+// 	arr.forEach((element, index) => {
+// 		const header = $("<h3 class='meme-title text-center'>").text(element.portfolio_name);
+// 		const cover = $("<div class='img-holder'>");
+// 		const add_button = $("<button class='add-meme'>")
+// 			.append($("<i class='fa fa-plus fa-5x'>"));
+// 		const close_button = $("<button class='btn btn-danger remove-portfolio'>")
+// 			.text("X");
 
-
-		const card = $("<div class='card portfolio m-2'>").append(header,cover);
-		card.attr({
-			'data-portfolio-id': element.id,
-			'data-cover': element.cover_img
-		});
-		const portfolio = $("<div class='portfolio'>")
-			.append(card, add_button, close_button);
-		$("#portfolio-list").append(portfolio);
-	});
-	loadPortfolioCovers();
-}
+// 		const card = $("<div class='card portfolio m-2'>").append(header,cover);
+// 		card.attr({
+// 			'data-portfolio-id': element.id,
+// 			'data-cover': element.cover_img
+// 		});
+// 		const portfolio = $("<div class='portfolio'>")
+// 			.append(card, add_button, close_button);
+// 		$("#portfolio-list").append(portfolio);
+// 	});
+// 	loadPortfolioCovers();
+// }
 
 loadPortfolioCovers();
 

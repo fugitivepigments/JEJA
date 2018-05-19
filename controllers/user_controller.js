@@ -63,17 +63,6 @@ router.get("/community", function(req, res) {
 router.post("/api/new-user", function(req, res) {
 	var user = req.body;
 
-	// passport.use(new LocalStrategy(
-	//   function(username, password, done) {
-	//     db.User.findOne({ username: username }, function (err, user) {
-	//       if (err) { return done(err); }
-	//       if (!user) { return done(null, false); }
-	//       if (!user.verifyPassword(password)) { return done(null, false); }
-	//       return done(null, user);
-	//     });
-	//   }
-	// ));
-
 	// Encrypt password
 	bcrypt.hash(req.body.password, null, null, function(err, hash){
 		db.User.create({
@@ -92,6 +81,18 @@ router.post("/api/new-user", function(req, res) {
 
 // Login a user (securely) --GOOD
 router.post("/login", function(req, res) {
+
+	// passport.use(new LocalStrategy(
+	//   function(email, password, done) {
+	//     db.User.findOne({ email: user.body.email }, function (err, user) {
+	//       if (err) { return done(err); }
+	//       if (!user) { return done(null, false); }
+	//       if (!user.verifyPassword(password)) { return done(null, false); }
+	//       return done(null, user);
+	//     });
+	//   }
+	// ));
+
 	db.User.findOne({
 		where: {
 			email: req.body.email
