@@ -33,7 +33,10 @@ $("#signup-form").on('submit', function(event) {
 		}
 		sessionStorage.setItem("userData",JSON.stringify(user));
 
-		$("#curr-user").text('Welcome, '+userData.username);
+		// userData = localStorage.getItem('userData') || sessionStorage.getItem('userData') || "New User";
+		// console.log(userData);
+
+		$("#curr-user").text('Welcome, '+ data.name);
 
 		// Hide the Home page's Sign Up button
 		$("#signup").toggle();
