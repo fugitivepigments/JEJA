@@ -25,7 +25,7 @@ h3.script {
 }
 
 h3.footer-headings {
-	color: #353a3f;
+	color: #FFF!important;
 	opacity: .8;
 	font-size: 25px;
 	font-family: "Lato", "Helvetica", "Arial", Sans-serif;
@@ -48,7 +48,7 @@ p.footer-text {
 	font-size: 10px;
 	text-align: center;
 	display: block;
-	color: #fff;
+	color: #FFF!important;
 	border-top: 1px solid #353a3f;
 	padding-top: 20px;
 	opacity: .8;
@@ -258,10 +258,10 @@ div.recent-picks {
 footer.footer {
 	width: 100%;
 	background-color: #c7544f!important;
-	color: #fff;
+	color: #FFF!important;
 	margin-top: 20px;
 	/* Blame Safari for the negative bottom margin */
-	margin-bottom: -1px; 
+	margin-bottom: -1px;
 	padding: 20px 0px 20px 0px;
 }
 
