@@ -107,20 +107,33 @@ $("#save-portfolio").on('click', function(event) {
 			// package portfolio details
 			const newPortfolio = {
 				portfolio_name: portfolioName || "Untitled",
-				cover_img: "/images/Placeholder.jpg",
-				UserId: userData.userId
+				cover_img: "/images/Placeholder.jpg"
 			}
+
+			// Clear out the input form
+			$("#portfolio-name").val('');
 
 			// Close the portfolio modal
 			$("#portfolioModal").modal();
 
 			// ajax call to create a new port
-			$.post('/api/'+ userData.userId +'/new-portfolio', newPortfolio, function(data, textStatus, xhr) {
+			$.post('/api/'+ userData.userId +'/new-portfolio', newPortfolio, function(data) {
 				/*optional stuff to do after success */
 				// Reload/redraw portfolios section
-				
+				console.log(data);
+				$("#portfolio-list").empty();
+
+				data.forEach((element, index) => {
+					const header = $("<h3 class='meme-title text-center'>").text(element.portfolio_name);
+					const cover = $("<img>").attr({
+						src: element.cover_img,
+						alt: element.portfolio_name
+					});
+					const card = $("<div class='card portfolio m-2'>").append(header,cover);
+					$("#portfolio-list").append(card);
+				});
+
 			});
 		}
 	}
-	
 });

@@ -9,7 +9,7 @@ var db = require("../models");
 // ====================================================================
 
 // TODO: Displays a portfolio
-router.get("/portfolio/:portfolioID", function(req, res) {
+router.get("/user/:userID/portfolio/:portfolioID", function(req, res) {
 	db.Portfolio.findOne({
 		where: {
 			id: req.params.portfolioID
@@ -32,10 +32,22 @@ router.post("/api/:userID/new-portfolio", function(req, res) {
 	var portfolio = req.body;
 	db.Portfolio.create({
 		portfolio_name: portfolio.portfolio_name,
+		cover_img: portfolio.cover_img,
 		UserId: req.params.userID
 	}).then(() => {
 		console.log('Successfully added portfolio: ' + req.body.portfolio_name);
-		res.redirect(200, "/");
+		db.Portfolio.findAll({
+			where: {
+				UserId: req.params.userID
+			}
+		}).then(results => {
+			var portfolios = [];
+			results.forEach( function(element, index) {
+				portfolios.push(element.dataValues);
+			});
+			console.log(portfolios);
+			res.json(portfolios);
+		})
 	}).catch((err) => {
 		res.status(500).send('Error while adding portfolio: ' + req.body.portfolio_name).end();
 	});	

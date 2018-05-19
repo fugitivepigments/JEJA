@@ -76,6 +76,7 @@ img {
 	border-radius: .25rem;
 	margin: 5px;
 	height: 24px;
+	cursor: pointer;
 }
 
 .card-link:hover {
@@ -94,11 +95,26 @@ img {
 	background-color: #eeeeee;
 }
 
-div.portfolio {
+div.portfolio-card {
 	width: 200px;
 	height: 200px;
 }
 
-.portfolio img {
+.portfolio-card .img-holder {
 	height: calc(200px - 55px);
+	position: relative;
+}
+
+div.img-holder button.add-meme {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	cursor: pointer;
+}
+
+div.portfolio-card:hover,
+div.meme-card:hover {
+	transform: scale(1.01);
+	box-shadow: 0 0 15px rgba(0,0,0,.7);
 }
