@@ -8,16 +8,20 @@ var db = require("../models");
 // GET Routes
 // ====================================================================
 
-// TODO: Displays a portfolio
+// Displays a portfolio
 router.get("/user/:userID/portfolio/:portfolioID", function(req, res) {
 	db.Portfolio.findOne({
 		where: {
-			id: req.params.portfolioID
-		}
+			id: req.params.portfolioID,
+			UserId: req.params.userID
+		},
+		include: [
+			{model: db.Meme}, 
+			{model: db.User}
+		],
 	}).then((results) => {
-		// TODO: Need to update 
-		console.log(results);
-		res.render("portfolio", {portfolio: results.dataValues});
+		// console.log(results.dataValues);
+		res.render("portfolio", results.dataValues);
 	}).catch((err) => {
 		res.status(500).end();
 	});
@@ -27,7 +31,7 @@ router.get("/user/:userID/portfolio/:portfolioID", function(req, res) {
 // POST Routes
 // ====================================================================
 
-// Add a new portfolio
+// Add a new portfolio --GOOD
 router.post("/api/:userID/new-portfolio", function(req, res) {
 	var portfolio = req.body;
 	db.Portfolio.create({
@@ -55,6 +59,33 @@ router.post("/api/:userID/new-portfolio", function(req, res) {
 
 // PUT Routes
 // ====================================================================
+
+// Add a meme to a portfolio
+router.put("/api/add-meme-to-portfolio", function(req, res) {
+	db.Meme.update({
+		PortfolioId: req.body.portfolioID
+	}, {
+		where: {
+			UserId: req.body.userID,
+			id: req.body.memeID
+		}
+	}).then((success) => {
+		db.Portfolio.update({
+			cover_img: req.body.cover_img
+		}, {
+			where: {
+				id: req.body.portfolioID
+			}
+		}).then(result => {
+			console.log('Successfully added meme to portfolio: ' + req.body.portfolioID);
+			res.json(result);
+		}).catch((err) => {
+			res.status(500).send('Error finding portfolio: ' + req.body.portfolioID).end();
+		});
+	}).catch((err) => {
+		res.status(500).send('Error adding meme to portfolio: ' + req.body.portfolioID).end();
+	});
+});
 
 // A user updates a portfolio
 router.put("/api/:userID/update-portfolio/:portfolioID", function(req, res) {

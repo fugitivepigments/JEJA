@@ -149,6 +149,29 @@ router.get("/collection", function(req, res) {
   });
 });
 
+// Returns a json object with the collection of all memes for a specific user
+router.get("/api/:userID/collection", function(req, res) {
+
+  db.Meme.findAll({
+    where: {
+      UserId: req.params.userID 
+    },
+    order: [
+      ['createdAt', 'DESC']
+    ]
+  }).then(results => {
+
+    // Retrieve meme data from results
+    var memes = [];
+    for (var i = 0; i < results.length; i++) {
+      memes.push(results[i].dataValues);
+    }
+    res.json(memes);
+  }).catch(err => {
+    res.status(500).end();
+  });
+});
+
 // Search all Artworks and all Memes -- GOOD
 // artwork.title, artwork.author , meme.meme_text, meme.meme_name
 router.get("/search", function(req, res) {

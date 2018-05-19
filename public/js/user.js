@@ -62,37 +62,6 @@ $(".edit").on('click', function(event) {
 	}
 });
 
-$(".btn-edit").on('click', function(event) {
-	event.preventDefault();
-	const memeId = $(this).parent().prev().data('memeid');
-	window.location.href = "/edit-meme/" + memeId;
-});
-
-$(".btn-delete").on('click', function(event) {
-	event.preventDefault();
-
-	if(userData){
-		const memeId = $(this).parent().prev().data('memeid');
-		
-		$.ajax({
-			url: '/api/'+ userData.userId +'/delete-meme/' + memeId,
-			type: 'DELETE'
-		}).then(response => {
-			if(response === 1){
-				// console.log("meme #"+ memeId +" deleted successfully.");
-				$(this).closest('.card').remove();
-				// Update meme count
-				
-				// $(".meme-section-title").text("Saved Memes ("+newCount+")");
-			} else {
-				console.log("You cannot delete meme #" + memeId);
-			}
-		}).catch(err => {
-			console.log("meme #"+ memeId +" was not deleted", err.message);
-		});
-	}
-});
-
 $("#save-portfolio").on('click', function(event) {
 	event.preventDefault();
 
@@ -134,6 +103,73 @@ $("#save-portfolio").on('click', function(event) {
 				});
 
 			});
+		} else {
+			console.log('Please log in');
 		}
+	}
+});
+
+// User clicks on a portfolio card
+$(".portfolio-card").on('click', function(event) {
+	event.preventDefault();
+
+	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+		const portfolioID = $(this).data("portfolio-id");
+		window.location.href = '/user/'+ userData.userId +'/portfolio/' + portfolioID;
+	} else {
+		console.log('Please log in');
+	}
+});
+
+// User clicks on the plus sign within a portfolio card to add memes
+$(".add-meme").on('click', function(event) {
+	event.preventDefault();
+
+	const portfolioID = $(this).prev().data('portfolio-id');
+
+	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+		$.get('/api/'+ userData.userId +'/collection', function(data) {
+			// Display list of memes in a popup container next to the portfolio
+			$("#meme-picker").animate({width: 'toggle'});
+			$('.scroll-window').empty();
+
+			for (var i = 0; i < data.length; i++) {
+				const meme = $("<div class='meme-card' style='opacity: 0;'>");
+				const meme_img = $("<img>").attr({
+					src: data[i].new_img,
+					alt: data[i].meme_name,
+					title: data[i].meme_name
+				});
+				meme.append(meme_img);
+				meme.attr('data-meme-id', data[i].id);
+				meme.on('click', function(event) {
+					event.preventDefault();
+					// Add selected meme to the portfolioID
+					const memeID = $(this).data('meme-id');
+
+					var memeDetails = {
+						memeID: memeID,
+						portfolioID: portfolioID,
+						userID: userData.userId,
+						cover_img: data[i].new_img
+					}
+
+					$.ajax({
+						url: '/api/add-meme-to-portfolio',
+						type: 'PUT',
+						data: memeDetails,
+					}).then(success => {
+						console.log('Meme added successfully');
+						// refresh the 
+					});
+					
+				});
+				$(".scroll-window").append(meme);
+			}
+
+			// Add click listeners
+
+			$(".scroll-window .meme-card").animate({opacity: 1}, 2300);
+		});
 	}
 });

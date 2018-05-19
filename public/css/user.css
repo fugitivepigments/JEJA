@@ -95,19 +95,24 @@ img {
 	background-color: #eeeeee;
 }
 
+/* Portfolio Styles */
+
 div.portfolio-card {
 	width: 200px;
 	height: 200px;
 }
 
-.portfolio-card .img-holder {
+div.portfolio-card .img-holder {
 	height: calc(200px - 55px);
+}
+
+div.portfolio {
 	position: relative;
 }
 
-div.img-holder button.add-meme {
+div.portfolio button.add-meme {
 	position: absolute;
-	top: 50%;
+	top: 60%;
 	left: 50%;
 	transform: translate(-50%,-50%);
 	cursor: pointer;
@@ -117,4 +122,38 @@ div.portfolio-card:hover,
 div.meme-card:hover {
 	transform: scale(1.01);
 	box-shadow: 0 0 15px rgba(0,0,0,.7);
+	cursor: pointer;
+}
+
+div#meme-picker {
+	position: fixed;
+	top: 100px;
+	right: 0;
+	width: 300px;
+	height: 80%;
+	background-color: #ddd;
+	border: 1px solid #000;
+	border-right-style: none;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding: 10px;
+}
+
+div.scroll-window {
+	height: 100%;
+	width: 90%;
+	overflow-y: scroll;
+}
+
+div.scroll-window div.meme-card {
+	position: relative;
+	width: 80%;
+	height: 50%;
+    max-height: 300px;
+	margin: 10px 0;
+}
+
+div.meme-card img {
+	width: 100%;
+	height: 100%;
 }
