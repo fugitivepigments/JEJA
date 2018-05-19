@@ -47,11 +47,11 @@ function infoChanged(){
 	return false;
 }
 
-function refreshUserInfo(){
-	$.get('/user/' + userData.userId, function(data) {
+// function refreshUserInfo(){
+// 	$.get('/user/' + userData.userId, function(data) {
 
-	});
-}
+// 	});
+// }
 
 $(".edit").on('click', function(event) {
 	event.preventDefault();
@@ -62,33 +62,187 @@ $(".edit").on('click', function(event) {
 	}
 });
 
-$(".btn-edit").on('click', function(event) {
+$("#save-portfolio").on('click', function(event) {
 	event.preventDefault();
-	const memeId = $(this).parent().prev().data('memeid');
-	window.location.href = "/edit-meme/" + memeId;
+
+	// Obtain the provided portfolio name
+	const portfolioName = $("#portfolio-name").val().trim();
+
+	// Validation to check that a portfolio name has been provided
+	if(portfolioName.length > 0){
+		// Validation to check if the user is logged in
+		if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+
+			// package portfolio details
+			const newPortfolio = {
+				portfolio_name: portfolioName || "Untitled",
+				cover_img: "/images/Placeholder.jpg"
+			}
+
+			// Clear out the input form
+			$("#portfolio-name").val('');
+
+			// Close the portfolio modal
+			$("#portfolioModal").modal();
+
+			// ajax call to create a new port
+			$.post('/api/'+ userData.userId +'/new-portfolio', newPortfolio, function(data) {
+				/*optional stuff to do after success */
+				// Reload/redraw portfolios section
+				console.log(data);
+
+				displayPortfolios(data);
+
+				// $("#portfolio-list").empty();
+				// data.forEach((element, index) => {
+				// 	const header = $("<h3 class='meme-title text-center'>").text(element.portfolio_name);
+				// 	const cover = $("<img>").attr({
+				// 		src: element.cover_img,
+				// 		alt: element.portfolio_name
+				// 	});
+				// 	const card = $("<div class='card portfolio m-2'>").append(header,cover);
+				// 	card.attr({
+				// 		'data-portfolio-id': element.id,
+				// 		'data-cover': element.cover_img
+				// 	});
+				// 	$("#portfolio-list").append(card);
+				// });
+
+			});
+		} else {
+			console.log('Please log in');
+		}
+	}
 });
 
-$(".btn-delete").on('click', function(event) {
+// User clicks on a portfolio card
+$(".portfolio-card").on('click', function(event) {
 	event.preventDefault();
 
-	if(userData){
-		const memeId = $(this).parent().prev().data('memeid');
-		
-		$.ajax({
-			url: '/api/'+ userData.userId +'/delete-meme/' + memeId,
-			type: 'DELETE'
-		}).then(response => {
-			if(response === 1){
-				// console.log("meme #"+ memeId +" deleted successfully.");
-				$(this).closest('.card').remove();
-				// Update meme count
-				
-				// $(".meme-section-title").text("Saved Memes ("+newCount+")");
-			} else {
-				console.log("You cannot delete meme #" + memeId);
+	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+		const portfolioID = $(this).data("portfolio-id");
+		window.location.href = '/user/'+ userData.userId +'/portfolio/' + portfolioID;
+	} else {
+		console.log('Please log in');
+	}
+});
+
+// User clicks on the plus sign within a portfolio card to add memes
+$(".add-meme").on('click', function(event) {
+	event.preventDefault();
+
+	const portfolioID = $(this).prev().data('portfolio-id');
+
+	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+		$.get('/api/'+ userData.userId +'/collection', function(data) {
+			// Display list of memes in a popup container next to the portfolio
+			$("#meme-picker").animate({width: 'toggle'});
+			$('.scroll-window').empty();
+
+			for (var i = 0; i < data.length; i++) {
+				const meme = $("<div class='meme-card' style='opacity: 0;'>");
+				const meme_img = $("<img>").attr({
+					src: data[i].new_img,
+					alt: data[i].meme_name,
+					title: data[i].meme_name
+				});
+				meme.append(meme_img);
+				meme.attr({
+					'data-meme-id': data[i].id,
+					'data-new-img': data[i].new_img
+				});
+				meme.on('click', function(event) {
+					event.preventDefault();
+					// Add selected meme to the portfolioID
+					const memeID = $(this).data('meme-id');
+					const coverImg = $(this).data('new-img');
+
+					// Package the meme details
+					var memeDetails = {
+						memeID: memeID,
+						portfolioID: portfolioID,
+						userID: userData.userId,
+						cover_img: coverImg
+					}
+
+					$.ajax({
+						url: '/api/add-meme-to-portfolio',
+						type: 'PUT',
+						data: memeDetails,
+					}).then(data => {
+						console.log('Meme added successfully');
+						// refresh the page or dynamically reload portfolios
+						// displayPortfolios(data);
+					}).catch(function(err) {
+						console.log("error");
+					});
+					
+				});
+				$(".scroll-window").append(meme);
 			}
-		}).catch(err => {
-			console.log("meme #"+ memeId +" was not deleted", err.message);
+			$(".scroll-window .meme-card").animate({opacity: 1}, 2300);
 		});
 	}
 });
+
+$(".remove-portfolio").on('click', function(event) {
+	event.preventDefault();
+	var portfolioID = $(this).prev().prev().data('portfolio-id');
+
+	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
+		$.ajax({
+			url: '/api/'+ userData.userId +'/delete-portfolio/' + portfolioID,
+			type: 'DELETE'
+		})
+		.then(function(data) {
+			if(data){
+				// displayPortfolios(data);
+				console.log("delete successful");
+				window.location.href = "/user/" + userData.userId;
+			} else {
+				console.log("delete unsuccessful");
+			}
+		})
+		.catch(function(err) {
+			console.log("error");
+		});
+	}
+	
+});
+
+function loadPortfolioCovers(){
+	var portfolios = $(".portfolio-card");
+	$(".portfolio-card").each(function(index){
+		var coverImgURL = $(this).data('cover');
+		if(coverImgURL !== "/images/Placeholder.jpg"){
+			// display image
+			var coverImg = $("<img>").attr('src', coverImgURL);
+			$(this).children('.img-holder').empty().append(coverImg);
+		}
+	});
+}
+
+function displayPortfolios(arr){
+	$("#portfolio-list").empty();
+	arr.forEach((element, index) => {
+		const header = $("<h3 class='meme-title text-center'>").text(element.portfolio_name);
+		const cover = $("<div class='img-holder'>");
+		const add_button = $("<button class='add-meme'>")
+			.append($("<i class='fa fa-plus fa-5x'>"));
+		const close_button = $("<button class='btn btn-danger remove-portfolio'>")
+			.text("X");
+
+
+		const card = $("<div class='card portfolio m-2'>").append(header,cover);
+		card.attr({
+			'data-portfolio-id': element.id,
+			'data-cover': element.cover_img
+		});
+		const portfolio = $("<div class='portfolio'>")
+			.append(card, add_button, close_button);
+		$("#portfolio-list").append(portfolio);
+	});
+	loadPortfolioCovers();
+}
+
+loadPortfolioCovers();

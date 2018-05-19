@@ -1,0 +1,57 @@
+{{#section 'head'}}
+    <title>DRY MEMES - Editor</title>
+
+    <!-- jQuery 1.11.3 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <!-- Spectrum plugin (optional) -->
+    <script src="/js/spectrum.js"></script>
+
+    <!-- Meme Generator plugin -->
+    <script type="text/javascript" src="/js/jquery.memegenerator.min.js"></script>
+
+    <!-- jQuery UI CSS file -->
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <!-- Spectrum CSS file (optional) -->
+    <link rel="stylesheet" type="text/css" href="/css/spectrum.css">
+
+    <!-- Meme Generator CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/jquery.memegenerator.min.css">
+
+    <link rel="stylesheet" href="/css/editor.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300i,400" rel="stylesheet">
+
+{{/section}}
+
+<h1>Meme Editor <i class="fas fa-angle-right"></i></h1>
+<p class="lead"><i>Use the settings below to design, save, and download your new meme</i></p>
+<div class="my-4">
+    {{!-- <img id="meme" src="{{img_url}}" alt="{{title}}">  --}}
+
+    {{!-- You must enable CORS to view the image through localhost
+        Install this Chrome extension to enable CORS automatically:
+
+        https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi/related?hl=en-US
+
+        Once this is deployed to Heroku the image can be viewed without CORS
+     --}}
+    <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous">
+</div>
+
+<div class="row d-flex justify-content-center footer">
+    <form id="save-form" action="" class="d-flex flex-row">
+        <input id="meme-name" class="form-control" type="text" name="meme_name" placeholder="FILENAME">
+        <button class="btn btn-success" id="save">Save</button>
+    </form>
+    <div class="mx-2"></div>
+    <button class="btn btn-danger" id="download">Download</button>
+</div>
+
+{{#section 'scripts'}}
+<script src="/js/editor.js" type="text/javascript"></script>
+{{/section}}

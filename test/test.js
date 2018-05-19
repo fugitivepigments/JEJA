@@ -88,6 +88,7 @@ describe('Login functionality', function () {
       .on('page', (type, message) => {
         if (type == 'alert') done()
       })
+      .wait(2000)
       .click('#btn-login')
       .wait(2000)
       .type('#login-email', 'notgonnawork')
@@ -112,37 +113,37 @@ describe('Login functionality', function () {
       .type('#login-email', 'rusty@ferrari.com')
       .type('#login-password', 'jiminycricket!')
       .click('#signin')
-      .wait(2000)
-      .end()
-      .then(function (result) { done() })
-      .catch(done)
-    })
-  })
-})
-
-//tests clicking on artwork
-describe('click artwork functionality', function () {
-  this.timeout('30s')
-
-  let nightmare = null
-  beforeEach(() => {
-    // show true lets you see wth is actually happening :)
-    nightmare = new Nightmare({ show: true })
-  })
-//click should pass and take you to meme-editor page
-  describe('log in with bad data', () => {
-    it('should fail', done => {
-      nightmare
-      .goto('http://localhost:8080')
-      .on('page', (type, message) => {
-        if (type == 'alert') done()
-      })
-      .click('.artwork')
       .wait(5000)
       .end()
       .then(function (result) { done() })
       .catch(done)
     })
   })
-  //then go to meme-editor page and edit meme
 })
+
+// //tests clicking on artwork
+// describe('meme generator', function () {
+//   this.timeout('30s')
+//
+//   let nightmare = null
+//   beforeEach(() => {
+//     // show true lets you see wth is actually happening :)
+//     nightmare = new Nightmare({ show: true })
+//   })
+// //click should pass and take you to meme-editor page
+//   describe('log in with bad data', () => {
+//     it('should fail', done => {
+//       nightmare
+//       .goto('http://localhost:8080')
+//       .on('page', (type, message) => {
+//         if (type == 'alert') done()
+//       })
+//       .click('.artwork')
+//       .wait(5000)
+//       .end()
+//       .then(function (result) { done() })
+//       .catch(done)
+//     })
+//   })
+//   //then go to meme-editor page and edit meme
+// })

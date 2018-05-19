@@ -90,6 +90,7 @@ img {
 	border-radius: .25rem;
 	margin: 5px;
 	height: 24px;
+	cursor: pointer;
 }
 
 .card-link:hover {
@@ -106,4 +107,87 @@ img {
 
 /*meme button background*/ .card-block {
 	background-color: #eeeeee;
+}
+
+/* Portfolio Styles */
+
+div.portfolio-card {
+	width: 200px;
+	height: 200px;
+}
+
+div.portfolio-card .img-holder {
+	height: calc(200px - 55px);
+}
+
+div.portfolio {
+	position: relative;
+}
+
+div.portfolio:hover button.add-meme,
+div.portfolio:hover button.remove-portfolio {
+	opacity: 1;
+}
+
+div.portfolio button.add-meme {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	outline: none;
+	cursor: pointer;
+	transition: opacity 1s;
+	opacity: 0;
+}
+
+div.portfolio button.remove-portfolio {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	opacity: 0;
+}
+
+div.portfolio-card:hover,
+div.meme-card:hover {
+	transform: scale(1.01);
+	box-shadow: 0 0 15px rgba(0,0,0,.7);
+	cursor: pointer;
+}
+
+div.portfolio div.img-holder img {
+	width: 100%;
+	height: 100%;
+}
+
+div#meme-picker {
+	position: fixed;
+	top: 100px;
+	right: 0;
+	width: 300px;
+	height: 80%;
+	background-color: #ddd;
+	border: 1px solid #000;
+	border-right-style: none;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding: 10px;
+}
+
+div.scroll-window {
+	height: 100%;
+	width: 90%;
+	overflow-y: scroll;
+}
+
+div.scroll-window div.meme-card {
+	position: relative;
+	width: 80%;
+	height: 50%;
+    max-height: 300px;
+	margin: 10px 0;
+}
+
+div.scroll-window div.meme-card img {
+	width: 100%;
+	height: 100%;
 }
