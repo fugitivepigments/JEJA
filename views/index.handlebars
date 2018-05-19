@@ -58,6 +58,43 @@
 <div class="row content-contain">
     <div class="col top-picks">
         <h2 class="sidebar-title">TOP PICKS</h2>
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md rand-pick-holder mb-4">
+                <div class="artwork">
+                    <a href="/edit-meme/1">
+                        <img src="/*" alt="" data-artworkid="1" class="meme">
+                    </a>
+                    <div class="artwork-desc">
+                        <h4 class="desc-title">Meme title</h4>
+                        <!-- <p class="desc-text">by {{author}}</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md rand-pick-holder mb-4">
+                <div class="artwork">
+                    <a href="/edit-meme/2">
+                        <img src="/*" alt="" data-artworkid="2" class="meme">
+                    </a>
+                    <div class="artwork-desc">
+                        <h4 class="desc-title">Meme title</h4>
+                        <!-- <p class="desc-text">by {{author}}</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md rand-pick-holder mb-4">
+                <div class="artwork">
+                    <a href="/edit-meme/3">
+                        <img src="/*" alt="" data-artworkid="3" class="meme">
+                    </a>
+                    <div class="artwork-desc">
+                        <h4 class="desc-title">Meme title</h4>
+                        <!-- <p class="desc-text">by {{author}}</p> -->
+                    </div>
+                </div>
+            </div>
+  
+        </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie tortor ut odio accumsan porttitor. Donec faucibus libero sit amet bibendum varius. Aliquam interdum sem lectus, vitae vehicula arcu tempor ut. Vestibulum lobortis commodo iaculis. Etiam sagittis ipsum sit amet eros aliquet dictum vel vel eros. Sed risus est, mollis vitae fringilla a, bibendum et massa. Nulla luctus sem sapien, a aliquet dolor congue vitae. Donec pretium sapien nec mauris condimentum, non lacinia dui lobortis. Donec finibus, libero id laoreet malesuada, odio mi scelerisque enim, vitae pharetra augue erat nec lectus. Aenean cursus elit nibh, vitae placerat massa placerat non. Duis ut venenatis est, nec viverra ex. Maecenas pretium vehicula lectus, sed elementum lacus auctor non.</p>
     </div>
     <div class="col random-picks">
@@ -65,7 +102,7 @@
 
         <div class="row d-flex justify-content-center">
             {{#each randomPicks}}
-            <div class="col-md-4 rand-pick-holder">
+            <div class="col-md-6 rand-pick-holder mb-4">
                 <div class="artwork">
                     <a href="/edit-meme/{{id}}">
                         <img src="{{new_img}}" alt="{{meme_name}}" data-artworkid="{{id}}" class="meme">
