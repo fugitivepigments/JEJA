@@ -2,7 +2,7 @@
 var express = require("express");
 var router = express.Router();
 var bcrypt = require("bcrypt-nodejs");
-var passport = require("passport");
+// var passport = require("passport");
 
 // Require all models
 var db = require("../models");
