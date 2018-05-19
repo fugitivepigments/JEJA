@@ -320,3 +320,7 @@ label, strong, #signin, .modal-close /*logout*/ {
 .content-contain {
 	position: relative;
 }
+
+.demo img {
+	width: 100%;
+}
