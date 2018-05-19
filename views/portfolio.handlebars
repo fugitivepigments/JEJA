@@ -3,16 +3,22 @@
     <link rel="stylesheet" href="/css/collection.css">
 {{/section}}
 
-<h1>Portfolio: {{portfolio_name}}</h1>
 
 <div class="container">
 	<div class="row d-flex flex-row">
-	{{#each Memes}}
-		<div class="card m-2">
-			<h3 class="meme-title text-center">{{meme_name}}</h3>
-			<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
+		<div class="card">
+			<div class="card-header">
+				<h1>Portfolio: {{portfolio_name}}</h1>
+			</div>
+			<div class="card-body d-flex">
+			{{#each Memes}}
+				<div class="card m-2">
+					<h3 class="meme-title text-center">{{meme_name}}</h3>
+					<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
+				</div>
+			{{/each}}
+			</div>
 		</div>
-	{{/each}}
 	</div>
 </div>
 

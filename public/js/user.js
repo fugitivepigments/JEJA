@@ -141,17 +141,22 @@ $(".add-meme").on('click', function(event) {
 					title: data[i].meme_name
 				});
 				meme.append(meme_img);
-				meme.attr('data-meme-id', data[i].id);
+				meme.attr({
+					'data-meme-id': data[i].id,
+					'data-new-img': data[i].new_img
+				});
 				meme.on('click', function(event) {
 					event.preventDefault();
 					// Add selected meme to the portfolioID
 					const memeID = $(this).data('meme-id');
+					const coverImg = $(this).data('new-img');
 
+					// Package the meme details
 					var memeDetails = {
 						memeID: memeID,
 						portfolioID: portfolioID,
 						userID: userData.userId,
-						cover_img: data[i].new_img
+						cover_img: coverImg
 					}
 
 					$.ajax({
