@@ -73,7 +73,7 @@ function displayAll(displayPage, model, res){
 // Display the Index page -- GOOD
 router.get("/", function(req, res) {
   // displayThreeRandom("index", db.Artwork, res);
-  artworkCount = 44809;
+  artworkCount = 44808;
   db.Artwork.findAll({
     where: {
       [Op.or]: [
@@ -114,7 +114,7 @@ router.get("/", function(req, res) {
 
 // Displays the Meme Generator page with a random img --NEED TO USE
 router.get("/create-meme", function(req, res) {
-  artworkCount = artworkCount || 44809;
+  artworkCount = artworkCount || 44808;
   var randomID = Math.floor(Math.random() * artworkCount);
   res.redirect("/create-meme/" + randomID);
 });
