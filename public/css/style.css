@@ -146,13 +146,13 @@ button.submit-sign-up {
 }
 
 /* We should limit this rule-set to only a specific form */
-/*div.form-group {
+#sign-up div.form-group {
 	margin-top: 30px;
 	margin-left: 0 auto;
 	margin-right: 0 auto;
 	overflow: auto;
 }
-*/
+
 button.sign-up-button {}
 
 .demo {

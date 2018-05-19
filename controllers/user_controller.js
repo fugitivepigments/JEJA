@@ -2,7 +2,7 @@
 var express = require("express");
 var router = express.Router();
 var bcrypt = require("bcrypt-nodejs");
-// var passport = require("passport");
+var passport = require("passport");
 
 // Require all models
 var db = require("../models");
@@ -62,6 +62,18 @@ router.get("/community", function(req, res) {
 // Add a new User (securely) --GOOD
 router.post("/api/new-user", function(req, res) {
 	var user = req.body;
+
+	// passport.use(new LocalStrategy(
+	//   function(username, password, done) {
+	//     db.User.findOne({ username: username }, function (err, user) {
+	//       if (err) { return done(err); }
+	//       if (!user) { return done(null, false); }
+	//       if (!user.verifyPassword(password)) { return done(null, false); }
+	//       return done(null, user);
+	//     });
+	//   }
+	// ));
+
 	// Encrypt password
 	bcrypt.hash(req.body.password, null, null, function(err, hash){
 		db.User.create({

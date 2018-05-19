@@ -114,7 +114,7 @@ router.get("/", function(req, res) {
 
 // Displays the Meme Generator page with a random img --NEED TO USE
 router.get("/create-meme", function(req, res) {
-  artworkCount = artworkCount || 44809;
+  artworkCount = artworkCount || 44808;
   var randomID = Math.floor(Math.random() * artworkCount);
   res.redirect("/create-meme/" + randomID);
 });
