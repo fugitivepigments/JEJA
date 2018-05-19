@@ -93,11 +93,11 @@ router.get("/", function(req, res) {
       .then((recentMemes) => {
       // console.log('Recent Memes',recentMemes);
         var memes = [];
-        for (var i = 0; i < recentMemes.length; i++) {
+        for (var i = 0; i < 3; i++) {
           memes.push(recentMemes[i].dataValues);
         }
 
-        // console.log(memes);
+        console.log({artworks: art, randomPicks: memes});
 
       // Send results to index.handlebars
       res.render("index", {artworks: art, randomPicks: memes});

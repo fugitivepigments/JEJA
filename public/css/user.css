@@ -7,15 +7,29 @@ h1 {
 
 /*p*/.lead {
 	font-family: 'Source Sans Pro', sans-serif;
-	margin-left: 15px;
+	margin: 0 15px 0 15px;
 	font-size: 20px;
 	margin-bottom: 0 !important;
 }
 
-.edit-on {
+.form-group.edit-on {
 	display: flex;
 	flex-flow: row;
+	margin-top: 0px;
+	margin-bottom: 16px;
 }
+
+.label-title>strong {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: bold;
+	height: 20px !important;
+}
+
+label .edit-off {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: bold;
+	height: 44px;
+} 
 
 /*main cards*/.card.m-4 {
 	border: 1px solid #343a40;
