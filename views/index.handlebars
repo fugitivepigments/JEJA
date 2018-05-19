@@ -60,12 +60,12 @@
         <h2 class="sidebar-title">TOP PICKS</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie tortor ut odio accumsan porttitor. Donec faucibus libero sit amet bibendum varius. Aliquam interdum sem lectus, vitae vehicula arcu tempor ut. Vestibulum lobortis commodo iaculis. Etiam sagittis ipsum sit amet eros aliquet dictum vel vel eros. Sed risus est, mollis vitae fringilla a, bibendum et massa. Nulla luctus sem sapien, a aliquet dolor congue vitae. Donec pretium sapien nec mauris condimentum, non lacinia dui lobortis. Donec finibus, libero id laoreet malesuada, odio mi scelerisque enim, vitae pharetra augue erat nec lectus. Aenean cursus elit nibh, vitae placerat massa placerat non. Duis ut venenatis est, nec viverra ex. Maecenas pretium vehicula lectus, sed elementum lacus auctor non.</p>
     </div>
-    <div class="col recent-picks">
+    <div class="col random-picks">
         <h2 class="sidebar-title">RANDOM</h2>
 
         <div class="row d-flex justify-content-center">
             {{#each randomPicks}}
-            <div class="col-md-4">
+            <div class="col-md-4 rand-pick-holder">
                 <div class="artwork">
                     <a href="/edit-meme/{{id}}">
                         <img src="{{new_img}}" alt="{{meme_name}}" data-artworkid="{{id}}" class="meme">

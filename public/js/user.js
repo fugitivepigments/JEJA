@@ -1,3 +1,7 @@
+if(!localStorage.getItem('userData') && !sessionStorage.getItem('userData')){
+	window.location.href = "/";
+}
+
 var prevUserDetails = {
 	name: $("#name").val().trim(),
 	email: $("#email").val().trim()

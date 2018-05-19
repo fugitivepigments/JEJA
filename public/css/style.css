@@ -252,8 +252,13 @@ div.top-picks {
 	margin: 0px auto;
 }
 
-div.recent-picks {
+div.random-picks {
 	margin: 0px auto;
+}
+
+div.random-picks div.rand-pick-holder {
+	color: #000;
+	width: 200px;
 }
 
 footer.footer {

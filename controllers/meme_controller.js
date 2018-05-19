@@ -89,8 +89,16 @@ router.get("/", function(req, res) {
       art.push(artResults[i].dataValues);
     }
 
-    db.Meme.findAll({order: [['createdAt', 'DESC']]})
-      .then((recentMemes) => {
+    db.Meme.findAll({
+      order: [['createdAt', 'DESC']],
+      where: {
+        [Op.or]: [
+          {id: parseInt(Math.floor(Math.random() * artworkCount))},
+          {id: parseInt(Math.floor(Math.random() * artworkCount))},
+          {id: parseInt(Math.floor(Math.random() * artworkCount))}
+        ]
+      }
+    }).then((recentMemes) => {
       // console.log('Recent Memes',recentMemes);
         var memes = [];
         for (var i = 0; i < 3; i++) {
