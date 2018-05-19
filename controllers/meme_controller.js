@@ -73,7 +73,7 @@ function displayAll(displayPage, model, res){
 // Display the Index page -- GOOD
 router.get("/", function(req, res) {
   // displayThreeRandom("index", db.Artwork, res);
-  artworkCount = 44809;
+  artworkCount = 44808;
   db.Artwork.findAll({
     where: {
       [Op.or]: [
@@ -156,7 +156,7 @@ router.get("/api/:userID/collection", function(req, res) {
 
   db.Meme.findAll({
     where: {
-      UserId: req.params.userID 
+      UserId: req.params.userID
     },
     order: [
       ['createdAt', 'DESC']
@@ -429,7 +429,7 @@ router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 // DELETE Routes
 // ====================================================================
 
-// Deletes a meme. The meme can only be delete if it belongs to 
+// Deletes a meme. The meme can only be delete if it belongs to
 // the specified user.
 router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
 

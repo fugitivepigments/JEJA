@@ -308,3 +308,15 @@ label, strong, #signin, .modal-close /*logout*/ {
 #signin:hover, .modal-close:hover /*logout*/ {
 	background-color: #eb9514;
 }
+
+.sep {
+	border: 3px solid gray;
+	height: 200px;
+	position: relative;
+	top: 500px;
+	transform: translate(0, -50%);
+}
+
+.content-contain {
+	position: relative;
+}
