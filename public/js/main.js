@@ -17,7 +17,7 @@ $("#signup-form").on('submit', function(event) {
 		password: $("#password").val().trim()
 	};
 
-	console.log(newUser);
+	console.log('New signup detected. Waiting for confirmation from server...');
 
 	clearform();
 
