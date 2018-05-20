@@ -68,3 +68,11 @@ a, a:hover {
 	text-decoration: none;
 	color: #000;
 }
+
+h2 {
+	margin-left: 15px;
+}
+
+.col-lg-4.col-md-6.col-sm-6.card-div {
+	box-shadow: none;
+}
