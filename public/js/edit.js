@@ -38,7 +38,6 @@ $(document).ready(function(){
 
         // Retrieve and store the image data
         var imageDataUrl = $("#meme").memeGenerator("save");
-        localStorage.setItem("lastSavedMeme",imageDataUrl);
 
         var memeText = "";
         var delimiter = "|";

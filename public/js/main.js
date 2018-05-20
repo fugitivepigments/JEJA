@@ -43,6 +43,8 @@ $("#signup-form").on('submit', function(event) {
 		$("#btn-login").toggle();
 		$("#btn-logout").toggle();
 
+		window.location.href = "/";
+
 		console.log('We have a new user! Welcome ' + data.name);
 	});
 });
