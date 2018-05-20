@@ -72,6 +72,7 @@ function displayAll(displayPage, model, res){
 // Display the Index page -- GOOD
 router.get("/", function(req, res) {
   // displayThreeRandom("index", db.Artwork, res);
+  artworkCount = 5280;
   db.Artwork.findAll({
     where: {
       [Op.or]: [
@@ -86,6 +87,8 @@ router.get("/", function(req, res) {
     for (var i = 0; i < artResults.length; i++) {
       art.push(artResults[i].dataValues);
     }
+
+    // console.log(art);
 
     db.Meme.findAndCountAll({
       order: [['createdAt', 'DESC']],
