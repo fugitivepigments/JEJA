@@ -11,6 +11,7 @@ if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 	$("#curr-user").text('Welcome, '+userData.username);
 
 	console.log(userData.username + ' is currently logged in');
+	// isLoggedIn(true);
 	toggleLoginLogOut();
 	$("#signup").toggle();
 }
@@ -25,7 +26,8 @@ $("#login-form").on('submit', function(event) {
 	}
 
 	// Login the user
-	$.post('/login', userCreds, function(data, textStatus, xhr) {
+	$.post('/signin', userCreds, function(data, textStatus, xhr) {
+
 		console.log('Welcome, ' + data.name);
 
 		// Hide the Home page's Sign Up button
@@ -37,7 +39,8 @@ $("#login-form").on('submit', function(event) {
 		// package user's name & ID
 		var user = {
 			userId: data.id,
-			username: data.name
+			username: data.name,
+			session: data.session
 		}
 
 		// if Remember me is checked, use localStorage, otherwise use sessionStorage
@@ -53,6 +56,7 @@ $("#login-form").on('submit', function(event) {
 		$("#login-email, #login-password").val('');
 
 		// Toggle the log in/out buttons
+		// isLoggedIn(true);
 		toggleLoginLogOut();
 		
 		// Hide the login modal
@@ -73,8 +77,12 @@ $("#btn-login").on('click', function(event) {
 
 });
 
+
+// Additional code that runs when a user clicks the logout button
+// the new /logout route destroys the session and redirects the
+// user to "/"
 $("#btn-logout").on('click', function(event) {
-	event.preventDefault();
+	// event.preventDefault();
 
 	var user;
 	try {
@@ -85,7 +93,6 @@ $("#btn-logout").on('click', function(event) {
 		userData = JSON.parse(sessionStorage.userData);
 		user = userData.username;
 	}
-	console.log(user);
 
 	// clear session data
 	localStorage.removeItem('userData');
@@ -93,6 +100,7 @@ $("#btn-logout").on('click', function(event) {
 
 	$("#curr-user").text('');
 
+	// isLoggedIn(false);
 	toggleLoginLogOut();
 
 	// Show the Home page's Sign Up button
@@ -109,7 +117,7 @@ $("#btn-logout").on('click', function(event) {
 	console.log(user + " has been logged out");
 
 	// Route user to the home page
-	window.location.href = "/";
+	// window.location.href = "/";
 
 });
 
@@ -118,4 +126,17 @@ function toggleLoginLogOut(){
 	$("#btn-login").toggle();
 	$("#btn-logout").toggle();
 	$("#collection-link").toggle();
+}
+
+function isLoggedIn(status){
+
+	if(status){
+		$("#btn-login").hide();
+		$("#btn-logout").show();
+		$("#collection-link").show();
+	} else {
+		$("#btn-login").show();
+		$("#btn-logout").hide();
+		$("#collection-link").hide();
+	}
 }

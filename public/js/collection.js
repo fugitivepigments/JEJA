@@ -11,6 +11,16 @@ $(".card").hover(function() {
 $(".btn-edit").on('click', function(event) {
 	event.preventDefault();
 	const memeId = $(this).parent().prev().data('memeid');
+
+	var meme = {
+		memeId: memeId
+	}
+
+	console.log('clicked btn-edit ', meme);
+
+	// $.post('/memes/edit-meme', meme, function(data, textStatus, xhr) {
+
+	// });
 	window.location.href = "/edit-meme/" + memeId;
 });
 
@@ -19,10 +29,15 @@ $(".btn-delete").on('click', function(event) {
 
 	if(userData){
 		const memeId = $(this).parent().prev().data('memeid');
+
+		var meme = {
+			memeId: memeId
+		}
 		
 		$.ajax({
-			url: '/api/'+ userData.userId +'/delete-meme/' + memeId,
-			type: 'DELETE'
+			url: '/memes/delete-meme',
+			type: 'DELETE',
+			data: meme
 		}).then(response => {
 			if(response === 1){
 				console.log("meme #"+ memeId +" deleted successfully.");

@@ -32,7 +32,7 @@
                 Sign Up
             </button>
             <!-- Sign up form will be inserted here dynamically -->
-            <form id="signup-form" action="#" method="POST" class="w-50 sign-up-form text-center" style="display: none;">
+            <form id="signup-form" action="/signup" method="POST" class="w-50 sign-up-form text-center" style="display: none;">
                 <div class="form-group">
                     <label for="name" class="text-white text-left sign-up-label">Name</label>
                     <input name="name" type="text" class="form-control sign-input" id="name" placeholder="Enter your name">
@@ -62,7 +62,7 @@
 
             <div class="col-md-6 rand-pick-holder mb-4">
                 <div class="artwork">
-                    <a href="/edit-meme/1">
+                    <a href="#">
                         <img src="/images/jesusCrush.png" alt="jCrush" data-artworkid="1" class="meme">
                     </a>
                     <div class="artwork-desc">
@@ -73,7 +73,7 @@
             </div>
             <div class="col-md-6 rand-pick-holder mb-4">
                 <div class="artwork">
-                    <a href="/edit-meme/3">
+                    <a href="#">
                         <img src="/images/number1SadBoy.png" alt="noyanny" data-artworkid="3" class="meme">
                     </a>
                     <div class="artwork-desc">
@@ -84,7 +84,7 @@
             </div>
             <div class="col-md-6 rand-pick-holder mb-4">
                 <div class="artwork">
-                    <a href="/edit-meme/5">
+                    <a href="#">
                         <img src="/images/badKitty.png" alt="badKitty" data-artworkid="5" class="meme">
                     </a>
                     <div class="artwork-desc">
@@ -95,7 +95,7 @@
             </div>
             <div class="col-md-6 rand-pick-holder mb-4">
                 <div class="artwork">
-                    <a href="/edit-meme/9">
+                    <a href="#">
                         <img src="/images/dontCare.png" alt="dontCare" data-artworkid="9" class="meme">
                     </a>
                     <div class="artwork-desc">
@@ -115,7 +115,7 @@
             {{#each randomPicks}}
             <div class="col-md-6 rand-pick-holder mb-4">
                 <div class="artwork">
-                    <a href="/edit-meme/{{id}}">
+                    <a href="/community">
                         <img src="{{new_img}}" alt="{{meme_name}}" data-artworkid="{{id}}" class="meme">
                     </a>
                     <div class="artwork-desc">

@@ -1,0 +1,26 @@
+
+<div id="sign-up" class="jumbotron bg-dark">
+    <div class="row">
+        <div class="col text-center justify-content-center">
+            <form id="signup-form" action="/signup" method="POST" class="w-50 sign-up-form text-center">
+                <div class="form-group">
+                    <label for="name" class="text-white text-left sign-up-label">Name</label>
+                    <input name="name" type="text" class="form-control sign-input" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="text-white sign-up-label">Email</label>
+                    <input name="email" type="email" class="form-control sign-input" id="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="text-white sign-up-label">Password</label>
+                    <input name="password" type="password" class="form-control sign-input" id="password" placeholder="Password">
+                </div>
+                <div class="form-check" style="float: left">
+                    <input type="checkbox" class="form-check-input" id="signin-persist">
+                    <label class="form-check-label text-white" for="signin-persist">Remember me</label>
+                </div>
+                <button class="btn btn-primary submit-sign-up" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

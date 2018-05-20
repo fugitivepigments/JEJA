@@ -11,7 +11,7 @@ var artworkCount;
 var db = require("../models");
 
 function displayThreeRandom(displayPage, model, res){
-  artworkCount = 44809;
+  artworkCount = 44808;
   model.findAll({
     where: {
       [Op.or]: [
@@ -99,7 +99,7 @@ router.get("/", function(req, res) {
           memes.push(recentMemes.rows[i].dataValues);
         }
 
-        console.log({artworks: art, randomPicks: memes});
+        // console.log({artworks: art, randomPicks: memes});
 
       // Send results to index.handlebars
       res.render("index", {artworks: art, randomPicks: memes});
@@ -120,9 +120,9 @@ router.get("/create-meme", function(req, res) {
 });
 
 // Displays the Meme Generator page -- GOOD (new)
-router.get("/create-meme/:artworkID", function(req, res) {
-  displayOne("new", db.Artwork, req.params.artworkID, res);
-});
+// router.get("/create-meme/:artworkID", function(req, res) {
+//   displayOne("new", db.Artwork, req.params.artworkID, res);
+// });
 
 // Displays the Meme Editor page -- GOOD (new)
 router.get("/edit-meme/:memeID", function(req, res) {
@@ -130,26 +130,26 @@ router.get("/edit-meme/:memeID", function(req, res) {
 });
 
 // Displays the collection of all memes -- GOOD
-router.get("/collection", function(req, res) {
+// router.get("/collection", function(req, res) {
 
-  db.Meme.findAll({
-    order: [
-      ['createdAt', 'DESC']
-    ]
-  }).then(results => {
+//   db.Meme.findAll({
+//     order: [
+//       ['createdAt', 'DESC']
+//     ]
+//   }).then(results => {
 
-    // Retrieve meme data from results
-    var memes = [];
-    for (var i = 0; i < results.length; i++) {
-      memes.push(results[i].dataValues);
-    }
-    res.render("collection", {
-      memes: memes
-    });
-  }).catch(err => {
-    res.status(500).end();
-  });
-});
+//     // Retrieve meme data from results
+//     var memes = [];
+//     for (var i = 0; i < results.length; i++) {
+//       memes.push(results[i].dataValues);
+//     }
+//     res.render("collection", {
+//       memes: memes
+//     });
+//   }).catch(err => {
+//     res.status(500).end();
+//   });
+// });
 
 // Returns a json object with the collection of all memes for a specific user
 router.get("/api/:userID/collection", function(req, res) {
@@ -431,20 +431,20 @@ router.put("/api/:userID/update-meme/:memeID", function(req, res) {
 
 // Deletes a meme. The meme can only be delete if it belongs to
 // the specified user.
-router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
+// router.delete("/api/:userID/delete-meme/:memeID", function(req, res) {
 
-  db.Meme.destroy({
-    where: {
-      userId: parseInt(req.params.userID),
-      id: parseInt(req.params.memeID)
-    }
-  }).then((result) => {
-    // Result with either be 1(successful) or 0(failed)
-    res.json(result);
-  }).catch((err) => {
-    console.log('You cannot delete this meme');
-    res.status(500).send(err.message);
-  });
-});
+//   db.Meme.destroy({
+//     where: {
+//       userId: parseInt(req.params.userID),
+//       id: parseInt(req.params.memeID)
+//     }
+//   }).then((result) => {
+//     // Result with either be 1(successful) or 0(failed)
+//     res.json(result);
+//   }).catch((err) => {
+//     console.log('You cannot delete this meme');
+//     res.status(500).send(err.message);
+//   });
+// });
 
 module.exports = router;
