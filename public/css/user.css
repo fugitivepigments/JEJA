@@ -113,6 +113,11 @@ img {
 
 div.portfolio-card .img-holder img {
 	height: 100%;
+	max-width: 300px;
+}
+
+div.portfolio-card {
+	text-align: center;
 }
 
 div.portfolio {
@@ -137,8 +142,8 @@ div.portfolio button.add-meme {
 
 div.portfolio button.remove-portfolio {
 	position: absolute;
-	top: 15px;
-	right: 15px;
+	bottom: 5px;
+	right: 5px;
 	border: none;
 	color: white;
 	font-weight: bold;
@@ -189,8 +194,8 @@ div.scroll-window {
 
 div.scroll-window div.meme-card {
 	position: relative;
-	width: 80%;
-	height: 50%;
+	/*width: 80%;
+	height: 50%;*/
     max-height: 300px;
 	margin: 10px 0;
 }
@@ -202,6 +207,14 @@ div.scroll-window div.meme-card img {
 
 .close-popout {
 	position: absolute;
-	left: 5px;
-	top: 5px;
+	left: 1px;
+	top: 50%;
+}
+
+div#meme-picker {
+	background-color: white;
+}
+
+div.card.meme-card {
+	height: 100%;
 }

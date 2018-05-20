@@ -84,3 +84,18 @@ img {
 /*area at bottom of cards*/ .card-block {
 	height: 100%;
 }
+
+.card.portfolio-view {
+	box-shadow: none;
+	transform: none;
+}
+
+/*h2*/ .portfolio-view-name {
+	font-family: "Open Sans Condensed";
+	font-weight: bold;
+}
+
+div.card.portfolio-view.col-12 {
+	padding: 0px;
+	/*margin: 0px;*/
+}
