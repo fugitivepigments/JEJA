@@ -21,16 +21,17 @@ $(".edit-details").on('click', function(event) {
 		}
 
 		$.ajax({
-			url: '/api/update-user/' + userData.userId,
+			url: '/users/update-account', 
 			type: 'PUT',
 			data: user,
 		}).then((updatedUser) => {
-			// console.log('Successfully updated user info');
+	
 			// Display the updated name
 			$("#name").text(updatedUser.name);
 			$(".disp-name").text("Name: " + updatedUser.name);
-			$(".user-name").text(updatedUser.name + "'s Details")
-			document.title = "Dry Memes - " + updatedUser.name + "'s Account"
+			$(".user-name").text(updatedUser.name + "'s Details");
+			$("#curr-user").text("Welcome, " + updatedUser.name);
+			document.title = "Dry Memes - " + updatedUser.name + "'s Account";
 
 			// Display the updated email
 			$("#email").text(updatedUser.email);
@@ -50,12 +51,6 @@ function infoChanged(){
 	}
 	return false;
 }
-
-// function refreshUserInfo(){
-// 	$.get('/user/' + userData.userId, function(data) {
-
-// 	});
-// }
 
 $(".edit").on('click', function(event) {
 	event.preventDefault();
@@ -91,11 +86,11 @@ $("#save-portfolio").on('click', function(event) {
 
 			// ajax call to create a new port
 			$.post('/api/'+ userData.userId +'/new-portfolio', newPortfolio, function(data) {
-				/*optional stuff to do after success */
+	
 				// Reload/redraw portfolios section
 				console.log(data);
 
-				window.location.href = "/user/" + userData.userId
+				window.location.href = "/users/" + userData.userId
 
 				// displayPortfolios(data);
 

@@ -2,7 +2,7 @@
 // ================================================
 
 $("#signup").on('click', function(event) {
-	event.preventDefault();
+	event.preventDefault();  
 	$("#signup-form").slideToggle();
 });
 
@@ -19,12 +19,13 @@ $("#signup-form").on('submit', function(event) {
 
 	clearform();
 
-	$.post('/api/new-user', newUser, function(data, textStatus, xhr) {
+	$.post('/signup', newUser, function(data, textStatus, xhr) {
 
 		// package user's name & ID
 		var user = {
 			userId: data.id,
-			username: data.name
+			username: data.name,
+			session: data.session
 		}
 
 		// Store user's name & ID
@@ -32,10 +33,7 @@ $("#signup-form").on('submit', function(event) {
 			localStorage.setItem('userData',JSON.stringify(user));
 		}
 		sessionStorage.setItem("userData",JSON.stringify(user));
-
-		// userData = localStorage.getItem('userData') || sessionStorage.getItem('userData') || "New User";
-		// console.log(userData);
-
+		
 		$("#curr-user").text('Welcome, '+ data.name);
 
 		// Hide the Home page's Sign Up button
@@ -101,7 +99,7 @@ $("#curr-user").on('click', function(event) {
 		userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
 		userData = JSON.parse(userData);
 		if(userData){
-			window.location.href = "/user/" + userData.userId;
+			window.location.href = "/users/" + userData.userId;
 		}
 	}
 });

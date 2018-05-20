@@ -49,7 +49,7 @@ router.post("/api/:userID/new-portfolio", function(req, res) {
 			results.forEach( function(element, index) {
 				portfolios.push(element.dataValues);
 			});
-			console.log(portfolios);
+			// console.log(portfolios);
 			res.json(portfolios);
 		})
 	}).catch((err) => {
