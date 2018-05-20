@@ -31,8 +31,6 @@
 <h1>Meme Generator <i class="fas fa-angle-right"></i></h1>
 <p class="lead"><i>Use the settings below to design, save, and download your new meme</i></p>
 <div class="my-4">
-    {{!-- <img id="meme" src="{{img_url}}" alt="{{title}}">  --}}
-
     {{!-- You must enable CORS to view the image through localhost
         Install this Chrome extension to enable CORS automatically:
 
@@ -40,7 +38,9 @@
 
         Once this is deployed to Heroku the image can be viewed without CORS
      --}}
-    <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous">
+{{!--     <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous">
+ --}}
+    <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}">
 </div>
 
 <div class="nav-arrows d-flex justify-content-between">
