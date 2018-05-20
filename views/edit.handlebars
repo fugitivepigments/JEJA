@@ -31,7 +31,6 @@
 <h1>Meme Editor <i class="fas fa-angle-right"></i></h1>
 <p class="lead"><i>Use the settings below to design, save, and download your new meme</i></p>
 <div class="my-4">
-    {{!-- <img id="meme" src="{{img_url}}" alt="{{title}}">  --}}
 
     {{!-- You must enable CORS to view the image through localhost
         Install this Chrome extension to enable CORS automatically:
@@ -40,7 +39,9 @@
 
         Once this is deployed to Heroku the image can be viewed without CORS
      --}}
-    <img id="meme" src="{{og_img}}" alt="{{meme_name}}" data-meme-name="{{meme_name}}" data-meme-text="{{meme_text}}" data-tags="{{tags}}" data-memeid="{{id}}" data-userid="{{UserId}}" data-userid="{{PortfolioId}}" crossOrigin="anonymous">
+   {{!--  <img id="meme" src="{{og_img}}" alt="{{meme_name}}" data-meme-name="{{meme_name}}" data-meme-text="{{meme_text}}" data-tags="{{tags}}" data-memeid="{{id}}" data-userid="{{UserId}}" data-userid="{{PortfolioId}}" crossOrigin="anonymous"> --}}
+
+    <img id="meme" src="{{og_img}}" alt="{{meme_name}}" data-meme-name="{{meme_name}}" data-meme-text="{{meme_text}}" data-tags="{{tags}}" data-memeid="{{id}}" data-userid="{{UserId}}" data-userid="{{PortfolioId}}">
 </div>
 
 <div class="row d-flex justify-content-center footer">

@@ -45,6 +45,8 @@ module.exports = function(app, passport) {
 			console.log('Signin successful for ', req.user.name);
 			console.log('Logged in user: ', req.user.id);
 			console.log('SessionID: ', req.sessionID);
+            // console.log(req);
+            // res.redirect("/");
 			res.json({
     			id: req.user.id, 
     			name: req.user.name,

@@ -70,6 +70,50 @@ $("#login-form").on('submit', function(event) {
 	});
 });
 
+$("#signin-form-alt").on('submit', function(event) {
+	event.preventDefault();
+
+	// package the user's credientials
+	var userCreds = {
+		email: $("#email-alt").val().trim(),
+		password: $("#password-alt").val().trim()
+	}
+
+	// Login the user
+	$.post('/signin', userCreds, function(data, textStatus, xhr) {
+
+		console.log('Welcome, ' + data.name);
+
+		// package user's name & ID
+		var user = {
+			userId: data.id,
+			username: data.name,
+			session: data.session
+		}
+
+		// if Remember me is checked, use localStorage, otherwise use sessionStorage
+		// Store user's name & ID
+		if($("#login-persist").is(":checked")){
+			localStorage.setItem('userData',JSON.stringify(user));
+		}
+		sessionStorage.setItem('userData',JSON.stringify(user));
+
+		$("#curr-user").text('Welcome, '+data.name);
+
+		// Toggle the log in/out buttons
+		// isLoggedIn(true);
+		toggleLoginLogOut();
+
+		window.location.href = "/";
+		
+	})
+	.fail((ErrXhr, ErrType, StatusText) => {
+		// Display red error text under username and password
+		$("#invalidCreds").show();
+		$("#loginModalLabel").hide();
+	});
+});
+
 $("#btn-login").on('click', function(event) {
 	$("#invalidCreds").hide();
 	$("#loginModalLabel").show();
