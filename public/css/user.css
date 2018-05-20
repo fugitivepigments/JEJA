@@ -49,7 +49,6 @@ label .edit-off {
 	border: 1px solid #343a40;
 	border-radius: 0 !important;
 	margin: 0 15px 15px 0;
-	height: 100%;
 }
 
 button, #new-portfolio, #new-meme {
@@ -93,7 +92,7 @@ img {
 	cursor: pointer;
 }
 
-.card-link:hover {
+.card-link:hover, div.portfolio button.remove-portfolio:hover {
 	background-color: #eb9514;
 	color: white !important;
 }
@@ -111,13 +110,9 @@ img {
 
 /* Portfolio Styles */
 
-div.portfolio-card {
-	width: 200px;
-	height: 200px;
-}
 
-div.portfolio-card .img-holder {
-	height: calc(200px - 55px);
+div.portfolio-card .img-holder img {
+	height: 100%;
 }
 
 div.portfolio {
@@ -144,6 +139,14 @@ div.portfolio button.remove-portfolio {
 	position: absolute;
 	top: 15px;
 	right: 15px;
+	border: none;
+	color: white;
+	font-weight: bold;
+	background-color: #f0b155;
+	transform: translate(-50%,-50%);
+	outline: none;
+	cursor: pointer;
+	transition: opacity 1s;
 	opacity: 0;
 }
 
@@ -155,8 +158,13 @@ div.meme-card:hover {
 }
 
 div.portfolio div.img-holder img {
-	width: 100%;
-	height: 100%;
+	max-height: 300px;
+	text-align: center;
+}
+
+div.img-holder {
+	min-width: 150px !important;
+	min-height: 150px !important;
 }
 
 div#meme-picker {
