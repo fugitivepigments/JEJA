@@ -17,9 +17,12 @@ $("#signup-form").on('submit', function(event) {
 		password: $("#password").val().trim()
 	};
 
+	console.log(newUser);
+
 	clearform();
 
 	$.post('/signup', newUser, function(data, textStatus, xhr) {
+		console.log('Signup successful for', data);
 
 		// package user's name & ID
 		var user = {
