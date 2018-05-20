@@ -32,7 +32,7 @@ app.set("view engine", "handlebars");
 
 // Setup Passport
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'indigo paper',
     resave: true,
     saveUninitialized: true
 })); // session secret
@@ -58,7 +58,7 @@ require('./config/passport/passport.js')(passport, db.User);
 
 
 // Setup Port
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 5000;
 
 // Sync all models & only listen once we are connected to the database
 db.sequelize.sync().then(function(){
