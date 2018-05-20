@@ -5,13 +5,12 @@ var fs = require("fs");
 var Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-var artworkCount;
+var artworkCount = 5280;
 
 // Require all models
 var db = require("../models");
 
 function displayThreeRandom(displayPage, model, res){
-  artworkCount = 44808;
   model.findAll({
     where: {
       [Op.or]: [
@@ -73,7 +72,6 @@ function displayAll(displayPage, model, res){
 // Display the Index page -- GOOD
 router.get("/", function(req, res) {
   // displayThreeRandom("index", db.Artwork, res);
-  artworkCount = 44808;
   db.Artwork.findAll({
     where: {
       [Op.or]: [
@@ -114,7 +112,6 @@ router.get("/", function(req, res) {
 
 // Displays the Meme Generator page with a random img --NEED TO USE
 router.get("/create-meme", function(req, res) {
-  artworkCount = artworkCount || 44808;
   var randomID = Math.floor(Math.random() * artworkCount);
   res.redirect("/create-meme/" + randomID);
 });
