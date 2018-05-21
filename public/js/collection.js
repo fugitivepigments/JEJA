@@ -9,12 +9,12 @@ $(".card").hover(function() {
 });
 
 $(".btn-edit").on('click', function(event) {
-	event.preventDefault();
+	// event.preventDefault();
 	const memeId = $(this).parent().prev().data('memeid');
 
-	$.get('/memes/' + memeId, function(data, textStatus, xhr) {});
+	// $.get('/memes/' + memeId, function(data, textStatus, xhr) {});
 
-	// window.location.href = "/edit-meme/" + memeId;
+	window.location.href = "/memes/" + memeId;
 });
 
 $(".btn-delete").on('click', function(event) {

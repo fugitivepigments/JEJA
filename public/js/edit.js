@@ -47,7 +47,7 @@ $(document).ready(function(){
         var memeId = $("#meme").data("memeid");
 
         // Package the meme data
-        var meme = {,
+        var meme = {
             id: memeId,
             meme_name: $("#meme-name").val().trim() || "Untitled",
             meme_text: memeText.trim(),
