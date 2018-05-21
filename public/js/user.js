@@ -183,6 +183,8 @@ $(".remove-portfolio").on('click', function(event) {
 	event.preventDefault();
 	var portfolioID = $(this).prev().prev().data('portfolio-id');
 
+	var targetPortfolio = $(this).closest('.portfolio');
+
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 		$.ajax({
 			url: '/portfolios/delete-portfolio',
@@ -192,11 +194,11 @@ $(".remove-portfolio").on('click', function(event) {
 		.then(function(data) {
 			if(data){
 
-				console.log("delete successful");
-				// $(this).parent().remove();
-				window.location.href = "/users/" + userData.userId;
-			} else {
-				console.log("delete unsuccessful");
+				targetPortfolio.remove();
+				// window.location.href = "/users/" + userData.userId;
+				var title = $("#section-title-portfolio").text();
+				var count = parseInt(title.split('(')[1].split(')')[0]) - 1;
+				$("#section-title-portfolio").text('Portfolios ('+count+')');
 			}
 		})
 		.catch(function(err) {

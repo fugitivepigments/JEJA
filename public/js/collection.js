@@ -21,7 +21,7 @@ $(".btn-edit").on('click', function(event) {
 	$.post('/memes/edit-meme', meme, function(data, textStatus, xhr) {
 
 	});
-	
+
 	// window.location.href = "/edit-meme/" + memeId;
 });
 
@@ -43,6 +43,10 @@ $(".btn-delete").on('click', function(event) {
 			if(response === 1){
 				console.log("meme #"+ memeId +" deleted successfully.");
 				$(this).closest('.card').remove();
+
+				var title = $("#section-title-meme").text();
+				var count = parseInt(title.split('(')[1].split(')')[0]) - 1;
+				$("#section-title-meme").text('Saved Memes ('+ count +')');
 			} else {
 				console.log("You cannot delete meme #" + memeId);
 			}
