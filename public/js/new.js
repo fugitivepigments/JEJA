@@ -36,8 +36,12 @@ $(document).ready(function(){
             return;
         }
 
+        $("#meme").attr('crossOrigin', 'anonymous');
+
         // Retrieve and store the image data
         var imageDataUrl = $("#meme").memeGenerator("save");
+
+        $("#meme").attr('crossOrigin', '');
 
         var memeText = "";
         var delimiter = "|";

@@ -115,24 +115,24 @@ router.put("/api/:userID/update-portfolio/:portfolioID", function(req, res) {
 // ====================================================================
 
 // A user deletes a portfolio
-router.delete("/api/:userID/delete-portfolio/:portfolioID", function(req, res) {
-	db.Portfolio.destroy({
-		where: {
-			userId: req.params.userID,
-			id: req.params.portfolioID
-		}
-	}).then((result) => {
-		// Result with either be 1(successful) or 0(failed)
-		db.Portfolio.findAll().then(portfolioList => {
-			portfolios = [];
-			for (var i = 0; i < portfolioList.length; i++) {
-				portfolios.push(portfolioList[i].dataValues);
-			}
-			res.json(portfolios);
-		});
-	}).catch((err) => {
-		res.status(500).send(err.message);
-	});
-});
+// router.delete("/api/:userID/delete-portfolio/:portfolioID", function(req, res) {
+// 	db.Portfolio.destroy({
+// 		where: {
+// 			userId: req.params.userID,
+// 			id: req.params.portfolioID
+// 		}
+// 	}).then((result) => {
+// 		// Result with either be 1(successful) or 0(failed)
+// 		db.Portfolio.findAll().then(portfolioList => {
+// 			portfolios = [];
+// 			for (var i = 0; i < portfolioList.length; i++) {
+// 				portfolios.push(portfolioList[i].dataValues);
+// 			}
+// 			res.json(portfolios);
+// 		});
+// 	}).catch((err) => {
+// 		res.status(500).send(err.message);
+// 	});
+// });
 
 module.exports = router;

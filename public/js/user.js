@@ -190,20 +190,23 @@ $(".add-meme").on('click', function(event) {
 
 $(".remove-portfolio").on('click', function(event) {
 	event.preventDefault();
+	// var portfolioID = $(this).prev().prev().data('portfolio-id');
 	var portfolioID = $(this).parent().data('portfolio-id');
-	// console.log(portfolioID);
-	// return;
+	console.log(portfolioID);
+	return;
 
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 		$.ajax({
-			url: '/api/'+ userData.userId +'/delete-portfolio/' + portfolioID,
-			type: 'DELETE'
+			// url: '/api/'+ userData.userId +'/delete-portfolio/' + portfolioID,
+			url: '/portfolios/delete-portfolio'
+			type: 'DELETE',
+			data: {portfolioID: parseInt(portfolioID)}
 		})
 		.then(function(data) {
 			if(data){
 				// displayPortfolios(data);
 				console.log("delete successful");
-				window.location.href = "/user/" + userData.userId;
+				window.location.href = "/users/" + userData.userId;
 			} else {
 				console.log("delete unsuccessful");
 			}

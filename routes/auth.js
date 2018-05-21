@@ -13,11 +13,13 @@ module.exports = function(app, passport) {
 
     app.put('/users/delete-account', isLoggedIn, authController.deleteUser);
 
-    app.delete('/memes/delete-meme', isLoggedIn, authController.deleteMeme);
-
     app.get('/create-meme/:artworkID', authController.createMeme);
 
     app.post('/memes/edit-meme', isLoggedIn, authController.editMeme);
+
+    app.delete('/memes/delete-meme', isLoggedIn, authController.deleteMeme);
+
+    app.delete('/portfolios/delete-portfolio', isLoggedIn, authController.deletePortfolio);
 
     app.get('/signup', authController.signup);
 

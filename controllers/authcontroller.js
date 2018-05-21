@@ -248,3 +248,23 @@ exports.collection = function(req, res) {
     res.status(500).end();
   });
 };
+
+exports.deletePortfolio = function(req, res) {
+	Portfolio.destroy({
+		where: {
+			id: req.body.portfolioID,
+			userId: req.user.id
+		}
+	}).then((result) => {
+		// Result with either be 1(successful) or 0(failed)
+		Portfolio.findAll().then(portfolioList => {
+			portfolios = [];
+			for (var i = 0; i < portfolioList.length; i++) {
+				portfolios.push(portfolioList[i].dataValues);
+			}
+			res.json(portfolios);
+		});
+	}).catch((err) => {
+		res.status(500).send(err.message);
+	});
+}
