@@ -258,6 +258,7 @@ div.random-picks {
 div.random-picks div.rand-pick-holder {
 	color: #000;
 	width: 200px;
+	padding: 0;
 }
 
 footer.footer {

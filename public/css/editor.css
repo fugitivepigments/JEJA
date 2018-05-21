@@ -48,8 +48,11 @@ input.mg-textbox-border-width.form-control,
 	border: none;
 }
 
+#save:focus, #download:focus {
+	box-shadow: none;
+}
+
 #save:hover, #download:hover, .modal-close:hover {
-	/*box-shadow: none;*/
 	background-color: #eb9514
 }
 
