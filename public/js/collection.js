@@ -18,10 +18,11 @@ $(".btn-edit").on('click', function(event) {
 
 	console.log('clicked btn-edit ', meme);
 
-	// $.post('/memes/edit-meme', meme, function(data, textStatus, xhr) {
+	$.post('/memes/edit-meme', meme, function(data, textStatus, xhr) {
 
-	// });
-	window.location.href = "/edit-meme/" + memeId;
+	});
+	
+	// window.location.href = "/edit-meme/" + memeId;
 });
 
 $(".btn-delete").on('click', function(event) {

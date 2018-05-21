@@ -92,23 +92,6 @@ $("#save-portfolio").on('click', function(event) {
 
 				window.location.href = "/users/" + userData.userId
 
-				// displayPortfolios(data);
-
-				// $("#portfolio-list").empty();
-				// data.forEach((element, index) => {
-				// 	const header = $("<h3 class='meme-title text-center'>").text(element.portfolio_name);
-				// 	const cover = $("<img>").attr({
-				// 		src: element.cover_img,
-				// 		alt: element.portfolio_name
-				// 	});
-				// 	const card = $("<div class='card portfolio m-2'>").append(header,cover);
-				// 	card.attr({
-				// 		'data-portfolio-id': element.id,
-				// 		'data-cover': element.cover_img
-				// 	});
-				// 	$("#portfolio-list").append(card);
-				// });
-
 			});
 		} else {
 			console.log('Please log in');
@@ -134,6 +117,8 @@ $(".add-meme").on('click', function(event) {
 
 	const portfolioID = $(this).prev().data('portfolio-id');
 
+	var portfolioCover = $(this).prev().find('.img-holder img');
+
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 		$.get('/api/'+ userData.userId +'/collection', function(data) {
 			// Display list of memes in a popup container next to the portfolio
@@ -147,16 +132,23 @@ $(".add-meme").on('click', function(event) {
 					alt: data[i].meme_name,
 					title: data[i].meme_name
 				});
-				meme.append(meme_img);
+				const checkmark = $('<i class="fas fa-check-square checkmark">')
+				meme.append(meme_img, checkmark);
 				meme.attr({
 					'data-meme-id': data[i].id,
 					'data-new-img': data[i].new_img
 				});
+
+				// Click handler for selectable memes
 				meme.on('click', function(event) {
 					event.preventDefault();
 					// Add selected meme to the portfolioID
 					const memeID = $(this).data('meme-id');
 					const coverImg = $(this).data('new-img');
+
+					$(this).children('.checkmark').css('opacity', 1);
+
+					portfolioCover.attr('src', coverImg);
 
 					// Package the meme details
 					var memeDetails = {
@@ -171,9 +163,8 @@ $(".add-meme").on('click', function(event) {
 						type: 'PUT',
 						data: memeDetails,
 					}).then(data => {
-						console.log('Meme added successfully');
-						// refresh the page or dynamically reload portfolios
-						// displayPortfolios(data);
+						portfolioCover.attr('src', coverImg);
+
 					}).catch(function(err) {
 						console.log("error");
 					});
@@ -190,22 +181,19 @@ $(".add-meme").on('click', function(event) {
 
 $(".remove-portfolio").on('click', function(event) {
 	event.preventDefault();
-	// var portfolioID = $(this).prev().prev().data('portfolio-id');
-	var portfolioID = $(this).parent().data('portfolio-id');
-	console.log(portfolioID);
-	return;
+	var portfolioID = $(this).prev().prev().data('portfolio-id');
 
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 		$.ajax({
-			// url: '/api/'+ userData.userId +'/delete-portfolio/' + portfolioID,
-			url: '/portfolios/delete-portfolio'
+			url: '/portfolios/delete-portfolio',
 			type: 'DELETE',
 			data: {portfolioID: parseInt(portfolioID)}
 		})
 		.then(function(data) {
 			if(data){
-				// displayPortfolios(data);
+
 				console.log("delete successful");
+				// $(this).parent().remove();
 				window.location.href = "/users/" + userData.userId;
 			} else {
 				console.log("delete unsuccessful");

@@ -38,10 +38,16 @@ app.use(session({
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
- 
+
 
 // Require all models
 const db = require("./models");
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Routes
 var authRoute = require('./routes/auth.js')(app, passport);
@@ -51,6 +57,7 @@ var meme_routes = require("./controllers/meme_controller");
 var portfolio_routes = require("./controllers/portfolio_controller");
 
 app.use(meme_routes, portfolio_routes);
+
 
 
 //load passport strategies
