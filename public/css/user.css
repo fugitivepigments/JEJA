@@ -123,7 +123,7 @@ div.portfolio-card {
 
 div.portfolio {
 	position: relative;
-    height: 200px;
+    /*height: 200px;*/
     /*width: 150px;*/
     margin-bottom: 20px;
 }
@@ -146,7 +146,7 @@ div.portfolio button.add-meme {
 
 div.portfolio button.remove-portfolio {
 	position: absolute;
-	top: 35px;
+	bottom: 0;
     right: 0;
 	border: none;
 	color: white;
@@ -167,7 +167,7 @@ div.meme-card:hover {
 }
 
 div.portfolio div.img-holder img {
-	height: 150px;
+	height: auto;
     width: 150px;
 }
 
