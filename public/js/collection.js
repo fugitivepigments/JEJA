@@ -12,15 +12,7 @@ $(".btn-edit").on('click', function(event) {
 	event.preventDefault();
 	const memeId = $(this).parent().prev().data('memeid');
 
-	var meme = {
-		memeId: memeId
-	}
-
-	console.log('clicked btn-edit ', meme);
-
-	$.post('/memes/edit-meme', meme, function(data, textStatus, xhr) {
-
-	});
+	$.get('/memes/' + memeId, function(data, textStatus, xhr) {});
 
 	// window.location.href = "/edit-meme/" + memeId;
 });

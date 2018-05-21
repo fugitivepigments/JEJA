@@ -51,5 +51,11 @@ module.exports = function(sequelize, Sequelize){
 		timestamps: false
 	});
 
+	// Artwork.associate = function(models){
+	// 	Artwork.hasMany(models.Meme, {
+	// 		onDelete: "cascade"
+	// 	});
+	// };
+
 	return Artwork;
 };

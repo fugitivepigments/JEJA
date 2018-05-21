@@ -1,20 +1,11 @@
 $(document).ready(function(){
-    // var textSizeSelector = $(".mg-textbox-size")
-    // var textSizeCap = $("div");
-    // textSizeCap.attr("class", "lead");
-    // textSizeCap.text("Edit text at the top of the meme here:");
-    // textSizeSelector.prependChild(textSizeCap);
 
     $("#meme").memeGenerator({
         useBootstrap: true,
             previewMode: "css",
             defaultTextStyle: {
                 font: "'Comic Sans', Helvetica",
-            },
-            // captions: [
-            //     "type top",
-            //     "type bottom"
-            // ]
+            }
     });
 
     // If the user is logged in, show the save button, 
@@ -53,9 +44,11 @@ $(document).ready(function(){
                 memeText += textboxes[i].value;
             }
         }
+        var memeId = $("#meme").data("memeid");
 
         // Package the meme data
-        var meme = {
+        var meme = {,
+            id: memeId,
             meme_name: $("#meme-name").val().trim() || "Untitled",
             meme_text: memeText.trim(),
             og_img: $("#meme").attr('src'),
@@ -64,11 +57,9 @@ $(document).ready(function(){
             UserId: user
         }
 
-        var memeId = $("#meme").data("memeid");
-
         // send update request to database
         $.ajax({
-            url: '/api/'+ user +'/update-meme/' + memeId,
+            url: '/memes/update-meme/',
             type: 'PUT',
             data: meme
         })

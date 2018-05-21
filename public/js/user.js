@@ -75,7 +75,7 @@ $("#save-portfolio").on('click', function(event) {
 			// package portfolio details
 			const newPortfolio = {
 				portfolio_name: portfolioName || "Untitled",
-				cover_img: "/images/Placeholder.jpg"
+				cover_img: ""
 			}
 
 			// Clear out the input form
@@ -85,10 +85,10 @@ $("#save-portfolio").on('click', function(event) {
 			$("#portfolioModal").modal();
 
 			// ajax call to create a new port
-			$.post('/api/'+ userData.userId +'/new-portfolio', newPortfolio, function(data) {
+			$.post('/portfolios/save-portfolio', newPortfolio, function(newPortfolio) {
 	
 				// Reload/redraw portfolios section
-				console.log(data);
+				// console.log(newPortfolio);
 
 				window.location.href = "/users/" + userData.userId
 
@@ -105,7 +105,9 @@ $(".portfolio-card").on('click', function(event) {
 
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 		const portfolioID = $(this).data("portfolio-id");
-		window.location.href = '/user/'+ userData.userId +'/portfolio/' + portfolioID;
+
+		window.location.href = '/portfolios/' + portfolioID;
+
 	} else {
 		console.log('Please log in');
 	}
@@ -120,7 +122,7 @@ $(".add-meme").on('click', function(event) {
 	var portfolioCover = $(this).prev().find('.img-holder img');
 
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
-		$.get('/api/'+ userData.userId +'/collection', function(data) {
+		$.get('/users/collection', function(data) {
 			// Display list of memes in a popup container next to the portfolio
 			$("#meme-picker").animate({width: 'toggle'});
 			$('.scroll-window').empty();
@@ -154,12 +156,11 @@ $(".add-meme").on('click', function(event) {
 					var memeDetails = {
 						memeID: memeID,
 						portfolioID: portfolioID,
-						userID: userData.userId,
 						cover_img: coverImg
 					}
 
 					$.ajax({
-						url: '/api/add-meme-to-portfolio',
+						url: '/portfolios/add-meme',
 						type: 'PUT',
 						data: memeDetails,
 					}).then(data => {
@@ -191,14 +192,14 @@ $(".remove-portfolio").on('click', function(event) {
 			type: 'DELETE',
 			data: {portfolioID: parseInt(portfolioID)}
 		})
-		.then(function(data) {
-			if(data){
+		.then(function(portfolios) {
+			if(portfolios){
 
 				targetPortfolio.remove();
-				// window.location.href = "/users/" + userData.userId;
-				var title = $("#section-title-portfolio").text();
-				var count = parseInt(title.split('(')[1].split(')')[0]) - 1;
-				$("#section-title-portfolio").text('Portfolios ('+count+')');
+				// // window.location.href = "/users/" + userData.userId;
+				// var title = $("#section-title-portfolio").text();
+				// var count = parseInt(title.split('(')[1].split(')')[0]) - 1;
+				$("#section-title-portfolio").text('Portfolios ('+portfolios.length+')');
 			}
 		})
 		.catch(function(err) {
