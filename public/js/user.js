@@ -190,7 +190,9 @@ $(".add-meme").on('click', function(event) {
 
 $(".remove-portfolio").on('click', function(event) {
 	event.preventDefault();
-	var portfolioID = $(this).prev().prev().data('portfolio-id');
+	var portfolioID = $(this).parent().data('portfolio-id');
+	// console.log(portfolioID);
+	// return;
 
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 		$.ajax({

@@ -111,13 +111,15 @@ img {
 /* Portfolio Styles */
 
 
-div.portfolio-card .img-holder img {
+div.portfolio-card1 .img-holder img {
 	height: 100%;
 	max-width: 300px;
 }
 
-div.portfolio-card {
+div.portfolio-card1 {
 	text-align: center;
+	min-width: 200px;
+	min-height: 200px;
 }
 
 div.portfolio {
@@ -155,7 +157,7 @@ div.portfolio button.remove-portfolio {
 	opacity: 0;
 }
 
-div.portfolio-card:hover,
+div.portfolio-card1:hover,
 div.meme-card:hover {
 	transform: scale(1.01);
 	box-shadow: 0 0 15px rgba(0,0,0,.7);
@@ -217,4 +219,13 @@ div#meme-picker {
 
 div.card.meme-card {
 	height: 100%;
+}
+
+.portfolio-link:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.portfolio-link {
+	color: black !important;
 }
