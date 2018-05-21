@@ -122,7 +122,7 @@ $(".add-meme").on('click', function(event) {
 	var portfolioCover = $(this).prev().find('.img-holder img');
 
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
-		$.get('/users/collection', function(data) {
+		$.get('/users/'+ userData.userId +'/collection', function(data) {
 			// Display list of memes in a popup container next to the portfolio
 			$("#meme-picker").animate({width: 'toggle'});
 			$('.scroll-window').empty();

@@ -283,7 +283,7 @@ exports.createMeme = function(req, res) {
 	console.log('Inside Create Meme authcontroller');
 	console.log('Logged in user: ', req.user);
 	console.log('SessionID: ', req.sessionID);
-	console.log('Meme to edit: ', req.params);
+	console.log('Artwork to use: ', req.params);
 
 	Artwork.findOne({
 		where: {
@@ -326,10 +326,17 @@ exports.editMeme = function(req, res) {
 		  id: parseInt(req.params.memeID),
 		  UserId: req.user.id
 		}
-	}).then((results) => {
+	}).then((selectedMeme) => {
+		// console.log(selectedMeme);
+
+		console.log('Diagnositcs: before res.render(edit)');
+
+		// TODO: Render.('edit') is not working
 
 		// Redirects user to the edit page & displays the selected Meme
-		res.render("edit", results.dataValues);
+		res.render("edit", selectedMeme.dataValues);
+
+		console.log('Diagnositcs: after res.render(edit)');
 
 	}).catch((err) => {
 		console.log("User cannot edit this meme");
@@ -341,7 +348,7 @@ exports.updateMeme_JSON = function(req, res) {
 	console.log('Inside Update Meme authcontroller');
 	console.log('Logged in user: ', req.user.id);
 	console.log('SessionID: ', req.sessionID);
-	console.log('Request body: ', req.body);
+	console.log('Request body: ', req.body.meme_text);
 	console.log('Request params: ', req.params);
 
   var meme = req.body;
@@ -417,7 +424,7 @@ exports.saveMeme_JSON = function(req, res) {
 	console.log('Inside Save Meme authcontroller');
 	console.log('Logged in user: ', req.user.id);
 	console.log('SessionID: ', req.sessionID);
-	console.log('Request body: ', req.body);
+	console.log('Request body: ', req.body.meme_text);
 	console.log('Request params: ', req.params);
 
   var meme = req.body;
@@ -518,14 +525,14 @@ exports.collection = function(req, res) {
 
 exports.collection_JSON = function(req, res) {
 	console.log('Inside Collection JSON authcontroller');
-	console.log('Logged in user: ', req.user.id);
+	console.log('Logged in user: ', req.user);
 	console.log('SessionID: ', req.sessionID);
 	console.log('Request body: ', req.body);
 	console.log('Request params: ', req.params);
 
   Meme.findAll({
     where: {
-      UserId: req.user.id
+      UserId: req.params.userID
     },
     order: [
       ['createdAt', 'DESC']
@@ -659,7 +666,7 @@ exports.savePortfolio_JSON = function(req, res) {
 	});
 }
 
-exports.portfolio = function(req, res) {
+exports.private_portfolio = function(req, res) {
 	console.log('Inside Portfolio authcontroller');
 	console.log('Logged in user: ', req.user);
 	console.log('SessionID: ', req.sessionID);
@@ -683,7 +690,33 @@ exports.portfolio = function(req, res) {
 	}).catch((err) => {
 		res.status(500).end();
 	});
-}
+};
+
+exports.public_portfolio = function(req, res) {
+	console.log('Inside Portfolio authcontroller');
+	console.log('Logged in user: ', req.user);
+	console.log('SessionID: ', req.sessionID);
+	console.log('Request body: ', req.body);
+	console.log('Request params: ', req.params);
+
+	Portfolio.findOne({
+		where: {
+			id: req.params.portfolioID,
+			UserId: req.params.userID
+		},
+		include: [
+			{model: Meme}, 
+			{model: User}
+		],
+	}).then((results) => {
+
+		// Redirects the user to the Portfolio page and displays the selected portfolio
+		res.render("portfolio", results.dataValues);
+
+	}).catch((err) => {
+		res.status(500).end();
+	});
+};
 
 exports.addMemeToPortfolio_JSON = function(req, res) {
 	console.log('Inside Add Meme to Portfolio authcontroller');

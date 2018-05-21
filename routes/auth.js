@@ -13,7 +13,9 @@ module.exports = function(app, passport) {
 
     app.get('/create-meme', authController.createMemeFromRandom);
 
-    app.get('/portfolios/:portfolioID', authController.portfolio);
+    app.get('/portfolios/:portfolioID', authController.private_portfolio);
+
+    app.get('/users/:userID/portfolios/:portfolioID', authController.public_portfolio);
 
     app.get('/signup', authController.signup);
 
@@ -23,11 +25,11 @@ module.exports = function(app, passport) {
 
     app.get('/users/:userID', isLoggedIn, authController.user);
 
-    app.get('/memes/:memeID', isLoggedIn, authController.editMeme);
+    app.get('/memes/:memeID', isLoggedIn, authController.editMeme); //Does not route properly
 
     app.get('/collection', isLoggedIn, authController.collection);
 
-    app.get('/users/collection', isLoggedIn, authController.collection_JSON);
+    app.get('/users/:userID/collection', isLoggedIn, authController.collection_JSON);
 
     app.get('/create-meme/:artworkID', authController.createMeme);
 
