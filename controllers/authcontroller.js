@@ -315,9 +315,11 @@ exports.createMemeFromRandom = function(req, res) {
 
 exports.editMeme = function(req, res) {
 	console.log('Inside Edit Meme authcontroller');
-	console.log('Logged in user: ', req.user.id);
+	console.log('Logged in user: ', req.user);
 	console.log('SessionID: ', req.sessionID);
 	console.log('Meme to edit: ', req.params);
+
+	// TODO: prevent users from editing other users' memes from search
 
 	Meme.findOne({
 		where: {
@@ -330,6 +332,7 @@ exports.editMeme = function(req, res) {
 		res.render("edit", results.dataValues);
 
 	}).catch((err) => {
+		console.log("User cannot edit this meme");
 		res.status(500).end();
 	});
 }

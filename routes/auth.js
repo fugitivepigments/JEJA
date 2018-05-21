@@ -13,6 +13,8 @@ module.exports = function(app, passport) {
 
     app.get('/create-meme', authController.createMemeFromRandom);
 
+    app.get('/portfolios/:portfolioID', authController.portfolio);
+
     app.get('/signup', authController.signup);
 
     app.get('/signin', authController.signin);
@@ -22,8 +24,6 @@ module.exports = function(app, passport) {
     app.get('/users/:userID', isLoggedIn, authController.user);
 
     app.get('/memes/:memeID', isLoggedIn, authController.editMeme);
-
-    app.get('/portfolios/:portfolioID', isLoggedIn, authController.portfolio);
 
     app.get('/collection', isLoggedIn, authController.collection);
 
