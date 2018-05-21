@@ -1,7 +1,8 @@
 var authController = require('../controllers/authcontroller.js');
+var cors = require("cors");
  
 module.exports = function(app, passport) {
- 
+
     // GET Requests
     // ===============================================================
     
@@ -11,7 +12,7 @@ module.exports = function(app, passport) {
 
     app.get('/search', authController.search);
 
-    app.get('/create-meme', authController.createMemeFromRandom);
+    app.get('/create-meme', cors(), authController.createMemeFromRandom);
 
     app.get('/portfolios/:portfolioID', authController.private_portfolio);
 

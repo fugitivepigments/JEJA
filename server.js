@@ -5,6 +5,7 @@ var exphbs = require("express-handlebars");
 var passport = require("passport");
 var session = require("express-session");
 require("dotenv").config();
+var cors = require("cors");
 
 // Start Express app
 var app = express();
@@ -43,11 +44,14 @@ app.use(passport.session()); // persistent login sessions
 // Require all models
 const db = require("./models");
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
+app.use(cors());
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 // Routes
 var authRoute = require('./routes/auth.js')(app, passport);
