@@ -82,3 +82,9 @@ div.card.portfolio-card.m-2:hover {
 	color: black !important;
 	text-decoration: none;
 }
+
+.card-wrapper {
+	overflow: visible;
+	height: 100%;
+	margin-bottom: 15px;
+}

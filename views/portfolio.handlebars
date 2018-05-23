@@ -12,9 +12,11 @@
 				<div class="card-body">
 					<div class="row">
 						{{#each Memes}}
-						<div class="card m-2 portfolio-meme-display">
-							<h3 class="meme-title text-center">{{meme_name}}</h3>
-							<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
+						<div class="card-wrapper">
+							<div class="card m-2 portfolio-meme-display">
+								<h3 class="meme-title text-center">{{meme_name}}</h3>
+								<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}">
+							</div>
 						</div>
 						{{/each}}
 					</div>

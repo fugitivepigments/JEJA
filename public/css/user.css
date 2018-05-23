@@ -240,3 +240,18 @@ svg.checkmark {
 	color: rgba(0, 225, 0, 1);
 	opacity: 0;
 }
+
+#portfolioModalLabel {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: bold;
+}
+
+#save-portfolio {
+	font-family: "Source Sans Pro";
+}
+
+.card-wrapper {
+	overflow: visible;
+	height: 100%;
+	margin-bottom: 15px;
+}

@@ -99,3 +99,9 @@ div.card.portfolio-view.col-12 {
 	padding: 0px;
 	/*margin: 0px;*/
 }
+
+.card-wrapper {
+	overflow: visible;
+	height: 100%;
+	margin-bottom: 15px;
+}

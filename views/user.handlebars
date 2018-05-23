@@ -79,6 +79,7 @@
 			<div class="card-body">
 				<div class="row">
 				{{#each Memes}}
+				<div class="card-wrapper">
 					<div class="card meme-card">
 						<h3 class="meme-title text-center">{{meme_name}}</h3>
 						<img src="{{og_img}}" data-og-img="{{og_img}}" data-new-img="{{new_img}}" data-meme_text="{{meme_text}}" alt="{{meme_text}}" data-memeid="{{id}}">
@@ -87,6 +88,7 @@
 			                <button type="" class="card-link btn-delete text-danger">Delete</button>
 			            </div>
 					</div>
+				</div>
 				{{/each}}
 				</div>
 				<div class="pl-3">
@@ -107,7 +109,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="portfolioModalLabel">Add a new </h5>
+                <h5 class="modal-title" id="portfolioModalLabel">Add a new portfolio</h5>
 {{!--                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button> --}}
