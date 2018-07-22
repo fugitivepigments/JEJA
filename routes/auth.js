@@ -18,9 +18,9 @@ module.exports = function(app, passport) {
 
     app.get('/users/:userID/portfolios/:portfolioID', authController.public_portfolio);
 
-    app.get('/signup', authController.signup);
+    app.get('/signup', authController.signupPage);
 
-    app.get('/signin', authController.signin);
+    app.get('/signin', authController.signinPage);
 
     app.get('/logout', authController.logout);
 
@@ -52,35 +52,9 @@ module.exports = function(app, passport) {
 
     app.post('/portfolios/save-portfolio', isLoggedIn, authController.savePortfolio_JSON);
 
-    app.post('/signup', passport.authenticate('local-signup'),
-        function(req, res){
-            // If sign up is successful send back json data
-            console.log('New signup successful for ', req.user.name);
-            console.log('Logged in user: ', req.user.id);
-            console.log('SessionID: ', req.sessionID);
-            res.json({
-                id: req.user.id, 
-                name: req.user.name,
-                session: req.sessionID
-            });
-        }
-    );
+    app.post('/signup', passport.authenticate('local-signup'), authController.createUser_JSON);
 
-    app.post('/signin', passport.authenticate('local-signin'),
-        function(req, res) {
-            // If sign in is successful send back json data
-            console.log('Signin successful for ', req.user.name);
-            console.log('Logged in user: ', req.user.id);
-            console.log('SessionID: ', req.sessionID);
-            // console.log(req);
-            // res.redirect("/");
-            res.json({
-                id: req.user.id, 
-                name: req.user.name,
-                session: req.sessionID
-            });
-        }
-    );
+    app.post('/signin', passport.authenticate('local-signin'), authController.signinUser_JSON);
 
     // DELETE Requests
     // ===============================================================
@@ -91,11 +65,11 @@ module.exports = function(app, passport) {
 
     app.delete('/users/delete-account', isLoggedIn, authController.deleteUser);
 
-	function isLoggedIn(req, res, next) {
-	    if (req.isAuthenticated())
-	        return next();
-	         
-	    res.redirect('/signin');
-	};
+    function isLoggedIn(req, res, next) {
+        if (req.isAuthenticated())
+            return next();
+             
+        res.redirect('/signin');
+    };
  
 }

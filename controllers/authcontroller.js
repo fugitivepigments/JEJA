@@ -16,7 +16,6 @@ exports.home = function(req, res) {
 	console.log('Request body: ', req.body);
 	console.log('Request params: ', req.params);
 
-  // artworkCount = 5280;
   Artwork.findAll({
     where: {
       [Op.or]: [
@@ -26,25 +25,20 @@ exports.home = function(req, res) {
       ]
     }
   }).then((artResults) => {
-    // console.log(artResults);
     var art = [];
     for (var i = 0; i < artResults.length; i++) {
       art.push(artResults[i].dataValues);
     }
 
-    // console.log(art);
-
     Meme.findAndCountAll({
       order: [['createdAt', 'DESC']],
       limit: 4
     }).then((recentMemes) => {
-      // console.log('Recent Memes',recentMemes);
+
         var memes = [];
         for (var i = 0; i < recentMemes.rows.length; i++) {
           memes.push(recentMemes.rows[i].dataValues);
         }
-
-        // console.log({artworks: art, randomPicks: memes});
 
       // Redirect user to the index page and display 3 artworks and 4 memes
       res.render("index", {artworks: art, randomPicks: memes});
@@ -58,7 +52,7 @@ exports.home = function(req, res) {
   });
 }
  
-exports.signup = function(req, res) {
+exports.signupPage = function(req, res) {
 	console.log('Inside Signup authcontroller');
 	console.log('Logged in user: ', req.user);
 	console.log('SessionID: ', req.sessionID);
@@ -84,7 +78,7 @@ exports.signup = function(req, res) {
  
 };
 
-exports.signin = function(req, res) {
+exports.signinPage = function(req, res) {
 	console.log('Inside Signin authcontroller');
 	console.log('Logged in user: ', req.user);
 	console.log('SessionID: ', req.sessionID);
@@ -105,6 +99,31 @@ exports.signin = function(req, res) {
  	}
  
 };
+
+exports.createUser_JSON = function(req, res) {
+	// If sign up is successful send back json data
+	console.log('New signup successful for ', req.user.name);
+	console.log('Logged in user: ', req.user.id);
+	console.log('SessionID: ', req.sessionID);
+	res.json({
+	    id: req.user.id, 
+	    name: req.user.name,
+	    session: req.sessionID
+	});
+};
+
+exports.signinUser_JSON = function(req, res) {
+    // If sign in is successful send back json data
+    console.log('Signin successful for ', req.user.name);
+    console.log('Logged in user: ', req.user.id);
+    console.log('SessionID: ', req.sessionID);
+    // res.redirect("/");
+    res.json({
+        id: req.user.id, 
+        name: req.user.name,
+        session: req.sessionID
+    });
+}
 
 // Logs the user out and redirects them to the home page
 exports.logout = function(req, res) {
@@ -313,6 +332,8 @@ exports.createMemeFromRandom = function(req, res) {
 
 };
 
+
+// TODO: Fix this route
 exports.editMeme = function(req, res) {
 	console.log('Inside Edit Meme authcontroller');
 	console.log('Logged in user: ', req.user);
@@ -371,7 +392,7 @@ exports.updateMeme_JSON = function(req, res) {
         if (err.code === "EEXIST") {
           num++;
           console.log('Filename exists...creating new filename');
-          filename = req.body.meme_name + " (" + num + ").png";
+          filename = req.body.meme_name + "_" + num + ".png";
           updateMemeImage(filename);
           return;
         } else {
@@ -379,6 +400,9 @@ exports.updateMeme_JSON = function(req, res) {
           return console.error(err);
         }
       }
+
+      // Upload meme to Google Cloud Storage
+      uploadFile(__dirname + '/../public/images/' + filename);
 
       // Make sure the user exists
       User.findOne({
@@ -391,9 +415,8 @@ exports.updateMeme_JSON = function(req, res) {
           meme_name: meme.meme_name,
           meme_text: meme.meme_text,
           og_img: meme.og_img,
-          new_img: '/images/' + filename,
+          new_img: 'https://storage.googleapis.com/drymemes-4a96b.appspot.com/' + filename,
           tags: meme.tags,
-          // PortfolioId: parseInt(meme.portfolioID),
           UserId: req.user.id
         }, {
           where: {
@@ -406,7 +429,6 @@ exports.updateMeme_JSON = function(req, res) {
           // Returns a JSON object indicating the success(1) or failure(0) of the request
           res.json(success);
 
-          // res.redirect(200, "/");
         }).catch((err) => {
           console.log('The error occurrs here');
           res.status(500).json(err.message).end();
@@ -418,6 +440,27 @@ exports.updateMeme_JSON = function(req, res) {
       console.log('image has been updated');
     });
   }
+
+	// Upload a file to Google Cloud Storage
+	const uploadFile = (filename) => {
+		// Imports the Google Cloud client library
+		const Storage = require('@google-cloud/storage');
+
+		// Creates a client
+		const projectId = process.env.GC_PROJECT_ID;
+		const storage = new Storage({ projectId });
+
+		// Uploads a local file to the bucket
+		storage
+		.bucket(process.env.GC_BUCKET_ID)
+		.upload(filename)
+		.then(() => {
+			// upload successful
+		})
+		.catch(err => {
+			console.error('ERROR:', err);
+		});
+	}
 }
 
 exports.saveMeme_JSON = function(req, res) {
@@ -448,7 +491,7 @@ exports.saveMeme_JSON = function(req, res) {
         if (err.code === "EEXIST") {
           num++;
           console.log('Filename exists...creating new filename');
-          filename = req.body.meme_name + " (" + num + ").png";
+          filename = req.body.meme_name + "_" + num + ".png";
           createMemeImage(filename);
           return;
         } else {
@@ -456,6 +499,9 @@ exports.saveMeme_JSON = function(req, res) {
           return console.error(err);
         }
       }
+
+      // Upload meme to Google Cloud Storage
+      uploadFile(__dirname + '/../public/images/' + filename);
 
       // Make sure the user exists
       User.findOne({
@@ -469,7 +515,7 @@ exports.saveMeme_JSON = function(req, res) {
           meme_name: meme.meme_name,
           meme_text: meme.meme_text,
           og_img: meme.og_img,
-          new_img: '/images/' + filename,
+          new_img: 'https://storage.googleapis.com/drymemes-4a96b.appspot.com/' + filename,
           tags: meme.tags,
           UserId: req.user.id
         }).then((success) => {
@@ -488,6 +534,27 @@ exports.saveMeme_JSON = function(req, res) {
       console.log('image has been created');
     });
   }
+
+	// Upload a file to Google Cloud Storage
+	const uploadFile = (filename) => {
+		// Imports the Google Cloud client library
+		const Storage = require('@google-cloud/storage');
+
+		// Creates a client
+		const projectId = process.env.GC_PROJECT_ID;
+		const storage = new Storage({ projectId });
+
+		// Uploads a local file to the bucket
+		storage
+		.bucket(process.env.GC_BUCKET_ID)
+		.upload(filename)
+		.then(() => {
+			// upload successful
+		})
+		.catch(err => {
+			console.error('ERROR:', err);
+		});
+	}
 }
 
 exports.collection = function(req, res) {

@@ -56,13 +56,6 @@ app.use(cors());
 // Routes
 var authRoute = require('./routes/auth.js')(app, passport);
 
-// var meme_routes = require("./controllers/meme_controller");
-// var user_routes = require("./controllers/user_controller");
-// var portfolio_routes = require("./controllers/portfolio_controller");
-
-// app.use(meme_routes, portfolio_routes);
-
-
 //load passport strategies
 require('./config/passport/passport.js')(passport, db.User);
 
