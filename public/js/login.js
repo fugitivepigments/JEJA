@@ -8,6 +8,7 @@ if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 	userData = localStorage.getItem('userData') || sessionStorage.getItem('userData');
 	userData = JSON.parse(userData);
 
+    //Greet the logged in user
 	$("#curr-user").text('Welcome, '+userData.username);
 
 	console.log(userData.username + ' is currently logged in');

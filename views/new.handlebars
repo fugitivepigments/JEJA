@@ -38,9 +38,9 @@
 
         Once this is deployed to Heroku the image can be viewed without CORS
      --}}
-    {{!-- <img id="meme" src="https://cors-anywhere.herokuapp.com/{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous"> --}}
+    <img id="meme" src="https://cors-anywhere.herokuapp.com/{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossorigin="anonymous">
 
-    <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}">
+    {{!-- <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}"> --}}
 </div>
 
 <div class="nav-arrows d-flex justify-content-between">
@@ -79,10 +79,10 @@
 {{#section 'scripts'}}
 <script src="/js/new.js" type="text/javascript"></script>
 <script>
-    $("#save").on('click', function(event) {
-        event.preventDefault();
-        $(".modal-body").text('Your meme "'+ $("#meme-name").val().trim() +'" has been saved. Visit your collection to view this meme again later.');
-    });
+   // $("#save").on('click', function(event) {
+   //     event.preventDefault();
+   //     $(".modal-body").text('Your meme "'+ $("#meme-name").val().trim() +'" has been saved. Visit your collection to view this meme again later.');
+   // });
 
     $(".left-click, .right-click").on('click', function(event) {
         // event.preventDefault();

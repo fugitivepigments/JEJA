@@ -45,13 +45,3 @@ CREATE TABLE portfolios
     cover_img varchar(255),
 	PRIMARY KEY (id)
 );
-
-LOAD DATA INFILE 'my_art_caps_lite.csv' INTO TABLE artworks FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
-
-
-ALTER TABLE artworks ADD COLUMN id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
-ALTER TABLE artworks ADD COLUMN hitCount INT;
-
-SELECT * FROM artworks LIMIT 1000;
-
-SELECT `id`, `author`, `born_died`, `title`, `date`, `technique`, `location`, `img_url`, `form`, `type`, `school`, `timeframe`, `hitCount` FROM `Artworks` AS `Artwork` WHERE (`Artwork`.`id` = 1113 OR `Artwork`.`id` = 615 OR `Artwork`.`id` = 3307)

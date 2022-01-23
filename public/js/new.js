@@ -16,10 +16,14 @@ $(document).ready(function(){
         $("#save-form").hide();
     }
 
-    $("#save").click(function(e){
+    $("#save").on("click",function(e){
         e.preventDefault();
-        // Get the user's ID from LocalStorage
+        // TODO: Get the user's ID from LocalStorage
+
+        $(".modal-body").text('Your meme "'+ $("#meme-name").val().trim() +'" has been saved. Visit your collection to view this meme again later.');
+
         var user;
+        console.log(userData);
         if(userData){
             user = userData.userId;
         } else {
@@ -27,12 +31,10 @@ $(document).ready(function(){
             return;
         }
 
-        $("#meme").removeAttr('crossOrigin');
+        $("#meme").attr('crossOrigin', 'anonymous');
 
         // Retrieve and store the image data
         var imageDataUrl = $("#meme").memeGenerator("save");
-
-        $("#meme").attr('crossOrigin', 'anonymous');
 
         var memeText = "";
         var delimiter = "|";
@@ -55,12 +57,14 @@ $(document).ready(function(){
             UserId: user
         }
 
+        console.log('memeData', meme);
+
         // save meme to database
         $.post('/memes/save-meme', meme , function(data, textStatus, xhr) {});
        
     });
 
-    $("#download").click(function(e){
+    $("#download").on("click", function(e){
         e.preventDefault();
         
         $("#meme").memeGenerator("download");

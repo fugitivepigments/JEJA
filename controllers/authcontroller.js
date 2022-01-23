@@ -59,7 +59,6 @@ exports.signupPage = function(req, res) {
 	console.log('Request body: ', req.body);
 	console.log('Request params: ', req.params);
  
- 	console.log('Inside signup authcontroller');
  	if(req.user){
  		// res.render("/", {id: req.user.id, name: req.user.name});
 		res.json({
@@ -402,7 +401,7 @@ exports.updateMeme_JSON = function(req, res) {
       }
 
       // Upload meme to Google Cloud Storage
-      uploadFile(__dirname + '/../public/images/' + filename);
+      uploadFile(__dirname + '/../public/images/' + filename, filename);
 
       // Make sure the user exists
       User.findOne({
@@ -501,7 +500,7 @@ exports.saveMeme_JSON = function(req, res) {
       }
 
       // Upload meme to Google Cloud Storage
-      uploadFile(__dirname + '/../public/images/' + filename);
+      uploadFile(__dirname + '/../public/images/' + filename, filename);
 
       // Make sure the user exists
       User.findOne({
@@ -536,24 +535,26 @@ exports.saveMeme_JSON = function(req, res) {
   }
 
 	// Upload a file to Google Cloud Storage
-	const uploadFile = (filename) => {
+	const uploadFile = (filePath, filename) => {
+        const bucketName = process.env.GC_BUCKET_ID;
+
 		// Imports the Google Cloud client library
-		const Storage = require('@google-cloud/storage');
+		const {Storage} = require('@google-cloud/storage');
 
 		// Creates a client
-		const projectId = process.env.GC_PROJECT_ID;
-		const storage = new Storage({ projectId });
+		const storage = new Storage({ 
+            projectId: process.env.GC_PROJECT_ID
+        });
 
 		// Uploads a local file to the bucket
-		storage
-		.bucket(process.env.GC_BUCKET_ID)
-		.upload(filename)
-		.then(() => {
-			// upload successful
-		})
-		.catch(err => {
-			console.error('ERROR:', err);
-		});
+        async function uploadFileToGC() {
+            await storage.bucket(bucketName).upload(filePath, {
+                destination: filename,
+            });
+
+            console.log(`${filePath} uploaded to ${bucketName}`);
+        }
+        uploadFileToGC().catch(console.error);
 	}
 }
 
