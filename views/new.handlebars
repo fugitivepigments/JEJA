@@ -38,9 +38,9 @@
 
         Once this is deployed to Heroku the image can be viewed without CORS
      --}}
-    <img id="meme" src="https://cors-anywhere.herokuapp.com/{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous">
+    {{!-- <img id="meme" src="https://cors-anywhere.herokuapp.com/{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}" crossOrigin="anonymous"> --}}
 
-    {{!-- <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}"> --}}
+    <img id="meme" src="{{img_url}}" alt="{{title}}" data-og-img="{{img_url}}">
 </div>
 
 <div class="nav-arrows d-flex justify-content-between">

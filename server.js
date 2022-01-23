@@ -1,7 +1,7 @@
 // Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
-var exphbs = require("express-handlebars");
+var exphbs = require("express-handlebars").engine;
 var passport = require("passport");
 var session = require("express-session");
 require("dotenv").config();

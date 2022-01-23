@@ -18,31 +18,27 @@
   },
   "homepage": "https://github.com/fugitivepigments/JEJA#readme",
   "dependencies": {
-    "@google-cloud/storage": "^1.7.0",
+    "@google-cloud/storage": "^5.18.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "dotenv": "^5.0.1",
+    "dotenv": "^14.2.0",
     "dragula": "^3.7.2",
     "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
+    "express-handlebars": "^6.0.2",
     "express-session": "^1.15.6",
     "jquery-meme-generator": "^1.0.4",
     "jsonwebtoken": "^8.3.0",
-    "mysql2": "^1.5.3",
-    "passport": "^0.4.0",
+    "mysql2": "^2.3.3",
+    "passport": "^0.5.2",
     "passport-heroku": "^1.0.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^4.37.7",
-    "sequelize-cli": "^4.0.0",
+    "sequelize": "^6.14.0",
+    "sequelize-cli": "^6.4.1",
     "uninstall": "0.0.0"
   },
   "devDependencies": {
-    "mocha": "^5.1.1",
-    "nightmare": "^3.0.1",
-    "scripts": {
-      "test": "mocha",
-      "start": "node server.js"
-    }
+    "mocha": "^9.1.4",
+    "nightmare": "^3.0.1"
   }
 }
