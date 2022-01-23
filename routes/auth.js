@@ -1,69 +1,74 @@
-var authController = require('../controllers/authcontroller.js');
+var controllers = require('../controllers/controllers.js');
 var cors = require("cors");
  
 module.exports = function(app, passport) {
 
-    // GET Requests
+    // Page Routes
     // ===============================================================
     
-    app.get("/", authController.homePage);
+    app.get("/", controllers.goto_homePage);
 
-    app.get('/community', authController.community);
+    app.get('/search', controllers.goto_searchResults);
+    
+    app.get('/community', controllers.goto_communityPage);
 
-    app.get('/search', authController.search);
+    app.get('/collection', isLoggedIn, controllers.goto_collectionPage);
 
-    app.get('/create-meme', cors(), authController.createMemeFromRandom);
-
-    app.get('/portfolios/:portfolioID', authController.private_portfolio);
-
-    app.get('/users/:userID/portfolios/:portfolioID', authController.public_portfolio);
-
-    app.get('/signup', authController.signupPage);
-
-    app.get('/signin', authController.signinPage);
-
-    app.get('/logout', authController.logout);
-
-    app.get('/users/:userID', isLoggedIn, authController.user);
-
-    app.get('/memes/:memeID', isLoggedIn, authController.editMeme); //Does not route properly
-
-    app.get('/collection', isLoggedIn, authController.collection);
-
-    app.get('/users/:userID/collection', isLoggedIn, authController.collection_JSON);
-
-    app.get('/create-meme/:artworkID', authController.createMeme);
-
-    // PUT Requests
+    app.get('/signup', controllers.goto_signupPage);
+    
+    app.get('/signin', controllers.goto_signinPage);
+    
+    // User Routes
     // ===============================================================
-
-    app.put('/users/update-account', isLoggedIn, authController.updateUser_JSON);
-
-    app.put('/memes/update-meme/', isLoggedIn, authController.updateMeme_JSON);
-
-    app.put('/portfolios/update-portfolio', isLoggedIn, authController.updatePortfolio_JSON);
-
-    app.put('/portfolios/add-meme', isLoggedIn, authController.addMemeToPortfolio_JSON);
-
-    // POST Requests
+    
+    app.get('/users/:userID', isLoggedIn, controllers.action_restrictUserToOwnProfile);
+    
+    app.post('/signup', passport.authenticate('local-signup'), controllers.action_createUser);
+    
+    app.post('/signin', passport.authenticate('local-signin'), controllers.action_signinUser);
+    
+    app.get('/logout', controllers.action_logoutUser);
+    
+    app.put('/users/update-account', isLoggedIn, controllers.action_updateUser);
+    
+    app.delete('/users/delete-account', isLoggedIn, controllers.action_deleteUser);
+    
+    app.get('/users/:userID/collection', isLoggedIn, controllers.action_getUsersMemeCollection);
+    
+    // Meme Routes
     // ===============================================================
+    
+    app.get('/create-meme/:artworkID', controllers.goto_createMemePage);
+    
+    app.get('/create-meme', cors(), controllers.goto_createRandomMemePage);
+    
+    app.get('/view-meme/:memeID', isLoggedIn, controllers.goto_displayMemePage);
 
-    app.post('/memes/save-meme', isLoggedIn, authController.saveMeme_JSON);
-
-    app.post('/portfolios/save-portfolio', isLoggedIn, authController.savePortfolio_JSON);
-
-    app.post('/signup', passport.authenticate('local-signup'), authController.createUser_JSON);
-
-    app.post('/signin', passport.authenticate('local-signin'), authController.signinUser_JSON);
-
-    // DELETE Requests
+    app.get('/edit-meme/:memeID', isLoggedIn, controllers.goto_editMemePage);
+    
+    app.post('/memes/save-meme', isLoggedIn, controllers.action_saveMeme);
+    
+    app.put('/memes/update-meme/', isLoggedIn, controllers.action_updateMeme);
+    
+    app.delete('/memes/delete-meme', isLoggedIn, controllers.action_deleteMeme);
+    
+    // Portfolio Routes
     // ===============================================================
-
-    app.delete('/memes/delete-meme', isLoggedIn, authController.deleteMeme_JSON);
-
-    app.delete('/portfolios/delete-portfolio', isLoggedIn, authController.deletePortfolio_JSON);
-
-    app.delete('/users/delete-account', isLoggedIn, authController.deleteUser);
+    
+    app.get('/portfolios/:portfolioID', controllers.goto_publicPortfolio);
+    
+    app.get('/users/:userID/portfolios/:portfolioID', controllers.goto_privatePortfolio);
+    
+    app.put('/portfolios/add-meme', isLoggedIn, controllers.action_addMemeToPortfolio);
+    
+    app.post('/portfolios/save-portfolio', isLoggedIn, controllers.action_savePortfolio);
+    
+    app.put('/portfolios/update-portfolio', isLoggedIn, controllers.action_updatePortfolio);
+    
+    app.delete('/portfolios/delete-portfolio', isLoggedIn, controllers.action_deletePortfolio);
+    
+    // Misc
+    // ===============================================================
 
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {

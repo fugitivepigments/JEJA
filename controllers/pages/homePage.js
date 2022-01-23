@@ -1,8 +1,10 @@
-const { Op, Artwork, Meme, ARTWORK_COUNT } = require("./utils");
+const { Op, Artwork, Meme, ARTWORK_COUNT } = require("../utils");
+
+let artworkWithBadUrls = [];
 
 module.exports = function(req, res) {
     console.log('Inside Home authcontroller');
-    console.log('Logged in user: ', req.user);
+    console.log('Logged in user: ', req.user ? (({password, ...others}) => ({...others}))(req.user) : {});
     console.log('SessionID: ', req.sessionID);
     console.log('Request body: ', req.body);
     console.log('Request params: ', req.params);

@@ -7,8 +7,20 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
+    <!-- Spectrum plugin (optional) -->
+    <script src="/js/spectrum.js"></script>
+
+    <!-- Meme Generator plugin -->
+    <script type="text/javascript" src="/js/jquery.memegenerator.min.js"></script>
+
     <!-- jQuery UI CSS file -->
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+    <!-- Spectrum CSS file (optional) -->
+    <link rel="stylesheet" type="text/css" href="/css/spectrum.css">
+
+    <!-- Meme Generator CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/jquery.memegenerator.min.css">
 
     <link rel="stylesheet" href="/css/editor.css">
 
@@ -19,7 +31,7 @@
 <h1>Meme Viewer <i class="fas fa-angle-right"></i></h1>
 <p class="lead"></p>
 <div class="my-4 viewer-center">
-    <img src="{{new_img}}" alt="{{meme_name}}" data-meme-name="{{meme_name}}" data-meme-text="{{meme_text}}" data-tags="{{tags}}" data-memeid="{{id}}" data-userid="{{UserId}}" data-userid="{{PortfolioId}}">
+    <img id="meme" src="{{new_img}}" alt="{{meme_name}}" data-meme-name="{{meme_name}}" data-meme-text="{{meme_text}}" data-tags="{{tags}}" data-memeid="{{id}}" data-userid="{{UserId}}" data-userid="{{PortfolioId}}">
 </div>
 
 <div class="row d-flex justify-content-center footer">

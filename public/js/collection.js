@@ -12,9 +12,9 @@ $(".btn-edit").on('click', function(event) {
 	// event.preventDefault();
 	const memeId = $(this).parent().prev().data('memeid');
 
-	// $.get('/memes/' + memeId, function(data, textStatus, xhr) {});
+	// $.get('/edit-meme/' + memeId, function(data, textStatus, xhr) {});
 
-	window.location.href = "/memes/" + memeId;
+	window.location.href = "/edit-meme/" + memeId;
 });
 
 $(".btn-delete").on('click', function(event) {
@@ -22,9 +22,11 @@ $(".btn-delete").on('click', function(event) {
 
 	if(userData){
 		const memeId = $(this).parent().prev().data('memeid');
+        const filename = $(this).parent().prev().data('meme-name') + '.png';
 
 		var meme = {
-			memeId: memeId
+			memeId: memeId,
+            fileName: filename
 		}
 		
 		$.ajax({

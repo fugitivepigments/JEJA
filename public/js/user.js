@@ -106,7 +106,7 @@ $(".portfolio-card").on('click', function(event) {
 	if(localStorage.getItem('userData') || sessionStorage.getItem('userData')){
 		const portfolioID = $(this).data("portfolio-id");
 
-		window.location.href = '/portfolios/' + portfolioID;
+		window.location.href = `/users/${userData.userId}/portfolios/${portfolioID}`;
 
 	} else {
 		console.log('Please log in');

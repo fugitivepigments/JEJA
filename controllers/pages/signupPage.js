@@ -1,4 +1,4 @@
-const { Op } = require("./utils");
+const { Op } = require("../utils");
 
 module.exports = function(req, res) {
     console.log('Inside Signup authcontroller');

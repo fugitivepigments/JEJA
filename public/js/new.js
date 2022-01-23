@@ -57,6 +57,8 @@ $(document).ready(function(){
             UserId: user
         }
 
+        console.log('memeData:', meme);
+
         // save meme to database
         // $.post('/memes/save-meme', meme , function(data, textStatus, xhr) {
         //     console.log('Save successful on the client side', data, textStatus, xhr);
