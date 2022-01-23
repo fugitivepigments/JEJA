@@ -67,14 +67,7 @@ exports.signupPage = function(req, res) {
 		});
  	} else {
     	res.render('signup');
- 	}
-    // res.render('signup');
-
- //    res.json({
-	// 	id: req.user.id, 
-	// 	name: req.user.name
-	// });
- 
+ 	} 
 };
 
 exports.signinPage = function(req, res) {
@@ -163,7 +156,7 @@ exports.community = function(req, res) {
 		for (var i = 0; i < results.length; i++) {
 			users.push(results[i].dataValues);
 		}
-
+        console.log("Community results: ", results);
 		// Redirects the user to the community page and displays all users
 		res.render("community", {users: users});
 
@@ -186,7 +179,9 @@ exports.user = function(req, res) {
 
 	User.findOne({
 		where: {
-			id: req.user.id
+			id: {
+                [Op.eq]: req.user.id
+            }
 		},
 		include: [
 			{model: Meme}, 
@@ -219,14 +214,18 @@ exports.updateUser_JSON = function(req, res) {
 		email: user.email
 	}, {
 		where: {
-			id: req.user.id
+			id: {
+                [Op.eq]: req.user.id
+            }
 		}
 	}).then((response) => {
 		// response is an array with either 1(successful) or 0(failed)
 		if(response[0] === 1){
 			User.findOne({
 				where: {
-					id: req.user.id
+					id: {
+                        [Op.eq]: req.user.id
+                    }
 				},
 				include: [
 					{model: Meme}, 
@@ -262,7 +261,9 @@ exports.deleteUser = function(req, res) {
 
 	User.destroy({
 		where: {
-			id: req.user.id
+			id: {
+                [Op.eq]: req.user.id
+            }
 		}
 	}).then((result) => {
 
@@ -283,8 +284,12 @@ exports.deleteMeme_JSON = function(req, res) {
 
 	Meme.destroy({
 		where: {
-		  id: parseInt(req.body.memeId),
-		  userId: req.user.id
+            id: {
+                [Op.eq]: parseInt(req.body.memeId)
+            },
+            userId: {
+                [Op.eq]: req.user.id
+            }
 		}
 	}).then((result) => {
 
@@ -305,7 +310,9 @@ exports.createMeme = function(req, res) {
 
 	Artwork.findOne({
 		where: {
-		  id: parseInt(req.params.artworkID)
+            id: {
+                [Op.eq]: parseInt(req.params.artworkID)
+            }
 		}
 	}).then((results) => {
 
@@ -343,8 +350,12 @@ exports.editMeme = function(req, res) {
 
 	Meme.findOne({
 		where: {
-		  id: parseInt(req.params.memeID),
-		  UserId: req.user.id
+            id: {
+                [Op.eq]: parseInt(req.params.memeID)
+            },
+            UserId: {
+                [Op.eq]: req.user.id
+            }
 		}
 	}).then((selectedMeme) => {
 		// console.log(selectedMeme);
@@ -406,7 +417,9 @@ exports.updateMeme_JSON = function(req, res) {
       // Make sure the user exists
       User.findOne({
         where: {
-          id: req.user.id
+            id: {
+                [Op.eq]: req.user.id
+            }
         }
       }).then(user => {
         // After the user's record has been found, associate the meme to the user
@@ -419,8 +432,12 @@ exports.updateMeme_JSON = function(req, res) {
           UserId: req.user.id
         }, {
           where: {
-            id: parseInt(req.body.id),
-            UserId: req.user.id
+            id: {
+                [Op.eq]: parseInt(req.body.id)
+            },
+            UserId: {
+                [Op.eq]: req.user.id
+            }
           }
         }).then((success) => {
           console.log('Successfully updated meme: ' + req.body.meme_name);
@@ -505,7 +522,9 @@ exports.saveMeme_JSON = function(req, res) {
       // Make sure the user exists
       User.findOne({
         where: {
-          id: req.user.id
+            id: {
+                [Op.eq]: req.user.id
+            }
         }
       }).then(user => {
 
@@ -568,13 +587,15 @@ exports.collection = function(req, res) {
 	// Returns only the current user's collection
   Meme.findAll({
     where: {
-      UserId: req.user.id
+      UserId: {
+        [Op.eq]: req.user.id
+      }
     },
     order: [
       ['createdAt', 'DESC']
     ]
   }).then(results => {
-
+    console.log("Private Portfolio results: ", results);
     // Retrieve meme data from results
     var memes = [];
     for (var i = 0; i < results.length; i++) {
@@ -600,7 +621,9 @@ exports.collection_JSON = function(req, res) {
 
   Meme.findAll({
     where: {
-      UserId: req.params.userID
+        UserId: {
+            [Op.eq]: req.params.userID
+        }
     },
     order: [
       ['createdAt', 'DESC']
@@ -630,8 +653,12 @@ exports.deletePortfolio_JSON = function(req, res) {
 
 	Portfolio.destroy({
 		where: {
-			id: req.body.portfolioID,
-			userId: req.user.id
+			id: {
+                [Op.eq]: req.body.portfolioID
+            },
+			userId: {
+                [Op.eq]: req.user.id
+            }
 		}
 	}).then((result) => {
 		// Result with either be 1(successful) or 0(failed)
@@ -718,7 +745,9 @@ exports.savePortfolio_JSON = function(req, res) {
 		console.log('Successfully added portfolio: ' + req.body.portfolio_name);
 		Portfolio.findAll({
 			where: {
-				UserId: req.user.id
+				UserId: {
+                    [Op.eq]: req.user.id
+                }
 			}
 		}).then(results => {
 			var portfolios = [];
@@ -743,15 +772,19 @@ exports.private_portfolio = function(req, res) {
 
 	Portfolio.findOne({
 		where: {
-			id: req.params.portfolioID,
-			UserId: req.user.id
+			id: {
+                [Op.eq]: req.params.portfolioID
+            },
+			UserId: {
+                [Op.eq]: req.user.id
+            }
 		},
 		include: [
 			{model: Meme}, 
 			{model: User}
 		],
 	}).then((results) => {
-
+        console.log("Private Portfolio results: ", results);
 		// Redirects the user to the Portfolio page and displays the selected portfolio
 		res.render("portfolio", results.dataValues);
 
@@ -769,15 +802,19 @@ exports.public_portfolio = function(req, res) {
 
 	Portfolio.findOne({
 		where: {
-			id: req.params.portfolioID,
-			UserId: req.params.userID
+			id: {
+                [Op.eq]: req.params.portfolioID
+            },
+			UserId: {
+                [Op.eq]: req.params.userID
+            }
 		},
 		include: [
 			{model: Meme}, 
 			{model: User}
 		],
 	}).then((results) => {
-
+        console.log("Public Portfolio results: ", results);
 		// Redirects the user to the Portfolio page and displays the selected portfolio
 		res.render("portfolio", results.dataValues);
 
@@ -797,15 +834,21 @@ exports.addMemeToPortfolio_JSON = function(req, res) {
 		PortfolioId: req.body.portfolioID
 	}, {
 		where: {
-			id: req.body.memeID,
-			UserId: req.user.id
+			id: {
+                [Op.eq]: req.body.memeID
+            },
+			UserId: {
+                [Op.eq]: req.user.id
+            }
 		}
 	}).then((success) => {
 		Portfolio.update({
 			cover_img: req.body.cover_img
 		}, {
 			where: {
-				id: req.body.portfolioID
+				id: {
+                    [Op.eq]: req.body.portfolioID
+                }
 			}
 		}).then(result => {
 			console.log('Successfully added meme to portfolio: ' + req.body.portfolioID);
@@ -838,14 +881,20 @@ exports.updatePortfolio_JSON = function(req, res) {
 		portfolio_name: req.body.portfolio_name
 	}, {
 		where: {
-			id: req.params.portfolioID,
-			UserId: req.user.id
+			id: {
+                [Op.eq]: req.params.portfolioID
+            },
+			UserId: {
+                [Op.eq]: req.user.id
+            }
 		}
 	}).then(() => {
 		console.log('Successfully updated portfolio: ' + req.params.portfolioID);
 		Portfolio.findOne({
 			where: {
-				id: req.params.portfolioID
+				id: {
+                    [Op.eq]: req.params.portfolioID
+                }
 			}
 		}).then((result) => {
 

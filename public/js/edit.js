@@ -26,13 +26,12 @@ $(document).ready(function(){
             console.log('Please login');
             return;
         }
-
-        $("#meme").removeAttr('crossOrigin');
+        
+        $("#meme").attr('crossOrigin', 'anonymous');
 
         // Retrieve and store the image data
         var imageDataUrl = $("#meme").memeGenerator("save");
 
-        $("#meme").attr('crossOrigin', 'anonymous');
 
         var memeText = "";
         var delimiter = "|";
