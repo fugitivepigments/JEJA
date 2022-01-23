@@ -1,6 +1,6 @@
 {
   "name": "jeja",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Art Meme Generator",
   "main": "server.js",
   "scripts": {

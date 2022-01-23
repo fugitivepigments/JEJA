@@ -6,7 +6,7 @@ module.exports = function(app, passport) {
     // GET Requests
     // ===============================================================
     
-    app.get("/", authController.home);
+    app.get("/", authController.homePage);
 
     app.get('/community', authController.community);
 
@@ -66,10 +66,11 @@ module.exports = function(app, passport) {
     app.delete('/users/delete-account', isLoggedIn, authController.deleteUser);
 
     function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated())
+        if (req.isAuthenticated()) {
             return next();
-             
-        res.redirect('/signin');
+        } else {
+            res.redirect('/signin');
+        }
     };
  
 }

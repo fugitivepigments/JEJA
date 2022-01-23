@@ -9,88 +9,16 @@ var fs = require("fs");
 
 var artworkCount = 5280;
 
-exports.home = function(req, res) {
-	console.log('Inside Home authcontroller');
-	console.log('Logged in user: ', req.user);
-	console.log('SessionID: ', req.sessionID);
-	console.log('Request body: ', req.body);
-	console.log('Request params: ', req.params);
+let artworkWithBadUrls = [];
 
-  Artwork.findAll({
-    where: {
-      [Op.or]: [
-        {id: parseInt(Math.floor(Math.random() * artworkCount))},
-        {id: parseInt(Math.floor(Math.random() * artworkCount))},
-        {id: parseInt(Math.floor(Math.random() * artworkCount))}
-      ]
-    }
-  }).then((artResults) => {
-    var art = [];
-    for (var i = 0; i < artResults.length; i++) {
-      art.push(artResults[i].dataValues);
-    }
+// exports = {
+//     homePage: require("./homePage"),
+//     signupPage: require("./signupPage")
+// }
 
-    Meme.findAndCountAll({
-      order: [['createdAt', 'DESC']],
-      limit: 4
-    }).then((recentMemes) => {
-
-        var memes = [];
-        for (var i = 0; i < recentMemes.rows.length; i++) {
-          memes.push(recentMemes.rows[i].dataValues);
-        }
-
-      // Redirect user to the index page and display 3 artworks and 4 memes
-      res.render("index", {artworks: art, randomPicks: memes});
-
-    }).catch((err) => {
-      res.status(500).end();
-    });
-
-  }).catch((err) => {
-      res.status(500).end();
-  });
-}
- 
-exports.signupPage = function(req, res) {
-	console.log('Inside Signup authcontroller');
-	console.log('Logged in user: ', req.user);
-	console.log('SessionID: ', req.sessionID);
-	console.log('Request body: ', req.body);
-	console.log('Request params: ', req.params);
- 
- 	if(req.user){
- 		// res.render("/", {id: req.user.id, name: req.user.name});
-		res.json({
-			id: req.user.id, 
-			name: req.user.name
-		});
- 	} else {
-    	res.render('signup');
- 	} 
-};
-
-exports.signinPage = function(req, res) {
-	console.log('Inside Signin authcontroller');
-	console.log('Logged in user: ', req.user);
-	console.log('SessionID: ', req.sessionID);
-	console.log('Request body: ', req.body);
-	console.log('Request params: ', req.params);
-
- 	// Check if there is a user
- 	if(req.user){
- 		// res.render("/", {id: req.user.id, name: req.user.name});
- 		
- 		// Returns a JSON object with the user's id and name
-		res.json({
-			id: req.user.id, 
-			name: req.user.name
-		});
- 	} else {
-    	res.render('signin');
- 	}
- 
-};
+exports.homePage = require("./homePage");
+exports.signupPage = require("./signupPage");
+exports.signinPage = require("./signinPage");
 
 exports.createUser_JSON = function(req, res) {
 	// If sign up is successful send back json data
