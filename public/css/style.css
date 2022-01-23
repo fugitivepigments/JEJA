@@ -7,6 +7,10 @@ h2 {
     font-family: "Lato", "Helvetica", "Arial", Sans-serif;
 }
 
+button {
+    cursor: pointer;
+}
+
 h2.sidebar-title {
     font-weight: bold;
     display: block;
@@ -329,4 +333,8 @@ label, strong, #signin, .modal-close /*logout*/ {
 .img-fluid {
 	width: 100%;
 	height:auto;
+}
+
+.viewer-center {
+    text-align: center;
 }
