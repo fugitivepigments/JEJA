@@ -156,9 +156,10 @@ exports.community = function(req, res) {
 		for (var i = 0; i < results.length; i++) {
 			users.push(results[i].dataValues);
 		}
-        console.log("Community results: ", results);
 		// Redirects the user to the community page and displays all users
-		res.render("community", {users: users});
+		res.render("community", {
+            users: users
+        });
 
 	}).catch((err) => {
 

@@ -21,6 +21,10 @@ app.use(express.static('public'));
 // Setup Handlebars
 app.engine("handlebars", exphbs({
 	defaultLayout: "main",
+    runtimeOptions: {
+        allowProtoMethodsByDefault: true,
+        allowProtoPropertiesByDefault: true
+    },
 	helpers: {
 	    section: function(name, options){
 	        if(!this._sections) this._sections = {};
